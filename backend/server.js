@@ -11,7 +11,8 @@ app.use(express.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
-
+app.use('/api/ipad', require('./routes/ipad'));
+  
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
