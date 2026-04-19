@@ -55,7 +55,7 @@ const HowItWork = () => {
                     <img src={frameImg} alt="địt mẹ FPT"
                      className='bg-transparent relative z-10' />       
                 </div>
-                <div className="absolute w-[84%] h-[90%] rounded-[56px] overflow-hidden">
+                <div className="absolute w-[86%] h-[90%] rounded-[70px] overflow-hidden">
                         <video className='pointer-events-none w-full h-full '
                         playsInline preload='none' muted autoPlay loop ref={videoRef}
                         >

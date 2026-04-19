@@ -8,6 +8,9 @@ import WatchPage from "./components/pages/Watch/WatchPage"
 import StorePage from "./components/pages/Store/StorePage"
 import TVHomePage from "./components/pages/TVHome/TVHomePage"
 // import AirPod from "./components/pages/AirPod"
+import DetailsWatch from "./components/pages/Watch/DetailsWatch";
+import DetailsWatchSE from "./components/pages/Watch/DetailWatchSE";
+import DetailsWatchUltra from "./components/pages/Watch/DetailWatchUltra";
 import Login from "./components/pages/Auth/Login";
 import Signup from "./components/pages/Auth/Signup";
 import { Toaster } from 'react-hot-toast';
@@ -32,6 +35,9 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/watch" element={<WatchPage />} />
         <Route path="/tvhome" element={<TVHomePage />} />
+        <Route path="/detailwatchseries11" element={<DetailsWatch />} />
+        <Route path="/detailwatchse3" element={ <DetailsWatchSE />}/>
+        <Route path="/detailwatchsultra" element={ <DetailsWatchUltra />}/>
        </Routes>
     </>
   )
