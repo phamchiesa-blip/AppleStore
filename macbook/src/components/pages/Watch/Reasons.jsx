@@ -1,12 +1,25 @@
 import { reasons } from "../../../constants";
+import { useRef } from "react";
 
 function Reasons() {
+const scrollRef = useRef(null);
+
+const scroll = (direction) => {
+  if (scrollRef.current) {
+    const scrollAmount = 350; // khoảng cách scroll (tuỳ chỉnh)
+
+    scrollRef.current.scrollBy({
+      left: direction === "left" ? -scrollAmount : scrollAmount,
+      behavior: "smooth",
+    });
+  }
+};
     return ( 
         <div className="container mx-auto px-5 2xl:px-0 mt-[145px]">
             <h1 className="text-5xl text-white">Why Apple is the best place to buy</h1>
             <h1 className="text-5xl mt-2 bg-gradient-to-r from-yellow-400 via-purple-500 to-green-400 bg-clip-text text-transparent">Apple Watch</h1>
 
-             <div className="flex gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide mt-[45px] px-5 pb-4">
+            <div ref={scrollRef} className="flex gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide mt-[45px] px-5 pb-4">
         {reasons.map((item, index) => (
     <div 
       key={index} 
@@ -51,7 +64,23 @@ function Reasons() {
           </div>
     </div>
   ))}
-           </div>
+            </div>
+
+            <div className="flex justify-center gap-4 mt-4">
+  <button
+    onClick={() => scroll("left")}
+    className="w-10 h-10 rounded-full bg-white/10 text-white hover:bg-white/20 transition"
+  >
+    {"<"}
+  </button>
+
+  <button
+    onClick={() => scroll("right")}
+    className="w-10 h-10 rounded-full bg-white/10 text-white hover:bg-white/20 transition"
+  >
+    {">"}
+  </button>
+</div>
         </div>
     );
 }
