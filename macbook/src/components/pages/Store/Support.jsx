@@ -25,14 +25,13 @@ function Support() {
             <div className="flex flex-row container mx-auto px-5 2xl:px-0 mt-[70px]">
                 <div className="flex gap-8 mt-6 px-5 pb-4">
             {appleSupport.map((item, index) => (
-        <a href="#" 
+        <a key={index} href="#" 
   onClick={(e) => {
     e.preventDefault();
     setIsChatOpen(true);
   }}
 >
   <div data-aos="fade-up"
-    key={index}
     className="relative 
       w-[482px] h-[500px] 
       flex-shrink-0
