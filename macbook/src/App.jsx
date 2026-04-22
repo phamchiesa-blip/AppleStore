@@ -11,9 +11,14 @@ import TVHomePage from "./components/pages/TVHome/TVHomePage"
 import DetailsWatch from "./components/pages/Watch/DetailsWatch";
 import DetailsWatchSE from "./components/pages/Watch/DetailWatchSE";
 import DetailsWatchUltra from "./components/pages/Watch/DetailWatchUltra";
+import TV4K from "./components/pages/TVHome/TV4K";
+import HomeApp from "./components/pages/TVHome/HomeApp";
 import Login from "./components/pages/Auth/Login";
 import Signup from "./components/pages/Auth/Signup";
+import NavBar from "./components/Navbar";
 import { Toaster } from 'react-hot-toast';
+import GSAPReset from './components/Reset'
+
 
 // Đăng ký plugin ScrollTrigger và SplitText với GSAP
 gsap.registerPlugin(ScrollTrigger);
@@ -22,6 +27,8 @@ const App = () => {
   return (
     <>
       <Toaster position="top-center" />
+      <NavBar />
+      <GSAPReset />
       {/* Route */}
       <Routes>
         <Route path="/" element={<StorePage />} />
@@ -36,9 +43,11 @@ const App = () => {
         <Route path="/watch" element={<WatchPage />} />
         <Route path="/tvhome" element={<TVHomePage />} />
         <Route path="/detailwatchseries11" element={<DetailsWatch />} />
-        <Route path="/detailwatchse3" element={ <DetailsWatchSE />}/>
-        <Route path="/detailwatchsultra" element={ <DetailsWatchUltra />}/>
-       </Routes>
+        <Route path="/detailwatchse3" element={<DetailsWatchSE />} />
+        <Route path="/detailwatchsultra" element={<DetailsWatchUltra />} />
+        <Route path="/tv4k" element={<TV4K />} />
+        <Route path="/homeapp" element={<HomeApp />} />
+      </Routes> 
     </>
   )
 }

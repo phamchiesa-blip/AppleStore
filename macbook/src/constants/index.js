@@ -366,3 +366,14 @@ export const AppleUltra3 = [
     { src: "/oxi.png", name: 'Measuring blood oxygen levels. A brilliant invention.'}
 ];
 
+export const HomeApp = [
+    { src: "/clean.png", name: 'Clean the floors.', desc: 'Start the robot vacuum when you leave for work.'},
+    { src: "/lock.png", name: 'Lock the doors when sleepping', desc: 'Automatically lock all doors in the house.'},
+    { src: "/camera.png", name: 'View live camera feed', desc: 'Receive notifications when someone is standing at your door while you are sitting at your desk.'},
+    { src: "/lightup.png", name: 'Turn on the lights in the evening', desc: 'Set the automation mode to turn on the lights at a specific time.'},
+    { src: "/curtain.png", name: 'Close the curtains', desc: 'Set the curtains to close automatically when you leave the house.'},
+    { src: "/cafe.png", name: 'Start the coffee machine', desc: 'Use a smart plug to have a freshly brewed pot of coffee ready when you head out for your morning run.'},
+    { src: "/gara.png", name: 'Close the garage door', desc: 'Did you forget to close your garage door? Close it remotely from anywhere.'},
+    { src: "/fan.png", name: 'Start the fan', desc: 'The fan automatically turns on when the temperature rises.'}
+]
+

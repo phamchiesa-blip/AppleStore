@@ -80,7 +80,7 @@ const scroll = (direction) => {
   >
     {">"}
   </button>
-</div>
+          </div>
         </div>
     )
 }

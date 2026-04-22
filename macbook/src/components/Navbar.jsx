@@ -27,7 +27,7 @@ function NavBar() {
   };
 
   return (
-    <header>
+    <header className="z-50">
       <nav>
         {/* LEFT */}
         <div className="nav-left">
