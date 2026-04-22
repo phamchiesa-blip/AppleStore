@@ -1,4 +1,3 @@
-import NavBar from "../../Navbar"
 import CompareTable from "./CompareTable";
 import Footer from '../../Footer'
 import AOS from "aos";
@@ -31,9 +30,7 @@ const DetailsWatchSE = () => {
 
   return (
     <>
-        <NavBar />
-
-        <div className="w-full px-5 md:px-10 lg:px-20 2xl:px-0 max-w-7xl mx-auto mt-[100px]">
+      <div className="w-full px-5 md:px-10 lg:px-20 2xl:px-0 max-w-7xl mx-auto mt-[100px]">
           {/* 11 */}
           <div data-aos="fade-down" className="mt-[70px]">
             <h1 className="text-white text-5xl">Apple Watch SE 3</h1>

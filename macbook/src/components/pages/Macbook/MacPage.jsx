@@ -1,4 +1,3 @@
-import Navbar from "../../Navbar";
 import Hero from "./Hero";
 import ProductViewer from "./ProductViewer";
 import Showcase from "./Showcase";
@@ -10,7 +9,6 @@ import Footer from "../../Footer";
 function MacPage() {
   return (
     <>
-      <Navbar />
       <Hero />
       <ProductViewer />
       <Showcase />

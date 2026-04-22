@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Navbar from '../../Navbar';
 import Footer from '../../Footer';
 import Hero from './Hero';
 import Models from './Models';
@@ -12,7 +11,6 @@ const IPadPage = () => {
 
     return (
         <div className="bg-black min-h-screen overflow-x-hidden">
-            <Navbar />
             <main>
                 <Hero />
                 <Models />

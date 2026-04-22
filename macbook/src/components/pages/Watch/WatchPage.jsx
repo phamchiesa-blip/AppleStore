@@ -1,4 +1,3 @@
-import NavBar from "../../Navbar";
 import WatchProducts from "./WatchProducts";
 import Footer from '../../Footer'
 import Reasons from "./Reasons";
@@ -8,7 +7,6 @@ import Couple from "./Couple";
 function WathPage() {
     return ( 
         <>
-        <NavBar />
         <WatchProducts />
         <Reasons />
         <Accessory />

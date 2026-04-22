@@ -33,9 +33,9 @@ const VideoCarousel = () => {
     });
 
     // video animation to play the video when it is in the view
-    gsap.to("#video", {
+    gsap.to(".video-carousel-item", {
       scrollTrigger: {
-        trigger: "#video",
+        trigger: ".video-carousel-item",
         toggleActions: "restart none none none",
       },
       onComplete: () => {
@@ -99,10 +99,12 @@ const VideoCarousel = () => {
 
       // update the progress bar
       const animUpdate = () => {
-        anim.progress(
-          videoRef.current[videoId].currentTime /
-            hightlightsSlides[videoId].videoDuration
-        );
+        if (videoRef.current[videoId]) {
+            anim.progress(
+              videoRef.current[videoId].currentTime /
+                hightlightsSlides[videoId].videoDuration
+            );
+        }
       };
 
       if (isPlaying) {
@@ -116,11 +118,11 @@ const VideoCarousel = () => {
   }, [videoId, startPlay, isPlaying]);
 
   useEffect(() => {
-    if (loadedData.length > 3) {
+    if (loadedData.length > 0) {
       if (!isPlaying) {
-        videoRef.current[videoId].pause();
+        videoRef.current[videoId]?.pause();
       } else {
-        startPlay && videoRef.current[videoId].play();
+        startPlay && videoRef.current[videoId]?.play();
       }
     }
   }, [startPlay, videoId, isPlaying, loadedData]);
@@ -160,15 +162,13 @@ const VideoCarousel = () => {
       <div className="flex items-center">
         {hightlightsSlides.map((list, i) => (
           <div key={list.id} id="slider" className="sm:pr-20 pr-10">
-            <div className="relative sm:w-[55vw] w-[73vw] md:h-[55vh] sm:h-[35vh] h-[20vh]
-  }">
+            <div className="relative sm:w-[55vw] w-[73vw] md:h-[55vh] sm:h-[35vh] h-[20vh]">
               <div className="w-full h-full flex-center rounded-3xl overflow-hidden bg-black">
                 <video
-                  id="video"
                   playsInline={true}
                   className={`${
                     list.id === 2 && "translate-x-44"
-                  } pointer-events-none`}
+                  } pointer-events-none video-carousel-item`}
                   preload="auto"
                   muted
                   ref={(el) => (videoRef.current[i] = el)}
