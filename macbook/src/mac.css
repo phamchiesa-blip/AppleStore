@@ -24,6 +24,15 @@
   scrollbar-color: var(--color-dark-100) var(--color-black);
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
 :root {
   --gradient-color: linear-gradient(to bottom right,
       #0894ff 0%,

@@ -36,13 +36,13 @@ function NavBar() {
 
         {/* CENTER */}
         <ul className="nav-center">
-          <li><Link to="/">Store</Link></li>
-          <li><Link to="/mac">Mac</Link></li>
-          <li><Link to="/iphone">iPhone</Link></li>
-          <li><Link to="/ipad">iPad</Link></li>
-          <li><Link to="/airpods">AirPods</Link></li>
-          <li><Link to="/watch">Watch</Link></li>
-          <li><Link to="/tvhome">TV & Home</Link></li>
+          <li><Link onClick={() => window.scrollTo({top:0, behavior:'smooth'})} to="/">Store</Link></li>
+          <li><Link onClick={() => window.scrollTo({top:0, behavior:'smooth'})} to="/mac">Mac</Link></li>
+          <li><Link onClick={() => window.scrollTo({top:0, behavior:'smooth'})} to="/iphone">iPhone</Link></li>
+          <li><Link onClick={() => window.scrollTo({top:0, behavior:'smooth'})} to="/ipad">iPad</Link></li>
+          <li><Link onClick={() => window.scrollTo({top:0, behavior:'smooth'})} to="/airpods">AirPods</Link></li>
+          <li><Link onClick={() => window.scrollTo({top:0, behavior:'smooth'})} to="/watch">Watch</Link></li>
+          <li><Link onClick={() => window.scrollTo({top:0, behavior:'smooth'})} to="/tvhome">TV & Home</Link></li>
         </ul>
 
         {/* RIGHT */}
