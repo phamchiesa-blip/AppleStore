@@ -1,12 +1,25 @@
 import {imageAppleStore} from '../../../constants/index'
+import { useRef } from "react";
 
 function NextGeneration() {
+const scrollRef = useRef(null);
+
+const scroll = (direction) => {
+  if (scrollRef.current) {
+    const scrollAmount = 350; // khoảng cách scroll (tuỳ chỉnh)
+
+    scrollRef.current.scrollBy({
+      left: direction === "left" ? -scrollAmount : scrollAmount,
+      behavior: "smooth",
+    });
+  }
+};
     return (
         <div className="container mx-auto px-5 2xl:px-0 mt-[100px]">
             <h1 className="text-4xl font-bold text-white">Latest Generation. See now what's new.</h1>
 
             {/* Nhớ Link như thẻ navbar! */}
-           <div className="flex gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide mt-6 px-5 pb-4">
+          <div ref={scrollRef} className="flex gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide mt-6 px-5 pb-4">
         {imageAppleStore.map((item, index) => (
     <div 
       key={index} 
@@ -51,7 +64,23 @@ function NextGeneration() {
           </div>
     </div>
   ))}
-           </div>
+          </div>
+
+          <div className="flex justify-center gap-4 mt-4">
+  <button
+    onClick={() => scroll("left")}
+    className="w-10 h-10 rounded-full bg-white/10 text-white hover:bg-white/20 transition"
+  >
+    {"<"}
+  </button>
+
+  <button
+    onClick={() => scroll("right")}
+    className="w-10 h-10 rounded-full bg-white/10 text-white hover:bg-white/20 transition"
+  >
+    {">"}
+  </button>
+          </div>
         </div>
     )
 }

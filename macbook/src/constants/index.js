@@ -1,3 +1,4 @@
+// Mac
 export const navLinks = [
     { label: "Store" },
     { label: "Mac" },
@@ -200,4 +201,179 @@ export {
     reasons,
     coupleData
 };
+
+
+// iPhone
+import {
+  blackImg,
+  blueImg,
+  highlightFirstVideo,
+  highlightFourthVideo,
+  highlightSecondVideo,
+  highlightThirdVideo,
+  whiteImg,
+  yellowImg,
+} from "../components/utils/index";
+
+export const navLists = ["Store", "Mac", "iPhone", "Support"];
+
+export const hightlightsSlides = [
+  {
+    id: 1,
+    textLists: [
+      "Enter A17 Pro.",
+      "Game‑changing chip.",
+      "Groundbreaking performance.",
+    ],
+    video: highlightFirstVideo,
+    videoDuration: 4,
+  },
+  {
+    id: 2,
+    textLists: ["Titanium.", "So strong. So light. So Pro."],
+    video: highlightSecondVideo,
+    videoDuration: 5,
+  },
+  {
+    id: 3,
+    textLists: [
+      "iPhone 17 Pro Max has the",
+      "longest optical zoom in",
+      "iPhone ever. Far out.",
+    ],
+    video: highlightThirdVideo,
+    videoDuration: 2,
+  },
+  {
+    id: 4,
+    textLists: ["All-new Action button.", "What will yours do?."],
+    video: highlightFourthVideo,
+    videoDuration: 3.63,
+  },
+];
+
+export const models = [
+  {
+    id: 1,
+    title: "iPhone 17 Pro in Natural Titanium",
+    color: ["#8F8A81", "#ffe7b9", "#6f6c64"],
+    img: yellowImg,
+  },
+  {
+    id: 2,
+    title: "iPhone 17 Pro in Ocean Blue",
+    color: ["#53596E", "#6395ff", "#21242e"],
+    img: blueImg,
+  },
+  {
+    id: 3,
+    title: "iPhone 17 Pro in Pearl White",
+    color: ["#C9C8C2", "#ffffff", "#C9C8C2"],
+    img: whiteImg,
+  },
+  {
+    id: 4,
+    title: "iPhone 17 Pro in Mysterious Black",
+    color: ["#454749", "#3b3b3b", "#181819"],
+    img: blackImg,
+  },
+];
+
+export const sizes = [
+  { label: '6.1"', value: "small" },
+  { label: '6.7"', value: "large" },
+];
+
+// Watch
+export const watches = [
+  {
+    id: "series11",
+    name: "Series 11",
+    display: "Retina OLED",
+    battery: "18 hours",
+    chip: "S11",
+    gps: "GPS",
+    water: "50m",
+    price: "$442",
+  },
+  {
+    id: "se3",
+    name: "SE 3",
+    display: "OLED",
+    battery: "18 hours",
+    chip: "S9",
+    gps: "GPS",
+    water: "50m",
+    price: "$269",
+  },
+  {
+    id: "ultra3",
+    name: "Ultra 3",
+    display: "Always-On Retina",
+    battery: "36 hours",
+    chip: "S11 Pro",
+    gps: "GPS + Cellular",
+    water: "100m",
+    price: "$923",
+  },
+];
+
+export const AppleSeries11 = [
+    { src: "/wakeup-removebg-preview.png", name: 'Wake up and see your sleep score.'},
+    { src: "/breath-removebg-preview.png", name: 'Monitor for sleep apnea.'},
+    { src: "/sinhhieu-removebg-preview.png", name: 'The Vital Signs app. Get your daily health status.'},
+    { src: "/ecg.jpg", name: 'Monitor your heart rate using the ECG app.'},
+    { src: "/heart-removebg-preview.png", name: 'Track your heartbeat with the Heart Rate app.'},
+    { src: "/kinhnguyet.jpg", name: 'Track your cycle, and know your health better.'},
+    { src: "/oxi.png", name: 'Measuring blood oxygen levels. A brilliant invention.'}
+];
+
+export const AppleSeries11Features = [
+    { src: "/call.png", name: 'Make calls, send texts, and more, right on your wrist.', desc: 'With Series 11, you can stay connected with the people and things that matter most. Cellular connectivity helps you stay connected, even without your iPhone nearby.'},
+    { src: "/applepay.png", name: 'Apple Pay. Money right at your fingertips.', desc: 'Going out and about? Pay for almost anything by simply tapping your Apple Watch anywhere you see the contactless icon. Quick and convenient.'},
+    { src: "/translate.png", name: 'Hello, Live Translation.', desc: 'With Apple Intelligence on iPhone, Messages will automatically translate text into your preferred language. Now it is time for you to speak up.'},
+    { src: "/ping.png", name: 'Find your iPhone.', desc: 'If you lose your iPhone, Find Exactly can guide you to its location by showing the approximate distance and direction.19 And as you get closer, haptic feedback, a small audible beep, and a visual indicator will help you find it.'},
+    { src: "/suggest.png", name: 'Smart Stacking Hint. Genius.', desc: 'With improved predictive algorithms combined with data and trends on your device from your daily habits, Smart Stack will gently remind you when there is an instant helpful suggestion. Oh look, time for a ride!'},
+];
+
+export const AppleSe3 = [
+    { src: "/wakeup-removebg-preview.png", name: 'Wake up and see your sleep score.'},
+    { src: "/breath-removebg-preview.png", name: 'Detecting signs of sleep apnea.'},
+    { src: "/sinhhieu-removebg-preview.png", name: 'The Vital Signs app. Get your daily health status.'},
+    { src: "/ecg.jpg", name: 'Monitor your heart rate using the ECG app.'},
+    { src: "/heart-removebg-preview.png", name: 'Track your heartbeat with the Heart Rate app.'},
+    { src: "/kinhnguyet.jpg", name: 'Track your cycle, and know your health better.'},
+    { src: "/oxi.png", name: 'Measuring blood oxygen levels. A brilliant invention.'}
+];
+
+export const AppleSe3Features = [
+     { src: "/sendmess.jpg", name: 'Send a message.', desc: 'Simply tap, swipe, or dictate to send messages in the Messages app.'},
+    { src: "/call.png", name: 'Gesture control', desc: 'The wrist-shaking gesture lets you perform an action, like dismissing a notification, simply by quickly turning your wrist forward and back. And with the double-tap gesture, you can answer calls, reply to messages, scroll through your Smart Stack, and do much more.'},
+    { src: "/siri.png", name: 'Just ask Siri.', desc: 'Your favorite and most personal digital assistant works right on your device, and can perform useful tasks without Wi-Fi or a cellular connection.'},
+    { src: "/musicwatch.png", name: 'It sounds easy.', desc: 'The SE 3 connects seamlessly with AirPods, allowing you to listen to music or podcasts hands-free. And if you dont have AirPods with you, you can play content directly through the watchs speaker.'},
+    { src: "/ping.png", name: 'Ping my iPhone.', desc: 'Cant find your iPhone? Just tap the ping iPhone icon on your SE 3 and your iPhone will emit a small beep, helping you locate your device. Sounds cool.'},
+    { src: "/suggest.png", name: 'Smart Stacking Hint. Genius.', desc: 'With improved predictive algorithms combined with data and trends on your device from your daily habits, Smart Stack will gently remind you when there is an instant helpful suggestion. Oh look, time for a ride!'},
+     { src: "/translate.png", name: 'Hello, Live Translation.', desc: 'With Apple Intelligence on iPhone, Messages will automatically translate text into your preferred language. Now it is time for you to speak up.'}
+];
+
+export const AppleUltra3 = [
+    { src: "/wakeup-removebg-preview.png", name: 'Ultra 3 has built-in cellular connectivity.'},
+    { src: "/breath-removebg-preview.png", name: 'Detecting signs of sleep apnea.'},
+    { src: "/tackingmap.png", name: 'Lets go, we have an offline map now.'},
+    { src: "/ecg.jpg", name: 'Ready to run with the Action button.'},
+    { src: "/heart-removebg-preview.png", name: 'Track your heartbeat with the Heart Rate app.'},
+    { src: "/kinhnguyet.jpg", name: 'Track your cycle, and know your health better.'},
+    { src: "/oxi.png", name: 'Measuring blood oxygen levels. A brilliant invention.'}
+];
+
+export const HomeApp = [
+    { src: "/clean.png", name: 'Clean the floors.', desc: 'Start the robot vacuum when you leave for work.'},
+    { src: "/lock.png", name: 'Lock the doors when sleepping', desc: 'Automatically lock all doors in the house.'},
+    { src: "/camera.png", name: 'View live camera feed', desc: 'Receive notifications when someone is standing at your door while you are sitting at your desk.'},
+    { src: "/lightup.png", name: 'Turn on the lights in the evening', desc: 'Set the automation mode to turn on the lights at a specific time.'},
+    { src: "/curtain.png", name: 'Close the curtains', desc: 'Set the curtains to close automatically when you leave the house.'},
+    { src: "/cafe.png", name: 'Start the coffee machine', desc: 'Use a smart plug to have a freshly brewed pot of coffee ready when you head out for your morning run.'},
+    { src: "/gara.png", name: 'Close the garage door', desc: 'Did you forget to close your garage door? Close it remotely from anywhere.'},
+    { src: "/fan.png", name: 'Start the fan', desc: 'The fan automatically turns on when the temperature rises.'}
+]
 

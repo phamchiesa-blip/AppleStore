@@ -14,3 +14,4 @@ const useMacbookStore = create((set) => ({
 }));    
 
 export default useMacbookStore;
+
