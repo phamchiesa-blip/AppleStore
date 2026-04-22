@@ -1,0 +1,18 @@
+{
+  "name": "apple-store-root",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "macbook",
+    "backend"
+  ],
+  "scripts": {
+    "dev-frontend": "npm run dev -w macbook",
+    "dev-backend": "npm run dev -w backend",
+    "dev": "concurrently \"npm run dev-frontend\" \"npm run dev-backend\"",
+    "install-all": "npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
