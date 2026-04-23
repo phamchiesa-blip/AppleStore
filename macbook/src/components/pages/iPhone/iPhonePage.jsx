@@ -1,4 +1,3 @@
-import NavBar from "../../Navbar";
 import Hero from "./Hero";
 import Highlight from "./Highlight";
 import Model from "./Model";
@@ -9,7 +8,6 @@ import Footer from '../../Footer'
 function IphonePage() {
     return ( 
         <>
-            <NavBar />
             <Hero />
             <Highlight />
             <Model />

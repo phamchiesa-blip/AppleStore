@@ -51,7 +51,9 @@ function NavBar() {
             {user ? (
               <>
                 <li>
-                  Hi, {user?.username.trim().split(" ").pop()}
+                  <Link to="/user" className="hover:text-blue-400 transition-colors">
+                    Hi, {user?.username.trim().split(" ").pop()}
+                  </Link>
                 </li>
                 <li>
                   <button onClick={handleLogout} className="font-bold text-sm text-red-500 hover:text-red-700 transition-colors">
