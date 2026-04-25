@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from 'react';
+import { useCart } from '../../../context/useCart';
 
 function IntroHomeTV() {
+    const { addToCart, setIsCartOpen } = useCart();
+
     useEffect(() => {
       AOS.init({
         duration: 1000,
@@ -12,6 +15,14 @@ function IntroHomeTV() {
     
       AOS.refresh(); 
     }, []);
+
+    const tv = {
+    id: "tv-1", // nhớ unique
+    name: "Apple TV 4K",
+    price: 132,
+    image: "/tv-1.png" // ảnh sai link đấy, nhớ sửa lại
+    };
+
     return ( 
         <div className="container mx-auto px-5 2xl:px-0 mt-[100px]">
             <div className="flex justify-center gap-x-[20px]">
@@ -62,7 +73,12 @@ function IntroHomeTV() {
                         <h1 className="text-3xl mt-2 bg-gradient-to-r from-yellow-300 via-green-300 to-pink-300 bg-clip-text text-transparent">the senses.</h1>
                         <h1 className="mt-3 text-xl">From $132</h1>
                         <div className="flex flex-col items-center">
-                            <button className="text-center bg-blue-300 rounded-full px-6 py-2 text-white text-xl mt-[22px] cursor-pointer hover:scale-110 transition-all duration-300">Buy</button>
+                            <button 
+                                onClick={() => {
+                                    addToCart(tv);
+                                    setIsCartOpen(true);
+                                }}
+                                className="text-center bg-blue-300 rounded-full px-6 py-2 text-white text-xl mt-[22px] cursor-pointer hover:scale-110 transition-all duration-300">Buy</button>
                             <Link to="/tv4k"><p className="mt-6 text-blue-500 cursor-pointer hover:text-amber-100 transition-all duration-300">Learn more</p></Link>
                         </div>
                         <img src="tvhome-removebg-preview.png" className="mt-[90px] w-[408px] h-[275px]" />

@@ -1,10 +1,22 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import { dn } from "../constants";
 import { Link, useNavigate } from "react-router-dom";
+import SearchOverlay from "./SearchOverlay";
+import { useCart } from "../context/useCart";
 
 function NavBar() {
+  const {cart} = useCart();
+  const {setIsCartOpen} = useCart();  
+
+  const totalItems = cart.reduce(
+  (sum, item) => sum + item.quantity,
+  0
+  );
+
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
+  const [openSearch, setOpenSearch] = useState(false);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -25,6 +37,7 @@ function NavBar() {
     setUser(null);
     navigate('/login');
   };
+
 
   return (
     <header className="z-50">
@@ -72,13 +85,25 @@ function NavBar() {
             )}
           </ul>
 
-          <div className="flex items-center gap-3">
-            <button>
+          <div className="flex items-center relative gap-3">
+             <button onClick={() => setOpenSearch(true)}>
               <img src="/search.svg" alt="Search" />
             </button>
-            <button>
+
+            <SearchOverlay
+              isOpen={openSearch}
+              onClose={() => setOpenSearch(false)}
+            />
+
+            <button className="relative" onClick={() => setIsCartOpen(true)}>
               <img src="/cart.svg" alt="Cart" />
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-1 bg-white text-black px-1 text-xs rounded-full">
+                  {totalItems}
+                </span>
+              )}
             </button>
+
           </div>
         </div>
       </nav>

@@ -42,7 +42,7 @@ const Models = () => {
         if (!loading && models.length > 0) {
             // Give DOM a tiny moment to render the mapped array before attaching GSAP
             const timer = setTimeout(() => {
-                cardsRef.current.forEach((card, index) => {
+                cardsRef.current.forEach((card) => {
                     if (card) {
                         gsap.fromTo(card,
                             { opacity: 0, y: 50 },
@@ -77,7 +77,7 @@ const Models = () => {
                  )}
 
                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" ref={containerRef}>
-                     {models.map((model, idx) => (
+                     {models.map((model) => (
                          <div 
                              key={model.id} 
                              ref={addToRefs}

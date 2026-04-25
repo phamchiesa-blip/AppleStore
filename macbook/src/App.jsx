@@ -23,8 +23,8 @@ import DetailsWatchUltra from "./components/pages/Watch/DetailWatchUltra";
 import TV4K from "./components/pages/TVHome/TV4K";
 import HomeApp from "./components/pages/TVHome/HomeApp";
 import UserPage from "./components/pages/User/UserPage";
-
-
+import CheckoutPage from "./components/CheckoutPage";
+import SuccessPage from "./components/pages/SuccessPage";
 
 // Đăng ký plugin ScrollTrigger và SplitText với GSAP
 gsap.registerPlugin(ScrollTrigger);
@@ -37,7 +37,9 @@ const App = () => {
       <NavBar />
       {/* Route */}
       <Routes>
+        <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/" element={<StorePage />} />
+        <Route path="/success" element={<SuccessPage />} />
         <Route path="/mac" element={<MacPage />} />
         <Route path="/iphone" element={<IPhonePage />} />
         <Route path="/ipad" element={<IPadPage />} />

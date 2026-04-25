@@ -1,9 +1,11 @@
 import { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
-
+import { useCart } from '../../../../context/useCart';
 
 const Airpods4 = () => {
+    const { addToCart, setIsCartOpen } = useCart();
+
     const containerRef = useRef(null);
     const contentRef = useRef(null);
 
@@ -21,6 +23,14 @@ const Airpods4 = () => {
             }
         );
     }, []);
+
+    const ap = {
+    id: "airpods-4", // nhớ unique
+    name: "AirPods 4",
+    price: 129,
+    image: "/airpods-4.png"
+    };
+
 
     return (
         <section className="w-full flex justify-center mt-20 px-4 mb-20 relative">
@@ -61,7 +71,15 @@ const Airpods4 = () => {
 
                     <div className="flex gap-4 mt-6 md:mt-0">
                         <Link to="/airpods/pro4" className="bg-white text-black px-5 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition-all pointer-events-auto">Learn more</Link>
-                        <button className="border border-white text-white hover:bg-white hover:text-black px-5 py-2 rounded-full text-sm font-medium transition-all pointer-events-auto">Buy</button>
+                        <button
+                            onClick={() => {
+                                addToCart(ap);
+                                setIsCartOpen(true);
+                            }}
+                            className="border border-white text-white hover:bg-white hover:text-black px-5 py-2 rounded-full text-sm font-medium transition-all pointer-events-auto"
+                        >
+                            Buy
+                        </button>
                     </div>
                 </div>
             </div>

@@ -5,9 +5,9 @@ import { footerLinks } from "../constants/index";
 // Có vẻ responsive đã oke
 const footerSections = [
   {
-    title: "Cửa hàng",
+    title: "Store",
     links: [
-      { label: "Tìm cửa hàng", href: "#" },
+      { label: "Find a store", href: "#" },
       { label: "iPad", href: "#" },
       { label: "iPhone", href: "#" },
       { label: "Mac", href: "#" },
@@ -18,7 +18,7 @@ const footerSections = [
     ],
   },
   {
-    title: "Dịch vụ",
+    title: "Service",
     links: [
       { label: "Apple Music", href: "#" },
       { label: "Apple TV+", href: "#" },
@@ -31,9 +31,9 @@ const footerSections = [
     ],
   },
   {
-    title: "Tài khoản",
+    title: "Account",
     links: [
-      { label: "Quản lý Apple ID", href: "#" },
+      { label: "Manage Apple ID", href: "#" },
       { label: "Apple Store Account", href: "#" },
       { label: "iCloud.com", href: "#" },
     ],
@@ -41,41 +41,41 @@ const footerSections = [
   {
     title: "Apple Store",
     links: [
-      { label: "Tìm cửa hàng", href: "#" },
+      { label: "Find a store", href: "#" },
       { label: "Genius Bar", href: "#" },
       { label: "Today at Apple", href: "#" },
       { label: "Apple Summer Camp", href: "#" },
       { label: "Apple Store App", href: "#" },
-      { label: "Chứng nhận Refurbished", href: "#" },
-      { label: "Tài chính", href: "#" },
+      { label: "Refurbished Certificate", href: "#" },
+      { label: "Finance", href: "#" },
       { label: "Apple Trade In", href: "#" },
-      { label: "Đặt hàng trạng thái", href: "#" },
+      { label: "Order status", href: "#" },
     ],
   },
   {
-    title: "Doanh nghiệp",
+    title: "Businesses",
     links: [
-      { label: "Apple và Doanh nghiệp", href: "#" },
-      { label: "Mua cho Doanh nghiệp", href: "#" },
+      { label: "Apple & Doanh nghiệp", href: "#" },
+      { label: "Buy for Businesses", href: "#" },
     ],
   },
   {
-    title: "Giáo dục",
+    title: "Education",
     links: [
-      { label: "Apple và Giáo dục", href: "#" },
-      { label: "Mua cho Đại học", href: "#" },
+      { label: "Apple & Giáo dục", href: "#" },
+      { label: "Buy for University", href: "#" },
     ],
   },
   {
-    title: "Về Apple",
+    title: "About Apple",
     links: [
       { label: "Newsroom", href: "#" },
       { label: "Apple Leadership", href: "#" },
       { label: "Career Opportunities", href: "#" },
-      { label: "Nhà đầu tư", href: "#" },
-      { label: "Đạo đức & Tuân thủ", href: "#" },
-      { label: "Sự kiện", href: "#" },
-      { label: "Liên hệ Apple", href: "#" },
+      { label: "Investors", href: "#" },
+      { label: "Ethics & Compliance", href: "#" },
+      { label: "Events", href: "#" },
+      { label: "Contact Apple", href: "#" },
     ],
   },
 ];
@@ -128,15 +128,15 @@ const Footer = () => {
       {/* Banner mua hàng — chuẩn Apple */}
       <div className="border-b border-[#424245] py-4 px-6 md:px-12 text-center">
         <p className="text-[13px] text-[#86868b]">
-          Nhiều cách mua sắm hơn:{" "}
+          More shopping options:{" "}
           <a href="#" className="text-[#2997ff] hover:underline">
-            Tìm Apple Store
+            Find Apple Store
           </a>{" "}
-          hoặc{" "}
+         or{" "}
           <a href="#" className="text-[#2997ff] hover:underline">
-            nhà bán lẻ khác
+            other retailers
           </a>{" "}
-          gần bạn. Hoặc gọi 1800 1061 (miễn phí).
+          Near you. Or call 1800 1061 (toll-free).
         </p>
       </div>
 
@@ -176,7 +176,7 @@ const Footer = () => {
         {/* Dòng quốc gia + copyright */}
         <div className="pt-6 pb-2 border-b border-[#424245]">
           <p className="text-[13px] text-[#86868b]">
-            Copyright © 2026 Apple Inc. Mọi quyền được bảo lưu.
+            Copyright © 2026 Apple Inc. All rights reserved.
           </p>
         </div>
 
@@ -208,7 +208,7 @@ const Footer = () => {
                 d="M2 12h20M12 2c-2.5 3-4 6.5-4 10s1.5 7 4 10M12 2c2.5 3 4 6.5 4 10s-1.5 7-4 10"
               />
             </svg>
-            Việt Nam
+            VietNam
           </a>
         </div>
 

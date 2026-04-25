@@ -1,7 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { useCart } from '../../../context/useCart';
 
 const Hero = () => {
+    const { addToCart, setIsCartOpen } = useCart();
+
     const titleRef = useRef(null);
     const subtitleRef = useRef(null);
     const videoRef = useRef(null);
@@ -13,13 +16,25 @@ const Hero = () => {
           .fromTo(videoRef.current, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 1.5, ease: 'power2.out' }, "-=0.5");
     }, []);
 
+    const ipadPro = {
+    id: "ipad-pro", // nhớ unique
+    name: "iPad Pro",
+    price: 999,
+    image: "/ipad-pro.png" // ảnh sai link đấy, nhớ sửa lại
+    };
+
     return (
         <section className="relative h-screen w-full flex flex-col justify-start items-center bg-black text-white overflow-hidden pt-[15vh]">
             <div className="z-10 text-center flex flex-col items-center">
                 <h1 ref={titleRef} className="text-6xl md:text-[8rem] font-semibold tracking-tight mb-4 opacity-0">iPad Pro</h1>
                 <p ref={subtitleRef} className="text-2xl md:text-4xl text-gray-300 font-medium mb-10 opacity-0 tracking-wide">Thinpossible.</p>
                 <div className="flex gap-6">
-                    <button className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors text-lg">Buy</button>
+                    <button 
+                    onClick={() => {
+                            addToCart(ipadPro);
+                            setIsCartOpen(true);
+                        }}
+                    className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors text-lg">Buy</button>
                     <button className="text-blue-500 hover:text-blue-400 font-medium text-lg flex items-center gap-1 transition-colors">
                         Learn more <span className="text-sm">&gt;</span>
                     </button>
