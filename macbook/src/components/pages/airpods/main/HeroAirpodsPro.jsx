@@ -2,8 +2,13 @@ import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import { useCart } from '../../../../context/useCart';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const HeroAirpodsPro = () => {
+    const { addToCart, setIsCartOpen } = useCart();
+
     const containerRef = useRef(null);
     const textRef = useRef(null);
     const imgRef = useRef(null);
@@ -23,6 +28,13 @@ const HeroAirpodsPro = () => {
             .fromTo(textRef.current, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, "-=0.5");
 
     }, []);
+
+    const appro3 = {
+    id: "airpods-pro3", // nhớ unique
+    name: "AirPods Pro 3",
+    price: 249,
+    image: "/airpods-pro3.png"
+    };
 
     return (
         <section ref={containerRef} className="w-full flex justify-center mt-6 px-4 mb-20 relative">
@@ -57,7 +69,15 @@ const HeroAirpodsPro = () => {
 
                     <div className="flex gap-4 mt-6 md:mt-0">
                         <button onClick={() => navigate("/airpods/pro3")} className="bg-white text-black hover:bg-gray-200 px-6 py-2.5 rounded-full text-sm font-semibold transition-all">Learn more</button>
-                        <button className="bg-blue-600 text-white hover:bg-blue-500 px-6 py-2.5 rounded-full text-sm font-semibold transition-all">Buy</button>
+                        <button
+                            onClick={() => {
+                                addToCart(appro3);
+                                setIsCartOpen(true);
+                            }}
+                            className="bg-blue-600 text-white hover:bg-blue-500 px-6 py-2.5 rounded-full text-sm font-semibold transition-all"
+                        >
+                            Buy
+                        </button>
                     </div>
                 </div>
 

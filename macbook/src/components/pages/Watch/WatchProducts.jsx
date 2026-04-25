@@ -2,8 +2,12 @@ import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from 'react';
+import { useCart } from '../../../context/useCart';
+
 
 function WatchProducts() {
+    const { addToCart, setIsCartOpen } = useCart();
+
      useEffect(() => {
       AOS.init({
         duration: 1000,
@@ -12,6 +16,28 @@ function WatchProducts() {
     
       AOS.refresh(); 
     }, []);
+
+    const w11 = {
+    id: "watch-11", // nhớ unique
+    name: "Apple Watch Series 11",
+    price: 442,
+    image: "/watch-11.png" // ảnh sai link đấy, nhớ sửa lại
+    };
+
+    const wse3 = {
+    id: "watch-se3", // nhớ unique
+    name: "Apple Watch SE 3",
+    price: 269,
+    image: "/watch-se3.png" // ảnh sai link đấy, nhớ sửa lại
+    };
+
+    const wu3 = {
+    id: "watch-u3", // nhớ unique
+    name: "Apple Watch Ultra 3",
+    price: 923,
+    image: "/watch-u3.png" // ảnh sai link đấy, nhớ sửa lại
+    };
+
 
     return ( 
         <div className="container mx-auto px-5 2xl:px-0 mt-[136px]">
@@ -38,7 +64,12 @@ function WatchProducts() {
                     <Link to="/detailwatchseries11">
                     <h3 className="text-white-900 text-xl mt-3 cursor-pointer hover:scale-105">👉🏻 Learn more about Series 11</h3>
                     </Link>
-                    <button className="px-7 py-3 bg-[#0076DF] rounded-4xl mt-[30px] mb-2 text-xl">
+                    <button
+                        onClick={() => {
+                            addToCart(w11);
+                            setIsCartOpen(true);
+                        }}
+                        className="px-7 py-3 bg-[#0076DF] rounded-4xl mt-[30px] mb-2 text-xl">
                         <h3 className="text-xl text-white cursor-pointer transition-transform duration-200  hover:scale-110">Buy 🛍️</h3> 
                     </button>
                 </div>
@@ -56,7 +87,12 @@ function WatchProducts() {
                     <Link to="/detailwatchse3">
                     <h3 className="text-white-900 text-xl mt-3 cursor-pointer hover:scale-105">👉🏻 Learn more about SE 3</h3>
                     </Link>
-                    <button className="px-7 py-3 bg-[#0076DF] rounded-4xl mt-[30px] mb-2 text-xl">
+                    <button 
+                    onClick={() => {
+                            addToCart(wse3);
+                            setIsCartOpen(true);
+                        }}
+                    className="px-7 py-3 bg-[#0076DF] rounded-4xl mt-[30px] mb-2 text-xl">
                         <h3 className="text-xl text-white cursor-pointer hover:scale-110 transition-transform duration-200">Buy 🛍️</h3> 
                     </button>
                 </div>
@@ -74,7 +110,12 @@ function WatchProducts() {
                     <Link to="/detailwatchsultra">
                     <h3 className="text-white-900 text-xl mt-3 cursor-pointer hover:scale-105">👉🏻 Learn more about Ultra 3</h3>
                     </Link>
-                    <button className="px-7 py-3 bg-[#0076DF] rounded-4xl mt-[30px] mb-2 text-xl">
+                    <button 
+                        onClick={() => {
+                            addToCart(wu3);
+                            setIsCartOpen(true);
+                        }}
+                        className="px-7 py-3 bg-[#0076DF] rounded-4xl mt-[30px] mb-2 text-xl">
                         <h3 className="text-xl text-white cursor-pointer hover:scale-110 transition-transform duration-200">Buy 🛍️</h3> 
                     </button>
                 </div>

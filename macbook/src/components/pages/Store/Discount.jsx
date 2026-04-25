@@ -1,4 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
+import { CartContext } from "../../../context/CartContext";
+import Toast from "../../Toast";
 
 // Hook tái sử dụng cho mỗi khối upload ảnh
 function useImageUpload() {
@@ -74,6 +76,16 @@ function ImageUploadZone({ image, fileInputRef, handleImageUpload, handleUploadC
 // Chỗ Xác Thực xem xét làm BackEnd hay gì đó...
 export default function Discount() {
   // Mỗi khối có state & ref riêng biệt
+  const { setDiscount } = useContext(CartContext);
+  const [toast, setToast] = useState(null);
+  
+  const handleVerify = () => {
+    setDiscount({
+      percent: 10
+    });
+    setToast({ message: "Discount applied successfully 🎉", type: "success" });
+  };
+
   const block1 = useImageUpload();
   const block2 = useImageUpload();
   const block3 = useImageUpload();
@@ -105,7 +117,9 @@ export default function Discount() {
               <p className="text-gray-400 text-lg mb-8">
                Save up to <span className="text-white font-bold">$192</span> when you own a Mac. Plus, get 3 months of free Apple Music and Apple TV+.
               </p>
-              <button className="bg-white text-black font-semibold py-3 px-8 rounded-full hover:bg-gray-200 transition-colors">
+              <button 
+              onClick={handleVerify}
+              className="bg-sky-500 text-black font-semibold py-3 px-8 rounded-full hover:bg-gray-200 transition-colors">
                 Verify now
               </button>
             </div>
@@ -113,7 +127,7 @@ export default function Discount() {
               <ImageUploadZone
                 {...block1}
                 containerClassName="relative w-full h-64 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl flex items-center justify-center border border-gray-700 overflow-hidden"
-                emptyLabel="Chèn ảnh MacBook/iPad Lifestyle"
+                emptyLabel="Insert MacBook/iPad Lifestyle image"
               />
             </div>
           </div>
@@ -123,11 +137,17 @@ export default function Discount() {
             <div>
               <h3 className="text-xl font-bold mb-2">Equipment valuation</h3>
               <p className="text-gray-400 text-sm">Upload a photo of your old device to see the upgrade subsidy.</p>
+              <button 
+              onClick={handleVerify}
+              className="bg-sky-500 text-black font-semibold text-[12px] py-1.5 px-2.5 rounded-full hover:bg-gray-200 transition-colors mt-7">
+                Verify now
+              </button>
+              
             </div>
             <ImageUploadZone
               {...block2}
               containerClassName="mt-8 h-56 bg-black/40 rounded-xl flex flex-col items-center justify-center border-2 border-dashed border-gray-700 relative overflow-hidden"
-              emptyLabel="Tải ảnh lên"
+              emptyLabel="Upload image"
             />
           </div>
 
@@ -138,18 +158,32 @@ export default function Discount() {
               <p className="text-gray-400">
                 Discount <span className="text-white font-bold">20%</span> for Apple Watch cases, bands, and fast chargers when purchased with the main device.
               </p>
+              <button 
+              onClick={handleVerify}
+              className="bg-sky-500 text-black font-semibold py-1.5 px-2.5 text-[12px] rounded-full hover:bg-gray-200 transition-colors mt-7">
+                Verify now
+              </button>
             </div>
             <div className="mt-6 md:mt-0">
               <ImageUploadZone
                 {...block3}
                 containerClassName="relative w-42 h-30 bg-gray-800/50 rounded-lg border border-gray-700 flex items-center justify-center overflow-hidden"
-                emptyLabel="Tải ảnh phụ kiện"
+                emptyLabel="Download accessory images"
               />
             </div>
           </div>
 
         </div>
       </div>
+
+       {/* TOAST POPUP */}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
     </section>
   );
 }
