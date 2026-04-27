@@ -8,7 +8,7 @@ const Films = () => {
         <div className="flex items-center gap-4 mb-[150px]">
 
           {/* LEFT - TEXT */}
-          <div className="md:w-1/3">
+          <div className="md:w-1/3 mt-[10vh]">
             <h2 className="text-3xl text-white font-bold mb-4">
               Apple TV App.
             </h2>
@@ -30,7 +30,7 @@ const Films = () => {
           </div>
 
           {/* RIGHT - IMAGE */}
-          <div className="md:w-2/3">
+          <div className="md:w-2/3 mt-[30vh">
             <img
               src="/messi.png"
               alt="demo"
@@ -102,32 +102,45 @@ const Films = () => {
 
         </div>
 
-        <div className="mt-[270px] text-center">
-          <h1 className="text-7xl text-white">FaceTime on your</h1>
-          <h1 className="text-7xl text-white">biggest screen.</h1>
-        </div>
+       <section className="mt-24 sm:mt-32 lg:mt-[270px] px-4 sm:px-6 lg:px-10">
+  {/* Hero Title */}
+  <div className="text-center">
+    <h1 className="text-4xl sm:text-5xl lg:text-7xl text-white font-semibold">
+      FaceTime on your
+    </h1>
+    <h1 className="text-4xl sm:text-5xl lg:text-7xl text-white font-semibold mt-2">
+      biggest screen.
+    </h1>
+  </div>
 
-        <div className="flex flex-center mt-[60px]">
-            <img src="/faceID.png" alt="" className="w-[70vw]"/>
-        </div>
+  {/* Image */}
+  <div className="flex justify-center mt-10 sm:mt-12 lg:mt-[60px]">
+    <img
+      src="/faceID.png"
+      alt="FaceTime on Apple TV"
+      className="w-full sm:w-[85%] lg:w-[70vw] object-contain"
+    />
+  </div>
 
-        <span className=" flex-center mt-[100px] mb-[60px]">
-              <h1 className="mr-25 text-6xl bg-gradient-to-r from-green-500 via-sky-300 to-yellow-300 bg-clip-text text-transparent">FaceTime App</h1>
-            <h1 className="text-xl">on Apple TV 4K seamlessly connects with your iPhone
-              <br />
-              or iPad to stream audio and video to the big screen via the Clear 
-              <br />
-              Camera Live Annotations in FaceTime now support more languages and will
-              <br />
-              automatically display what the other person is saying, making it eassier
-              <br />
-              for everyone to understand the call. Apple TV 4K will also display
-              <br />
-              notifications about FaceTime calls, making it easier, more impressive,
-              <br />
-              and sharper than ever to share special moments together.
-            </h1>
-            </span>
+  {/* Bottom Content */}
+  <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-6 lg:gap-12 mt-12 sm:mt-16 lg:mt-[100px] mb-16">
+    
+    {/* Left Title */}
+    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-center lg:text-left bg-gradient-to-r from-green-500 via-sky-300 to-yellow-300 bg-clip-text text-transparent">
+      FaceTime App
+    </h1>
+
+    {/* Right Description */}
+    <p className="text-sm sm:text-base lg:text-xl text-gray-300 leading-relaxed text-center lg:text-left max-w-2xl">
+      On Apple TV 4K, FaceTime seamlessly connects with your iPhone or iPad to
+      stream audio and video to the big screen via Continuity Camera. Live
+      Captions in FaceTime now support more languages and automatically display
+      what the other person is saying, making conversations easier for everyone
+      to follow. Apple TV 4K also shows FaceTime call notifications, making it
+      easier than ever to share moments together.
+    </p>
+  </div>
+</section>
 
 
       </section>

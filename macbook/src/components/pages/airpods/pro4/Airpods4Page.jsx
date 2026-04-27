@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import NavBar from "../../../Navbar";
+
 import Footer from "../../../Footer";
 
 // Components
@@ -16,7 +16,7 @@ export default function Airpods4Page() {
 
     return (
         <main className="bg-black text-white selection:bg-zinc-600/30">
-            <NavBar />
+        
             
             <HeaderBanner />
             <HotspotViewer />

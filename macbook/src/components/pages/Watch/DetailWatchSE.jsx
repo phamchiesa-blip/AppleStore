@@ -6,7 +6,8 @@ import { useEffect, useRef } from 'react';
 import {AppleSe3, AppleSe3Features} from '../../../constants/index'
 
 const DetailsWatchSE = () => {
-  const scrollRef = useRef(null);
+  const topSliderRef = useRef(null);
+  const bottomSliderRef = useRef(null);
 
   useEffect(() => {
         AOS.init({
@@ -17,15 +18,14 @@ const DetailsWatchSE = () => {
         AOS.refresh(); 
       }, []);
 
-  const scroll = (direction) => {
-  if (scrollRef.current) {
-    const scrollAmount = 350; // khoảng cách scroll (tuỳ chỉnh)
-
-    scrollRef.current.scrollBy({
-      left: direction === "left" ? -scrollAmount : scrollAmount,
-      behavior: "smooth",
-    });
-  }
+  const handleScroll = (ref, direction) => {
+    if (ref.current) {
+      const scrollAmount = 350;
+      ref.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
   };
 
   return (
@@ -37,7 +37,7 @@ const DetailsWatchSE = () => {
             <h1 className="text-gray text-xl mt-5">Health.</h1>
             <h1 className="text-8xl mt-6 bg-gradient-to-br from-blue-500 via-purple-300 to-pink-700 bg-clip-text text-transparent">Go one</h1>
             <h1 className="text-8xl bg-gradient-to-br from-blue-400 via-purple-300 to-pink-700 bg-clip-text text-transparent">step ahead.</h1>
-            <div ref={scrollRef} className="flex gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide mt-10 px-5 pb-4">
+            <div ref={topSliderRef} className="flex gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide mt-10 px-5 pb-4">
         {AppleSe3.map((item, index) => (
     <div 
       key={index} 
@@ -80,14 +80,14 @@ const DetailsWatchSE = () => {
 
            <div className="flex justify-center gap-4 mt-4">
   <button
-    onClick={() => scroll("left")}
+    onClick={() => handleScroll(topSliderRef, "left")}
     className="w-10 h-10 rounded-full bg-white/10 text-white hover:bg-white/20 transition"
   >
     {"<"}
   </button>
 
   <button
-    onClick={() => scroll("right")}
+    onClick={() => handleScroll(topSliderRef, "right")}
     className="w-10 h-10 rounded-full bg-white/10 text-white hover:bg-white/20 transition"
   >
     {">"}
@@ -97,20 +97,22 @@ const DetailsWatchSE = () => {
         <div className="mt-[150px]">
           <div data-aos="fade-up" className="flex flex-col flex-center">
             <h1 className="text-green-500 font-medium text-2xl mb-7">Exercise</h1>
-            <h1 className="text-white font-semibold text-6xl mb-5">Improvement across</h1>
-            <h1 className="text-white font-semibold text-6xl">all indicators.</h1>
-            <h1 className="mt-[50px] text-2xl text-gray">Whether you're preparing for a marathon or a swimming race,</h1>
-            <h1 className="text-xl text-gray">The Apple Watch Series 11 offers countless ways to exercise. And the device uses</h1>
-            <h1 className="text-xl text-gray">useful metrics to track every move, so you can</h1>
-            <h1 className="text-xl text-gray">Learn how to motivate yourself better and train smarter. Let's get started,</h1>
-            <h1 className="text-xl text-gray">the starting line is right on your wrist.</h1>
+            <h1 className="text-white font-semibold lg:text-6xl text-4xl mb-5">Improvement across</h1>
+            <h1 className="text-white font-semibold lg:text-6xl text-4xl">all indicators.</h1>
+            <div className="text-center">
+              <h1 className="mt-[50px] text-2xl text-gray">Whether you're preparing for a marathon or a swimming race,</h1>
+              <h1 className="text-xl text-gray">The Apple Watch Series 11 offers countless ways to exercise. And the device uses</h1>
+              <h1 className="text-xl text-gray">useful metrics to track every move, so you can</h1>
+              <h1 className="text-xl text-gray">Learn how to motivate yourself better and train smarter. Let's get started,</h1>
+              <h1 className="text-xl text-gray">the starting line is right on your wrist.</h1>
+            </div>
           </div>
 
-          <div data-aos="fade-right" className="flex flex-row justify-around mt-[80px]">
+          <div data-aos="fade-right" className="flex lg:flex-row flex-col justify-around mt-[80px]">
             <img src="/run.png" alt="" />
             <div className="">
               <h1 className="text-5xl mb-6">🏃🏻‍➡️</h1>
-              <span className="text-xl">
+              <span className="text-xl text-center">
                 <h1 className="font-bold text-white">A more powerful Exercises app.</h1>
                 <h1>The improved layout highlights four buttons</h1>
                 <h1>in the corner, giving you quicker access</h1>
@@ -119,10 +121,10 @@ const DetailsWatchSE = () => {
                 </span>
             </div>
           </div>
-           <div data-aos="fade-left" className="flex flex-row justify-around mt-[80px]">
+           <div data-aos="fade-left" className="flex lg:flex-row flex-col justify-around mt-[80px]">
             <div className="">
               <h1 className="text-5xl mb-6">🏃‍➡️🚩</h1>
-              <span className="text-xl">
+              <span className="text-xl text-center">
                 <h1 className="font-bold text-white">Running is jumping.</h1>
                 <h1>The Apple Watch SE 3 is your perfect running partner.</h1>
                 <h1>With built-in GPS and advanced sensors, it can help you track distance, 
@@ -134,23 +136,23 @@ const DetailsWatchSE = () => {
         </div>
         </div>
 
-      <div className="relative w-full mt-[160px]">
+      <div className="relative w-full mt-[160px] hidden md:block">
         <img src="/running4K.jpg" alt="địt mẹ hanu" className="w-full h-auto object-cover" />
-        <div className="absolute top-50 left-50 text-white text-2xl md:text-4xl font-semibold">
-          <h1 className="font-bold text-6xl">Designed to encourage</h1>
-          <h1 className="font-bold text-6xl mb-6 bg-gradient-to-r from-green-400 via-sky-700 to-brown-400 bg-clip-text text-transparent">runners.</h1>
-          <h1 className="text-2xl">Whatever your running goal, the Apple Watch has </h1>
-          <h1 className="text-2xl">advanced features to help you see them through. </h1>
-          <h1 className="text-2xl"> With long-lasting battery life, precise GPS, and </h1>
-          <h1 className="text-2xl">motivational features that let you track </h1>
-          <h1 className="text-2xl">your workouts in real time, your best time </h1>
-          <h1 className="text-2xl">starts right on your wrist.</h1>
-          <h1 className="font-bold text-5xl mt-10">Apple watch allows you: </h1>
-          <div className="grid grid-cols-[270px_270px] mt-5">
+        <div className="absolute lg:top-50 left-50 top-25 text-white text-2xl md:text-4xl font-semibold">
+          <h1 className="font-bold lg:text-6xl text-4xl">Designed to encourage</h1>
+          <h1 className="font-bold lg:text-6xl text-4xl mb-6 bg-gradient-to-r from-green-400 via-sky-700 to-brown-400 bg-clip-text text-transparent">runners.</h1>
+          <h1 className="lg:text-2xl text-[1.25rem]">Whatever your running goal, the Apple Watch has </h1>
+          <h1 className="lg:text-2xl text-[1.25rem]">advanced features to help you see them through. </h1>
+          <h1 className="lg:text-2xl text-[1.25rem]"> With long-lasting battery life, precise GPS, and </h1>
+          <h1 className="lg:text-2xl text-[1.25rem]">motivational features that let you track </h1>
+          <h1 className="lg:text-2xl text-[1.25rem]">your workouts in real time, your best time </h1>
+          <h1 className="lg:text-2xl text-[1.25rem]">starts right on your wrist.</h1>
+          <h1 className="font-bold text-5xl mt-10 hidden lg:block">Apple watch allows you: </h1>
+          <div className="grid grid-cols-[270px_270px] mt-5 hidden lg:grid">
             <h1 className="text-xl mb-5 bg-gradient-to-r from-red-400 via-orange-300 to-yellow-200 bg-clip-text text-transparent">Check out your impressive training volume.</h1>
             <h1 className="text-xl mb-5 bg-gradient-to-r from-green-400 to-sky-400 bg-clip-text text-transparent">Create Custom Assignments.</h1>
-            <h1 className="text-xl bg-gradient-to-r from-orange-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">Sync your workout data across your iPhone.</h1>
-            <h1 className="text-xl bg-gradient-to-r from-gray-400 via-brown-300 to-green-400 bg-clip-text text-transparent">This playlist is designed to help you work out in sync with your workout routine.</h1>
+            <h1 className="text-xl mb-5 bg-gradient-to-r from-orange-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">Sync your workout data across your iPhone.</h1>
+            <h1 className="text-xl mb-5 bg-gradient-to-r from-gray-400 via-brown-300 to-green-400 bg-clip-text text-transparent">This playlist is designed to help you work out in sync with your workout routine.</h1>
           </div>
         </div>
       </div>
@@ -160,7 +162,7 @@ const DetailsWatchSE = () => {
          
           <div data-aos="fade-down" className="mt-[70px]">
             <h1 className="text-white text-5xl">More features</h1>
-            <div ref={scrollRef} className="flex gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide mt-10 px-5 pb-4">
+            <div ref={bottomSliderRef} className="flex gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide mt-10 px-5 pb-4">
         {AppleSe3Features.map((item, index) => (
     <div 
       key={index} 
@@ -204,14 +206,14 @@ const DetailsWatchSE = () => {
 
            <div className="flex justify-center gap-4 mt-4">
   <button
-    onClick={() => scroll("left")}
+    onClick={() => handleScroll(bottomSliderRef, "left")}
     className="w-10 h-10 rounded-full bg-white/10 text-white hover:bg-white/20 transition"
   >
     {"<"}
   </button>
 
   <button
-    onClick={() => scroll("right")}
+    onClick={() => handleScroll(bottomSliderRef, "right")}
     className="w-10 h-10 rounded-full bg-white/10 text-white hover:bg-white/20 transition"
   >
     {">"}
@@ -222,16 +224,16 @@ const DetailsWatchSE = () => {
 
       <div className="mt-[160px] text-center">
         <h1 className="text-3xl font-bold text-red-600">Safe</h1>
-        <h1 className="text-7xl font-extrabold text-white mt-3">The real emergency hotline.</h1>
-        <h1 className="mt-[45px] text-2xl">Equipped with groundbreaking safety features, the Apple Watch</h1>
-        <h1 className="text-2xl mt-2">Series 11 is ready to help you. It's designed to call for help when you need</h1>
-        <h1 className="text-2xl mt-2">it most, even when you can't access your iPhone.</h1>
+        <h1 className="lg:text-7xl text-4xl font-extrabold text-white mt-3">The real emergency hotline.</h1>
+        <h1 className="mt-[45px] text-2xl px-1">Equipped with groundbreaking safety features, the Apple Watch</h1>
+        <h1 className="text-2xl mt-2 px-1 ">Series 11 is ready to help you. It's designed to call for help when you need</h1>
+        <h1 className="text-2xl mt-2 px-1">it most, even when you can't access your iPhone.</h1>
 
           <div data-aos="zoom-in" className="flex flex-center mt-[120px]">
-            <img src="/safe-removebg-preview.png" alt="" className="w-[48vw] h-[90vh]" />
+            <img src="/safe-removebg-preview.png" alt="" className="lg:w-[45vw] lg:h-[88vh] h-[70vh]" />
           </div>
       </div>
-      <div className="w-full px-5 md:px-10 lg:px-20 2xl:px-0 max-w-7xl mx-auto grid grid-cols-3 gap-[40px] flex justify-around w-[120px]">
+      <div className="w-full px-5 md:px-10 lg:px-20 2xl:px-0 max-w-7xl mx-auto grid lg:grid-cols-3 grid-cols-1 gap-[40px] flex justify-around w-[120px]">
           <div className="">
             <h1 className="text-3xl">🆘</h1>
             <p className="mt-3 text-xl font-semibold leading-snug text-gray-400">

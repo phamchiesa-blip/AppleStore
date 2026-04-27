@@ -17,7 +17,7 @@ function Support() {
     const [isChatOpen, setIsChatOpen] = useState(false);
     return ( 
         <>
-            <div className="flex flex-row container mx-auto px-5 2xl:px-0 mt-[70px]">
+            <div className="flex flex-col lg:flex-row container mx-auto px-5 2xl:px-0 mt-[70px]">
                 <h1 className="text-white text-4xl">Support here - </h1>
                 <h1 className="text-4xl text-white-900"> - Right when you want it, everything you need.</h1>
             </div>
@@ -33,8 +33,9 @@ function Support() {
 >
   <div data-aos="fade-up"
     className="relative 
-      w-[482px] h-[500px] 
-      flex-shrink-0
+      w-full sm:w-[90%] lg:w-[482px]
+      h-[420px] sm:h-[460px] lg:h-[500px]
+      flex flex-col lg:flex-row
       rounded-3xl 
       bg-gradient-to-br from-[#0f0f0f] to-[#1a1a1a]
       shadow-[0_4px_20px_rgba(0,0,0,0.5)]

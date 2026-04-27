@@ -44,7 +44,7 @@ export default function TVFrame() {
         
         <div className="container mx-auto px-5 2xl:px-0 mt-[60px]">
             <div className="flex items-center justify-center">
-                <div className="grid grid-cols-[260px_260px_260px_260px] gap-x-5 text-center">
+                <div className="grid lg:grid-cols-[260px_260px_260px_260px] grid-cols-2 gap-x-5 text-center">
                     <div>
                         <h1 className="font-bold text-4xl bg-gradient-to-r from-yellow-300 to-green-700 bg-clip-text text-transparent">Apple TV</h1>
                         <h2 className="text-white mt-2">Watch award-winning Apple Originals shows online on all your screens.</h2>

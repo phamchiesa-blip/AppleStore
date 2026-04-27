@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import NavBar from "../../../Navbar";
+
 import Footer from "../../../Footer";
 
 // Components
@@ -15,7 +15,7 @@ export default function AirpodsMaxPage() {
 
     return (
         <main className="bg-black text-white selection:bg-purple-500/30">
-            <NavBar />
+           
             
             <MaxHero />
             <VisualFeatures />

@@ -18,7 +18,7 @@ const IntroHomeApp = () => {
        </div>
 
        <h1 className="text-white font-bold text-2xl text-center mt-[22px]">Home App</h1>
-       <div data-aos="fade-up" className="text-white text-8xl text-center mt-[50px]">
+       <div data-aos="fade-up" className="text-white lg:text-8xl text-4xl text-center mt-[50px]">
         <h1>A solid foundation </h1>
         <h1>for a smart home.</h1>
        </div>
@@ -27,7 +27,7 @@ const IntroHomeApp = () => {
         <img src="/homelapiph.png" className="w-[70vw]" />
        </div>
 
-        <h1 className="text-center mt-[85px] text-2xl text-gray-200">
+        <h1 className="text-center mt-[85px] lg:text-2xl text-[15px] text-gray-200">
           The Home app makes controlling all your smart home
           <br />
           accessories easier – across all your Apple devices.

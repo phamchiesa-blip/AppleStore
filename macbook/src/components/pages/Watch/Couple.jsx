@@ -16,10 +16,10 @@ function Couple() {
 const [activeTab, setActiveTab] = useState(0);
     return ( 
         <div className="container mx-auto px-5 2xl:px-0 mt-[145px] mb-[100px]">
-            <h1 className="text-6xl font-bold bg-gradient-to-l from-red-400 via-yellow-400 to-pink-400 bg-clip-text text-transparent">Made for each other.</h1>
+            <h1 className="lg:text-6xl text-4xl font-bold bg-gradient-to-l from-red-400 via-yellow-400 to-pink-400 bg-clip-text text-transparent">Made for each other.</h1>
 
-             <div data-aos="fade-up" className="w-full h-[500px] rounded-xl bg-gradient-to-br from-[#2d2d2d] to-[#1f1f1f] mt-[50px] mb-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+             <div data-aos="fade-up" className="w-full py-10 rounded-xl bg-gradient-to-br from-[#2d2d2d] to-[#1f1f1f] mt-[50px] mb-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                     {/* CỘT TRÁI: Navigation Menu */}
         <div className="space-y-4 mt-[93px] ml-10">
           {coupleData.map((item) => (

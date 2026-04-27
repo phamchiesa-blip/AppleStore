@@ -1,7 +1,7 @@
 function Product() {
     return (
         <div className="container mx-auto px-5 2xl:px-0 mt-[136px]">
-            <div className="flex justify-between">
+            <div className="flex flex-wrap justify-between">
                 <h1 className="text-8xl font-bold text-white">Store</h1>
                 <div className="flex flex-col">
                     <h1 className="text-4xl font-bold">The best way to buy<br />the product you like.</h1>
