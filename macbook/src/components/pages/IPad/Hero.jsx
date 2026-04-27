@@ -21,7 +21,7 @@ const Hero = () => {
         id: "ipad-pro", 
         name: "iPad Pro",
         price: 999,
-        image: "/ipad-pro.png" // Nhớ kiếm ảnh đuôi png tách nền để vào thư mục public nhé
+        image: "/ipadprom4.png" 
     };
 
     return (

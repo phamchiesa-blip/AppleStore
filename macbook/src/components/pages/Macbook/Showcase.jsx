@@ -23,7 +23,7 @@ const Showcase = () => {
         .to('.mask img', { scale: 1.05 })
         .to('.content', { opacity: 1, y: 0 });
 
-    }, [isTablet]);
+    });
 
     return () => ctx.revert(); 
   }
