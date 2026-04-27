@@ -38,7 +38,7 @@ function IntroHomeTV() {
 
             {/* 2 cái thanh giới thiệu */}
             <div className="mt-[50px]">
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid lg:grid-cols-2 grid-cols-1 gap-2">
                     <div data-aos="fade-up"
                     data-aos-duration="500" className="rounded-3xl flex flex-col items-center
                     bg-gradient-to-br from-[#0f0f0f] to-[#1a1a1a]

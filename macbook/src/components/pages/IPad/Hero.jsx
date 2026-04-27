@@ -37,11 +37,11 @@ const Hero = () => {
                             addToCart(ipadPro);
                             setIsCartOpen(true);
                         }}
-                        className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors text-lg"
+                        className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200 cursor-pointer transition-colors text-lg"
                     >
                         Buy
                     </button>
-                    <button className="text-green-500 hover:text-green-400 font-medium text-lg flex items-center gap-1 transition-colors">
+                    <button className="text-green-500 hover:text-green-400 font-medium text-lg flex items-center gap-1 cursor-pointer transition-colors">
                         Learn more <span className="text-sm">&gt;</span>
                     </button>
                 </div>

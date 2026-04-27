@@ -127,7 +127,7 @@ const Models = () => {
                             addToCart(productToAdd);
                             setIsCartOpen(true); // Mở sidebar giỏ hàng ngay lập tức
                         }}
-                        className="bg-white text-black py-2.5 px-6 rounded-full font-medium hover:bg-gray-200 transition-colors w-full"
+                        className="bg-white text-black py-2.5 px-6 rounded-full font-medium hover:bg-gray-200 cursor-pointer transition-colors w-full"
                     >
                         Buy
                     </button>
@@ -135,7 +135,7 @@ const Models = () => {
                                     {/* 💥 3. Nút Learn More mở Modal */}
                                     <button 
                                         onClick={() => setSelectedModel(model)} 
-                                        className="text-[#2997ff] hover:text-[#147ce6] transition-colors py-2 text-sm flex items-center justify-center gap-1"
+                                        className="text-[#2997ff] hover:text-[#147ce6] transition-colors py-2 text-sm flex items-center justify-center gap-1 cursor-pointer"
                                     >
                                         Learn more <span>&gt;</span>
                                     </button>

@@ -41,9 +41,11 @@ function WatchProducts() {
 
     return ( 
         <div className="container mx-auto px-5 2xl:px-0 mt-[136px]">
-            <h1 data-aos="fade-right" className="text-6xl py-2 font-bold bg-gradient-to-r from-green-300 via-purple-400 to-yellow-300 bg-clip-text text-transparent flex justify-center">Style with Apple Watch</h1>
+            <h1 data-aos="fade-right" className="md:text-6xl text-4xl py-2 font-bold bg-gradient-to-r from-green-300 via-purple-400 to-yellow-300 bg-clip-text text-transparent flex justify-center">
+                Style with Apple Watch
+            </h1>
 
-            <div className="grid grid-cols-3 gap-4 mt-[55px]">
+            <div className="grid lg:grid-cols-3 grid-cols-1 gap-4 mt-[55px]">
                 
                 <div data-aos="fade-up" data-aos-duration="1000" className="flex flex-col items-center">
                     <Link to="/detailwatchseries11">

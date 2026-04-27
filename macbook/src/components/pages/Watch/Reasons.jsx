@@ -16,7 +16,7 @@ const scroll = (direction) => {
 };
     return ( 
         <div className="container mx-auto px-5 2xl:px-0 mt-[145px]">
-            <h1 className="text-5xl text-white">Why Apple is the best place to buy</h1>
+            <h1 className="lg:text-5xl text-3xl text-white">Why Apple is the best place to buy</h1>
             <h1 className="text-5xl mt-2 bg-gradient-to-r from-yellow-400 via-purple-500 to-green-400 bg-clip-text text-transparent">Apple Watch</h1>
 
             <div ref={scrollRef} className="flex gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide mt-[45px] px-5 pb-4">
