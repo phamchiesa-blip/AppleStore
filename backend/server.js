@@ -17,8 +17,10 @@ app.use('/api/users', require('./routes/user'));
 // app.use('/api/orders', require('./routes/order'));
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/dashboard", require('./routes/dashboard'));
+app.use("/api/orders", orderRoutes);
 
-  
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

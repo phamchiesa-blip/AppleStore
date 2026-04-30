@@ -48,6 +48,7 @@ CREATE TABLE orders (
     payment_method VARCHAR(50) NOT NULL,
     items JSON NOT NULL,
     total_price DECIMAL(10,2) NOT NULL,
+    status VARCHAR(50) DEFAULT 'Pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -95,3 +96,17 @@ It features a 100 percent recycled aluminum enclosure and stunning all‑screen 
 " WHERE name = 'iPad mini';
 
 select * from ipad;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    full_name VARCHAR(255),
+    phone VARCHAR(20),
+    address TEXT,
+    role ENUM('admin', 'user') DEFAULT 'user',
+    status ENUM('active', 'banned') DEFAULT 'active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+INSERT INTO `users` VALUES (1,'admin','admin@applestore.com','$2b$10$dM77nLBDExIg/NoHYCPKT.5419B9jwvCqb3UUPrnZN..d9AMsVVRG',NULL,NULL,NULL,'admin','active','2026-04-30 06:13:48'),(2,'user','user@applestore.com','$2b$10$XMbLAbN1AFiX7uZ/nRiTDuDPhEKAU1fFTELWnZy15ORynJ7t.Uk9C',NULL,NULL,NULL,'user','active','2026-04-30 06:19:11'),(3,'phamchuyen','bangbong2232@gmail.com','$2b$10$RuHSrIk.ubiaHaju/frBouaeBv5WBXrp657neUahDRki4cjsw.CRq',NULL,NULL,NULL,'user','active','2026-04-30 06:20:49');
