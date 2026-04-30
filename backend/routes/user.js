@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const mysql = require('mysql2/promise');
-const { verifyAdmin } = require('../middleware/authMiddleware');
 
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
@@ -13,50 +12,11 @@ const pool = mysql.createPool({
     queueLimit: 0
 });
 
-// GET all users (Admin only)
-router.get('/', verifyAdmin, async (req, res) => {
-    try {
-        const [rows] = await pool.query('SELECT id, username, email, full_name, phone, address, role, status, created_at FROM users ORDER BY created_at DESC');
-        res.json({ success: true, users: rows });
-    } catch (error) {
-        console.error('Error fetching all users:', error);
-        res.status(500).json({ success: false, message: 'Server error fetching all users' });
-    }
-});
-
-// PUT update user role (Admin only)
-router.put('/:id/role', verifyAdmin, async (req, res) => {
-    try {
-        const { role } = req.body;
-        if (role !== 'admin' && role !== 'user') return res.status(400).json({ success: false, message: 'Invalid role' });
-        
-        await pool.query('UPDATE users SET role = ? WHERE id = ?', [role, req.params.id]);
-        res.json({ success: true, message: 'User role updated successfully' });
-    } catch (error) {
-        console.error('Error updating user role:', error);
-        res.status(500).json({ success: false, message: 'Server error updating user role' });
-    }
-});
-
-// PUT update user status (ban/unban) (Admin only)
-router.put('/:id/status', verifyAdmin, async (req, res) => {
-    try {
-        const { status } = req.body;
-        if (status !== 'active' && status !== 'banned') return res.status(400).json({ success: false, message: 'Invalid status' });
-        
-        await pool.query('UPDATE users SET status = ? WHERE id = ?', [status, req.params.id]);
-        res.json({ success: true, message: 'User status updated successfully' });
-    } catch (error) {
-        console.error('Error updating user status:', error);
-        res.status(500).json({ success: false, message: 'Server error updating user status' });
-    }
-});
-
 // GET user profile
 router.get('/:id', async (req, res) => {
     try {
         const [rows] = await pool.query(
-            'SELECT id, username, email, full_name, phone, address, role, created_at FROM users WHERE id = ?', 
+            'SELECT id, username, email, full_name, phone, address, created_at FROM users WHERE id = ?', 
             [req.params.id]
         );
         if (rows.length === 0) return res.status(404).json({ message: 'User not found' });
@@ -78,7 +38,7 @@ router.put('/:id', async (req, res) => {
         
         // Return back the updated user
         const [rows] = await pool.query(
-            'SELECT id, username, email, full_name, phone, address, role FROM users WHERE id = ?',
+            'SELECT id, username, email, full_name, phone, address FROM users WHERE id = ?',
             [req.params.id]
         );
         res.json({ message: 'Profile updated successfully', user: rows[0] });
