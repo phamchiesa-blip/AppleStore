@@ -50,6 +50,33 @@ const App = () => {
                     <Route path="orders" element={<AdminOrders />} />
                     <Route path="users" element={<AdminUsers />} />
                 </Route>
+  return (
+    <>
+      <Toaster position="top-center" />
+      <GSAPReset />
+      <NavBar />
+      {/* Route */}
+      <Routes>
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/" element={<StorePage />} />
+        <Route path="/success" element={<SuccessPage />} />
+        <Route path="/mac" element={<MacPage />} />
+        <Route path="/iphone" element={<IPhonePage />} />
+        <Route path="/ipad" element={<IPadPage />} />
+        <Route path="/airpods" element={<AirpodsPage />} />
+        <Route path="/airpods/max" element={<AirpodsMaxPage />} />
+        <Route path="/airpods/pro3" element={<AirpodsProPage />} />
+        <Route path="/airpods/pro4" element={<Airpods4Page />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/watch" element={<WatchPage />} />
+        <Route path="/tvhome" element={<TVHomePage />} />
+        <Route path="/detailwatchseries11" element={<DetailsWatch />} />
+        <Route path="/detailwatchse3" element={<DetailsWatchSE />} />
+        <Route path="/detailwatchsultra" element={<DetailsWatchUltra />} />
+        <Route path="/tv4k" element={<TV4K />} />
+        <Route path="/homeapp" element={<HomeApp />} />
+        <Route path="/user" element={<UserPage />} />
 
                 {/* Public Routes with Navbar */}
                 <Route path="/*" element={

@@ -50,24 +50,41 @@ const HowItWork = () => {
         </div>
 
         <div className="mt-10 md:mt-20 mb-14">
-            <div className="relative h-full flex-center">
-                <div className="overflow-hidden">
-                    <img src={frameImg} alt="địt mẹ FPT"
-                     className='bg-transparent relative z-10' />       
-                </div>
-                <div className="absolute w-[86%] h-[90%] rounded-[70px] overflow-hidden">
-                        <video className='pointer-events-none w-full h-full '
-                        playsInline preload='none' muted autoPlay loop ref={videoRef}
-                        >
-                            <source 
-                                src={frameVideo} type='video/mp4'
-                            />
-                        </video>
-                </div>
+    {/* 1. Đưa flex căn giữa ra ngoài cùng */}
+    <div className="flex justify-center items-center px-5">
+        
+        {/* 2. WRAPPER QUAN TRỌNG: Thẻ này bám sát kích thước ảnh. 
+            Bạn có thể chỉnh max-w-[...] để giới hạn độ to tối đa của iPhone trên màn hình lớn */}
+        <div className="relative w-full max-w-[900px]">
+            
+            {/* Ảnh Khung iPhone (z-10 để đè lên video) */}
+            <img 
+                src={frameImg} 
+                alt="iPhone Frame"
+                className="w-full h-auto relative z-10 pointer-events-none" 
+            />
+            
+            {/* 3. Khung Video: z-0 để nằm dưới ảnh.
+                - Dùng top-1/2 left-1/2 và translate để căn giữa tuyệt đối vào tâm bức ảnh.
+                - Dùng responsive cho bo góc: Điện thoại (rounded-2xl) -> iPad (md:rounded-[40px]) -> PC (lg:rounded-[60px])
+            */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[97%] h-[93%] z-0 overflow-hidden rounded-2xl md:rounded-[40px] lg:rounded-[60px]">
+                
+                {/* 4. Thêm object-cover để video luôn full viền */}
+                <video 
+                    className="w-full h-full object-cover pointer-events-none"
+                    playsInline preload="none" muted autoPlay loop ref={videoRef}
+                >
+                    <source src={frameVideo} type="video/mp4" />
+                </video>
+                
             </div>
-            <p className="text-gray font-semibold text-center mt-5 text-2xl">
-                Honkai: Star Rail
-            </p>
+        </div>
+    </div>
+    
+    <p className="text-gray font-semibold text-center mt-5 text-2xl">
+        Honkai: Star Rail
+    </p>
         </div>
              <div className="flex flex-col justify-around gap-24 flex-center">
                 <div className="flex flex-1 justify-center flex-col">

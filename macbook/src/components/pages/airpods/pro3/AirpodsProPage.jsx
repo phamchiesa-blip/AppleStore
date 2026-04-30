@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import NavBar from "../../../Navbar";
+
 import Footer from "../../../Footer";
 
 // Components
@@ -15,7 +15,7 @@ export default function AirpodsProPage() {
 
     return (
         <main className="bg-black text-white selection:bg-blue-500/30 font-sans">
-            <NavBar />
+          
             
             <InteractiveProCanvas />
             <SpecPager />

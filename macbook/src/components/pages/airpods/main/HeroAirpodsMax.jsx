@@ -2,10 +2,13 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { Link } from "react-router-dom";
+import { useCart } from '../../../../context/useCart';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const HeroAirpodsMax = () => {
+    const { addToCart, setIsCartOpen } = useCart();
+
     const imgRef = useRef(null);
     const containerRef = useRef(null);
     const textRef = useRef(null);
@@ -26,6 +29,13 @@ const HeroAirpodsMax = () => {
             { opacity: 1, scale: 1, duration: 1.5, ease: "power2.out" }
         );
     }, []);
+
+    const apmax = {
+    id: "airpods-max", // nhớ unique
+    name: "AirPods Max",
+    price: 549,
+    image: "/airpods-max.png"
+    };
 
     return (
         <section ref={containerRef} className="w-full flex justify-center pt-24 px-4 pb-10 bg-black relative">
@@ -71,7 +81,15 @@ const HeroAirpodsMax = () => {
 
                     <div className="flex gap-4">
                         <Link to="/airpods/max" className="bg-white text-black hover:bg-gray-200 px-6 py-2.5 rounded-full text-sm font-semibold transition-all">Learn more</Link>
-                        <button className="bg-blue-600 text-white hover:bg-blue-500 px-6 py-2.5 rounded-full text-sm font-semibold transition-all">Buy</button>
+                        <button
+                            onClick={() => {
+                                addToCart(apmax);
+                                setIsCartOpen(true);
+                            }}
+                            className="bg-blue-600 text-white hover:bg-blue-500 px-6 py-2.5 rounded-full text-sm font-semibold transition-all"
+                        >
+                            Buy
+                        </button>
                     </div>
                 </div>
             </div>

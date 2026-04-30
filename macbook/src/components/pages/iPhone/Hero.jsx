@@ -2,8 +2,11 @@ import gsap from 'gsap'
 import {useGSAP} from '@gsap/react'
 import {heroVideo, smallHeroVideo} from '../../utils/index'
 import { useEffect, useState } from 'react';
+import { useCart } from '../../../context/useCart';
 
 function Hero() {
+    const { addToCart, setIsCartOpen } = useCart();
+
     const [videoSrc, setVideoSrc] = useState(window.innerWidth < 760 ? smallHeroVideo : heroVideo);
     const handleVideo = () => {
         if(window.innerWidth < 760) {
@@ -33,6 +36,13 @@ function Hero() {
         })
     }, []);
 
+    const product = {
+    id: "iphone-17-pro", // nhớ unique
+    name: "iPhone 17 Pro",
+    price: 999,
+    image: "/iphone-removebg-preview.png"
+    };
+
     return ( 
         <section className="w-full h-[calc(100vh-60px)] relative">
             <div className="h-5/6 w-full flex-center flex-col">
@@ -44,13 +54,25 @@ function Hero() {
                 </div>
             </div>
 
-            <div id="cta" className="flex flex-col items-center opacity-0 translate-y-20">
-                <a href="#highlights" 
-                className='px-5 py-2 rounded-3xl my-5 bg-blue-200 text-black'>
-                    Buy
-                </a>
-                <p className='font-normal text-xl'>From $199.month or $999</p>
-            </div>
+           
+                <div id="cta" className="flex flex-col items-center opacity-0 translate-y-20 mr-5">
+                    <button 
+                    onClick={()=>{
+                        addToCart(product);
+                        setIsCartOpen(true);
+                    }
+                         
+                    }
+                    className='px-5 py-2 rounded-3xl my-5 bg-blue-200 text-black hover:bg-blue-400 transition-colors font-semibold text-lg'>
+                        Buy
+                    </button>
+                    
+                    <p className='font-normal text-xl text-center'>From $199.month or $999</p>
+                </div>
+    
+                 
+          
+
         </section>
      );
 }
