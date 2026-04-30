@@ -23,42 +23,65 @@ import DetailsWatchUltra from "./components/pages/Watch/DetailWatchUltra";
 import TV4K from "./components/pages/TVHome/TV4K";
 import HomeApp from "./components/pages/TVHome/HomeApp";
 import UserPage from "./components/pages/User/UserPage";
+import CheckoutPage from "./components/CheckoutPage";
+import SuccessPage from "./components/pages/SuccessPage";
 
-
+// Admin Imports
+import AdminLayout from "./components/AdminLayout";
+import ProtectedRoute from "./components/ProtectedRoute";
+import AdminDashboard from "./components/pages/Admin/AdminDashboard";
+import AdminOrders from "./components/pages/Admin/AdminOrders";
+import AdminUsers from "./components/pages/Admin/AdminUsers";
 
 // Đăng ký plugin ScrollTrigger và SplitText với GSAP
 gsap.registerPlugin(ScrollTrigger);
 
 const App = () => {
-  return (
-    <>
-      <Toaster position="top-center" />
-      <GSAPReset />
-      <NavBar />
-      {/* Route */}
-      <Routes>
-        <Route path="/" element={<StorePage />} />
-        <Route path="/mac" element={<MacPage />} />
-        <Route path="/iphone" element={<IPhonePage />} />
-        <Route path="/ipad" element={<IPadPage />} />
-        <Route path="/airpods" element={<AirpodsPage />} />
-        <Route path="/airpods/max" element={<AirpodsMaxPage />} />
-        <Route path="/airpods/pro3" element={<AirpodsProPage />} />
-        <Route path="/airpods/pro4" element={<Airpods4Page />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/watch" element={<WatchPage />} />
-        <Route path="/tvhome" element={<TVHomePage />} />
-        <Route path="/detailwatchseries11" element={<DetailsWatch />} />
-        <Route path="/detailwatchse3" element={<DetailsWatchSE />} />
-        <Route path="/detailwatchsultra" element={<DetailsWatchUltra />} />
-        <Route path="/tv4k" element={<TV4K />} />
-        <Route path="/homeapp" element={<HomeApp />} />
-        <Route path="/user" element={<UserPage />} />
+    return (
+        <>
+            <Toaster position="top-center" />
+            <GSAPReset />
+            
+            {/* Route */}
+            <Routes>
+                {/* Admin Routes */}
+                <Route path="/admin" element={<ProtectedRoute requireAdmin={true}><AdminLayout /></ProtectedRoute>}>
+                    <Route path="dashboard" element={<AdminDashboard />} />
+                    <Route path="orders" element={<AdminOrders />} />
+                    <Route path="users" element={<AdminUsers />} />
+                </Route>
 
-      </Routes> 
-    </>
-  )
+                {/* Public Routes with Navbar */}
+                <Route path="/*" element={
+                    <>
+                        <NavBar />
+                        <Routes>
+                            <Route path="/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
+                            <Route path="/" element={<StorePage />} />
+                            <Route path="/success" element={<SuccessPage />} />
+                            <Route path="/mac" element={<MacPage />} />
+                            <Route path="/iphone" element={<IPhonePage />} />
+                            <Route path="/ipad" element={<IPadPage />} />
+                            <Route path="/airpods" element={<AirpodsPage />} />
+                            <Route path="/airpods/max" element={<AirpodsMaxPage />} />
+                            <Route path="/airpods/pro3" element={<AirpodsProPage />} />
+                            <Route path="/airpods/pro4" element={<Airpods4Page />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/signup" element={<Signup />} />
+                            <Route path="/watch" element={<WatchPage />} />
+                            <Route path="/tvhome" element={<TVHomePage />} />
+                            <Route path="/detailwatchseries11" element={<DetailsWatch />} />
+                            <Route path="/detailwatchse3" element={<DetailsWatchSE />} />
+                            <Route path="/detailwatchsultra" element={<DetailsWatchUltra />} />
+                            <Route path="/tv4k" element={<TV4K />} />
+                            <Route path="/homeapp" element={<HomeApp />} />
+                            <Route path="/user" element={<ProtectedRoute><UserPage /></ProtectedRoute>} />
+                        </Routes>
+                    </>
+                } />
+            </Routes>
+        </>
+    )
 }
 
 export default App;
