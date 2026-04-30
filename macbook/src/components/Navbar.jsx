@@ -3,37 +3,24 @@ import { dn } from "../constants";
 import { Link, useNavigate } from "react-router-dom";
 import SearchOverlay from "./SearchOverlay";
 import { useCart } from "../context/useCart";
+import useAuthStore from "../store/authStore";
 
 function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const [openSearch, setOpenSearch] = useState(false);
   const {cart} = useCart();
-  const {setIsCartOpen} = useCart();  
+  const {setIsCartOpen} = useCart();
+  
+  const { user, logout } = useAuthStore();  
 
   const totalItems = cart.reduce(
   (sum, item) => sum + item.quantity,
   0
   );
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser && storedUser !== "undefined") {
-      try {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setUser(JSON.parse(storedUser));
-      } catch (error) {
-        console.error("Error parsing user from localStorage:", error);
-        localStorage.removeItem('user');
-      }
-    }
-  }, []);
-
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    setUser(null);
+    logout();
     navigate('/login');
   };
 
@@ -77,6 +64,9 @@ function NavBar() {
             <ul className="hidden lg:flex items-center gap-6 text-[15px]">
               {user ? (
                 <>
+                  {user.role === 'admin' && (
+                    <li><Link to="/admin" className="font-semibold text-purple-400 hover:text-purple-300 mr-2">Admin Panel</Link></li>
+                  )}
                   <li><Link to="/user" className="font-medium">Hi, {user?.username.split(" ").pop()}</Link></li>
                   <li><button onClick={handleLogout} className="text-red-500 font-medium">Log out</button></li>
                 </>
@@ -135,6 +125,13 @@ function NavBar() {
       {/* Login / Logout */}
       {user ? (
         <>
+          {user.role === 'admin' && (
+            <li>
+              <Link onClick={() => setMenuOpen(false)} to="/admin" className="text-xl font-medium text-purple-400">
+                Admin Panel
+              </Link>
+            </li>
+          )}
           <li>
             <Link
               onClick={() => setMenuOpen(false)}

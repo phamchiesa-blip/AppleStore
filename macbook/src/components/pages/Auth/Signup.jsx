@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import useAuthStore from '../../../store/authStore';
 
 function Signup() {
   const [username, setUsername] = useState('');
@@ -8,6 +9,7 @@ function Signup() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
+  const setUser = useAuthStore(state => state.setUser);
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -28,6 +30,7 @@ function Signup() {
         toast.success('Đăng ký thành công!');
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
+        setUser(data.user);
         navigate('/');
       } else {
         toast.error(data.message || 'Lỗi đăng ký');

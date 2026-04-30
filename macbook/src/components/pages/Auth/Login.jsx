@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import useAuthStore from '../../../store/authStore';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const setUser = useAuthStore(state => state.setUser);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -21,6 +23,7 @@ function Login() {
         toast.success('Đăng nhập thành công!');
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
+        setUser(data.user);
         navigate('/'); // Redirect to Home
       } else {
         toast.error(data.message || 'Lỗi đăng nhập');

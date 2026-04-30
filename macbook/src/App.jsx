@@ -25,11 +25,24 @@ import HomeApp from "./components/pages/TVHome/HomeApp";
 import UserPage from "./components/pages/User/UserPage";
 import CheckoutPage from "./components/CheckoutPage";
 import SuccessPage from "./components/pages/SuccessPage";
+import AdminLayout from "./components/pages/Admin/AdminLayout";
+import { GuestRoute, UserRoute, AdminRoute } from "./components/routes/RouteGuards";
+import useAuthStore from "./store/authStore";
+import { useEffect } from "react";
 
 // Đăng ký plugin ScrollTrigger và SplitText với GSAP
 gsap.registerPlugin(ScrollTrigger);
 
 const App = () => {
+  const initializeAuth = useAuthStore(state => state.initialize);
+  const isInitialized = useAuthStore(state => state.isInitialized);
+
+  useEffect(() => {
+    initializeAuth();
+  }, [initializeAuth]);
+
+  if (!isInitialized) return null;
+
   return (
     <>
       <Toaster position="top-center" />
@@ -37,9 +50,8 @@ const App = () => {
       <NavBar />
       {/* Route */}
       <Routes>
-        <Route path="/checkout" element={<CheckoutPage />} />
+        {/* Public Routes (Guest, User, Admin đều vào được) */}
         <Route path="/" element={<StorePage />} />
-        <Route path="/success" element={<SuccessPage />} />
         <Route path="/mac" element={<MacPage />} />
         <Route path="/iphone" element={<IPhonePage />} />
         <Route path="/ipad" element={<IPadPage />} />
@@ -47,8 +59,6 @@ const App = () => {
         <Route path="/airpods/max" element={<AirpodsMaxPage />} />
         <Route path="/airpods/pro3" element={<AirpodsProPage />} />
         <Route path="/airpods/pro4" element={<Airpods4Page />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
         <Route path="/watch" element={<WatchPage />} />
         <Route path="/tvhome" element={<TVHomePage />} />
         <Route path="/detailwatchseries11" element={<DetailsWatch />} />
@@ -56,7 +66,24 @@ const App = () => {
         <Route path="/detailwatchsultra" element={<DetailsWatchUltra />} />
         <Route path="/tv4k" element={<TV4K />} />
         <Route path="/homeapp" element={<HomeApp />} />
-        <Route path="/user" element={<UserPage />} />
+
+        {/* Guest Routes (Chỉ người chưa đăng nhập mới vào được) */}
+        <Route element={<GuestRoute />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Route>
+
+        {/* User Routes (Đã đăng nhập mới vào được) */}
+        <Route element={<UserRoute />}>
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/success" element={<SuccessPage />} />
+          <Route path="/user" element={<UserPage />} />
+        </Route>
+
+        {/* Admin Routes (Chỉ Admin mới vào được) */}
+        <Route element={<AdminRoute />}>
+          <Route path="/admin/*" element={<AdminLayout />} />
+        </Route>
 
       </Routes> 
     </>

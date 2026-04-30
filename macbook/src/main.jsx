@@ -14,6 +14,6 @@ createRoot(document.getElementById('root')).render(
         <App />
         <CartSidebar />
       </CartProvider>
-    </StrictMode>,
+    </StrictMode>
   </BrowserRouter>
 )

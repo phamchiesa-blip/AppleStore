@@ -31,7 +31,7 @@ router.post('/signup', async (req, res) => {
 
     // Tạo token JWT để auto-login luôn
     const token = jwt.sign(
-      { id: result.insertId, username: username },
+      { id: result.insertId, username: username, role: 'user', status: 'active' },
       process.env.JWT_SECRET || 'secretkey',
       { expiresIn: '1h' }
     );
@@ -42,7 +42,9 @@ router.post('/signup', async (req, res) => {
       user: {
         id: result.insertId,
         username: username,
-        email: email
+        email: email,
+        role: 'user',
+        status: 'active'
       }
     });
   } catch (error) {
@@ -64,6 +66,11 @@ router.post('/login', async (req, res) => {
 
     const user = users[0];
 
+    // Kiểm tra trạng thái bị khoá
+    if (user.status === 'banned') {
+      return res.status(403).json({ message: 'Tài khoản của bạn đã bị khoá.' });
+    }
+
     // So sánh mật khẩu
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
@@ -72,7 +79,7 @@ router.post('/login', async (req, res) => {
 
     // Tạo token JWT
     const token = jwt.sign(
-      { id: user.id, username: user.username },
+      { id: user.id, username: user.username, role: user.role, status: user.status },
       process.env.JWT_SECRET || 'secretkey',
       { expiresIn: '1h' }
     );
@@ -83,7 +90,9 @@ router.post('/login', async (req, res) => {
       user: {
         id: user.id,
         username: user.username,
-        email: user.email
+        email: user.email,
+        role: user.role,
+        status: user.status
       }
     });
 
