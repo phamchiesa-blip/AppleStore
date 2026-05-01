@@ -95,3 +95,25 @@ It features a 100 percent recycled aluminum enclosure and stunning all‑screen 
 " WHERE name = 'iPad mini';
 
 select * from ipad;
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    full_name VARCHAR(255) DEFAULT NULL,
+    phone VARCHAR(20) DEFAULT NULL,
+    address TEXT DEFAULT NULL,
+    role VARCHAR(50) DEFAULT 'user',
+    status VARCHAR(50) DEFAULT 'active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ==========================================
+-- INSERT DEFAULT USERS
+-- ==========================================
+-- Mật khẩu mặc định cho cả 2 tài khoản là: admin123 và user123
+INSERT IGNORE INTO users (username, email, password, full_name, role, status)
+VALUES 
+('admin', 'admin@applestore.com', '$2b$10$oL5oBrGV96wft2IlRRQO0.Nr5LEsGKdNUfBp9P8HqgFReT3.lEfae', 'Administrator', 'admin', 'active'),
+('user', 'user@applestore.com', '$2b$10$oL5oBrGV96wft2IlRRQO0.Ll1AwYTSp/4EyHgiemh8n4k4jgEl3pG', 'Normal User', 'user', 'active');
+
