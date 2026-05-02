@@ -41,11 +41,7 @@ const Airpods4 = () => {
                     background: "radial-gradient(circle at 50% 50%, #ff8c42, #d15a1a)",
                 }}
             >
-                <div className="absolute top-5 right-5 z-40">
-                    <button className="w-8 h-8 rounded-full bg-black/20 flex items-center justify-center text-white hover:bg-black/30 transition-all">
-                        ||
-                    </button>
-                </div>
+
 
                 <div className="absolute inset-0 z-0 flex items-center justify-center bg-black">
                     <video

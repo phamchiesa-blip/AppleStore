@@ -83,7 +83,7 @@ INSERT IGNORE INTO products (id, category, name, description, base_price, image_
 
 -- Insert TV & Home
 INSERT IGNORE INTO products (id, category, name, description, base_price, image_url, options) VALUES 
-(19, 'tvhome', 'Apple TV ', 'The Apple experience. Cinematic in every sense.', 149.00, '/appletvnormal.png', '{"models":["Wi-Fi","Wi-Fi + Ethernet"],"colors":["Black"],"storages":[]}');
+(19, 'tvhome', 'Apple TV ', 'The Apple experience. Cinematic in every sense.', 149.00, 'https://product.hstatic.net/200000348419/product/apple_tv_4k_2022_0_419b31904d874dad8afbe90c1a2259c6_large.png', '{"models":["Wi-Fi","Wi-Fi + Ethernet"],"colors":["Black"],"storages":[]}');
 
 
 -- ==========================================
