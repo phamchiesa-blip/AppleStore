@@ -2,19 +2,18 @@ const jwt = require('jsonwebtoken');
 
 const authMiddleware = (req, res, next) => {
   const token = req.header('Authorization');
-  if (!token) return res.status(401).json({ message: 'Không có token, quyền truy cập bị từ chối' });
+  if (!token) return res.status(401).json({ message: 'No token, access denied.' });
 
   try {
     const decoded = jwt.verify(token.replace('Bearer ', ''), process.env.JWT_SECRET || 'secretkey');
     req.user = decoded;
-    
-    // Check if the user is banned from the token (if updated)
+
     if (req.user.status === 'banned') {
-       return res.status(403).json({ message: 'Tài khoản của bạn đã bị khoá.' });
+      return res.status(403).json({ message: 'Your account has been banned.' });
     }
     next();
   } catch (error) {
-    res.status(401).json({ message: 'Token không hợp lệ' });
+    res.status(401).json({ message: 'Token is not valid' });
   }
 };
 
@@ -22,7 +21,7 @@ const isAdmin = (req, res, next) => {
   if (req.user && req.user.role === 'admin') {
     next();
   } else {
-    res.status(403).json({ message: 'Không có quyền truy cập. Yêu cầu quyền quản trị viên.' });
+    res.status(403).json({ message: 'No access granted. Administrator privileges required.' });
   }
 };
 

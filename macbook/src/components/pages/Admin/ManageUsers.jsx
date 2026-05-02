@@ -7,6 +7,7 @@ function ManageUsers() {
 
   useEffect(() => {
     fetchUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchUsers = async () => {
@@ -31,13 +32,13 @@ function ManageUsers() {
     try {
       const res = await fetch(`http://localhost:5000/api/admin/users/${userId}/status`, {
         method: 'PUT',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` 
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ status: newStatus })
       });
-      
+
       if (res.ok) {
         fetchUsers();
       } else {
@@ -51,7 +52,7 @@ function ManageUsers() {
 
   return (
     <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 shadow-xl border border-white/10">
-      <h2 className="text-2xl font-semibold mb-6 text-white">Quản lý người dùng</h2>
+      <h2 className="text-2xl font-semibold mb-6 text-white">User management</h2>
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
@@ -61,7 +62,7 @@ function ManageUsers() {
               <th className="p-3 font-medium">Email</th>
               <th className="p-3 font-medium">Role</th>
               <th className="p-3 font-medium">Status</th>
-              <th className="p-3 font-medium text-center">Hành động</th>
+              <th className="p-3 font-medium text-center">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -82,11 +83,11 @@ function ManageUsers() {
                 </td>
                 <td className="p-3 text-center">
                   {u.role !== 'admin' && (
-                    <button 
+                    <button
                       onClick={() => handleStatusChange(u.id, u.status === 'active' ? 'banned' : 'active')}
                       className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${u.status === 'active' ? 'bg-red-500/20 hover:bg-red-500/40 text-red-400' : 'bg-green-500/20 hover:bg-green-500/40 text-green-400'}`}
                     >
-                      {u.status === 'active' ? 'Khoá (Ban)' : 'Mở khoá (Unban)'}
+                      {u.status === 'active' ? 'Ban' : 'Unban'}
                     </button>
                   )}
                 </td>

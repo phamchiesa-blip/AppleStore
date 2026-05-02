@@ -25,6 +25,25 @@ const CheckoutPage = () => {
               phone: user.phone || "",
               email: user.email || ""
           });
+
+          const fetchUserProfile = async () => {
+              try {
+                  const res = await fetch(`http://localhost:5000/api/users/${user.id}`);
+                  if (res.ok) {
+                      const data = await res.json();
+                      setFormData(prev => ({
+                          ...prev,
+                          fullName: data.full_name || data.username || prev.fullName,
+                          address: data.address || prev.address,
+                          phone: data.phone || prev.phone,
+                          email: data.email || prev.email
+                      }));
+                  }
+              } catch (error) {
+                  console.error("Error fetching user profile:", error);
+              }
+          };
+          fetchUserProfile();
       }
   }, [user]);
 
@@ -188,13 +207,7 @@ const CheckoutPage = () => {
                   <div className="space-y-4 mb-6 max-h-[40vh] overflow-y-auto pr-2">
                       {cart.map(item => (
                         <div key={item.id} className="flex gap-4 items-center">
-                          <div className="w-16 h-16 bg-white/5 rounded-xl p-2 flex-shrink-0 flex items-center justify-center">
-                              {item.image ? (
-                                  <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
-                              ) : (
-                                  <div className="w-full h-full bg-gray-800 rounded"></div>
-                              )}
-                          </div>
+                          {/* Image removed as requested */}
                           <div className="flex-1">
                               <p className="font-medium text-sm leading-tight text-gray-200 line-clamp-2">{item.name}</p>
                               <p className="text-gray-500 text-sm mt-1">Qty: {item.quantity}</p>

@@ -199,10 +199,10 @@ const SpecPager = () => {
     return (
         <section ref={containerRef} className="w-full bg-[#0a0a0a] px-6 md:px-12 lg:px-24">
             <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-start gap-12 lg:gap-24 relative">
-                <div className="flex-1 w-full space-y-[50vh] pb-[50vh] pt-[30vh]">
+                <div className="flex-1 w-full pb-[20vh]">
                     {airpodsProData.specs.map((spec, i) => (
-                        <div key={i} className={`spec-trigger-block space-y-6 transition-opacity duration-500 ${activeIndex === i ? 'opacity-100' : 'opacity-30'}`}>
-                            <div className={`p-4 rounded-2xl ${spec.bg} inline-block ${spec.color}`}>{spec.icon}</div>
+                        <div key={i} className={`spec-trigger-block min-h-[100vh] flex flex-col justify-center space-y-6 transition-opacity duration-500 ${activeIndex === i ? 'opacity-100' : 'opacity-30'}`}>
+                            <div className={`p-4 rounded-2xl ${spec.bg} inline-block ${spec.color} w-fit`}>{spec.icon}</div>
                             <h3 className="text-white text-4xl md:text-6xl font-bold tracking-tight">{spec.title}</h3>
                             <p className="text-gray-400 text-lg md:text-xl leading-relaxed max-w-lg">{spec.desc}</p>
                         </div>

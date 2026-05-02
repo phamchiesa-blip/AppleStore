@@ -26,9 +26,15 @@ const ExploreLineup = ({ category, learnMoreBehavior, defaultLearnMoreLink }) =>
             try {
                 const response = await fetch(`http://localhost:5000/api/products/category/${category}`);
                 const data = await response.json();
-                setModels(data);
+                if (Array.isArray(data)) {
+                    setModels(data);
+                } else {
+                    console.error(`Invalid data format for ${category}:`, data);
+                    setModels([]);
+                }
             } catch (error) {
                 console.error(`Failed to fetch ${category} models:`, error);
+                setModels([]);
             } finally {
                 setLoading(false);
             }

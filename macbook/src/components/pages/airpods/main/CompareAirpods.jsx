@@ -90,31 +90,39 @@ const CompareAirpods = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl w-full">
                 {products.map((product, idx) => (
-                    <div key={idx} className="compare-card flex flex-col items-center text-center">
-                        <div className="h-48 flex items-end justify-center mb-6">
+                    <div key={idx} className="compare-card flex flex-col items-center text-center h-full">
+                        <div className="h-48 flex items-end justify-center mb-6 w-full">
                             <img src={product.img} alt={product.name} className="max-h-full object-contain mix-blend-screen drop-shadow-2xl" />
                         </div>
 
-                        {product.isNew && <p className="text-[#e25c11] text-xs font-semibold mb-1">New</p>}
+                        <div className="flex flex-col items-center flex-grow w-full">
+                            <div className="h-4 mb-1">
+                                {product.isNew && <span className="text-[#e25c11] text-xs font-semibold">New</span>}
+                            </div>
+                            
+                            <h3 className="text-2xl text-white font-semibold mb-1">{product.name}</h3>
+                            <div className="h-5 mb-2">
+                                {product.sub && <p className="text-white text-sm">{product.sub}</p>}
+                            </div>
 
-                        <h3 className="text-2xl text-white font-semibold mb-1">{product.name}</h3>
-                        {product.sub && <p className="text-white text-sm mb-2">{product.sub}</p>}
+                            <div className="flex-grow flex items-start justify-center min-h-[60px] my-4 px-2">
+                                <p className="text-gray-400 text-xs">{product.tagline}</p>
+                            </div>
 
-                        <p className="text-gray-400 text-xs my-4 px-2 min-h-[50px]">{product.tagline}</p>
+                            <p className="text-white text-sm mb-4">{product.price}</p>
 
-                        <p className="text-white text-sm mb-4">{product.price}</p>
+                            <button
+                                onClick={() => openBuy(product.dbKey, product.img)}
+                                className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-1.5 rounded-full text-sm font-medium mb-2 transition-all"
+                            >
+                                Buy
+                            </button>
+                            <a href="#" className="text-blue-500 hover:underline text-xs mb-8 border-b-2 border-transparent hover:border-blue-500">Learn more &gt;</a>
+                        </div>
 
-                        <button
-                            onClick={() => openBuy(product.dbKey, product.img)}
-                            className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-1.5 rounded-full text-sm font-medium mb-2 transition-all"
-                        >
-                            Buy
-                        </button>
-                        <a href="#" className="text-blue-500 hover:underline text-xs mb-8 border-b-2 border-transparent hover:border-blue-500">Learn more &gt;</a>
+                        <div className="w-full h-[1px] bg-white/20 mb-8 mt-auto"></div>
 
-                        <div className="w-full h-[1px] bg-white/20 mb-8"></div>
-
-                        <div className="flex flex-col items-center">
+                        <div className="flex flex-col items-center h-32 justify-start w-full">
                             <div className="w-8 h-8 mb-4 opacity-70">
                                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414 1.414m-2.828 2.828a9 9 0 002.828 2.828M12 12a3 3 0 110-6 3 3 0 010 6z" />

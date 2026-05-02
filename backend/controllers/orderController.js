@@ -59,4 +59,45 @@ const placeOrder = async (req, res) => {
   }
 };
 
-module.exports = { placeOrder };
+const getUserOrders = async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        // Fetch user phone first
+        const [users] = await db.query('SELECT phone FROM users WHERE id = ?', [userId]);
+        if (users.length === 0 || !users[0].phone) {
+            return res.json([]);
+        }
+        
+        const phone = users[0].phone;
+        // Fetch orders by phone
+        const [orders] = await db.query('SELECT * FROM orders WHERE phone = ? ORDER BY created_at DESC', [phone]);
+        
+        // Map order fields to what UserPage.jsx expects
+        const mappedOrders = orders.map(order => {
+            const items = typeof order.items === 'string' ? JSON.parse(order.items) : order.items;
+            const firstItem = items && items.length > 0 ? items[0] : null;
+            
+            return {
+                id: order.id,
+                product_name: firstItem ? firstItem.product_name || firstItem.name : 'Order #' + order.id,
+                image_url: firstItem ? firstItem.product_image || firstItem.image : null,
+                status: order.status || 'Pending',
+                order_date: order.created_at,
+                price_string: `$${order.total_price}`,
+                // Thêm các trường cho Popup Detail
+                items: items,
+                address: order.address,
+                payment_method: order.payment_method,
+                customer_name: order.customer_name,
+                phone: order.phone
+            };
+        });
+        
+        res.json(mappedOrders);
+    } catch (error) {
+        console.error('Error fetching user orders:', error);
+        res.status(500).json({ message: 'Server error fetching orders' });
+    }
+};
+
+module.exports = { placeOrder, getUserOrders };

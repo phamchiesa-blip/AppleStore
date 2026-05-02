@@ -14,6 +14,7 @@ function AdminLayout() {
     if (storedUser) {
       const user = JSON.parse(storedUser);
       if (user.role === 'admin') {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setIsAdmin(true);
       } else {
         navigate('/'); // Không phải admin -> về trang chủ
@@ -26,9 +27,9 @@ function AdminLayout() {
   if (!isAdmin) return null; // Không render gì cả trong lúc đợi chuyển hướng
 
   const navItems = [
-    { path: '/admin/users', label: 'Quản lý Người dùng', icon: '👤' },
-    { path: '/admin/orders', label: 'Quản lý Đơn hàng', icon: '📦' },
-    { path: '/admin/products', label: 'Quản lý Sản phẩm', icon: '💻' }
+    { path: '/admin/users', label: 'User Management', icon: '👤' },
+    { path: '/admin/orders', label: 'Order Management', icon: '📦' },
+    { path: '/admin/products', label: 'Product Management', icon: '💻' }
   ];
 
   return (
@@ -43,11 +44,10 @@ function AdminLayout() {
             <Link
               key={item.path}
               to={item.path}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all duration-300 ${
-                location.pathname.startsWith(item.path)
-                  ? 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white border border-white/10 shadow-[0_0_15px_rgba(59,130,246,0.1)]'
-                  : 'text-gray-400 hover:bg-white/5 hover:text-white'
-              }`}
+              className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all duration-300 ${location.pathname.startsWith(item.path)
+                ? 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white border border-white/10 shadow-[0_0_15px_rgba(59,130,246,0.1)]'
+                : 'text-gray-400 hover:bg-white/5 hover:text-white'
+                }`}
             >
               <span>{item.icon}</span>
               {item.label}
@@ -63,7 +63,7 @@ function AdminLayout() {
           <Route path="/" element={
             <div className="text-center mt-20">
               <h1 className="text-4xl font-bold text-gray-300">Welcome to Admin Dashboard</h1>
-              <p className="text-gray-500 mt-4 text-lg">Vui lòng chọn chức năng ở thanh bên trái</p>
+              <p className="text-gray-500 mt-4 text-lg">Please select a function in the sidebar on the left</p>
             </div>
           } />
           <Route path="users" element={<ManageUsers />} />

@@ -20,17 +20,17 @@ function Login() {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success('Đăng nhập thành công!');
+        toast.success('Login successfully!');
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
         setUser(data.user);
         navigate('/'); // Redirect to Home
       } else {
-        toast.error(data.message || 'Lỗi đăng nhập');
+        toast.error(data.message || 'Login Error');
       }
     } catch (error) {
       console.error(error);
-      toast.error('Lỗi kết nối server');
+      toast.error('Error connect server');
     }
   };
 
