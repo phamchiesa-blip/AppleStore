@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
@@ -13,6 +13,18 @@ const HeroAirpodsPro = () => {
     const textRef = useRef(null);
     const imgRef = useRef(null);
     const navigate = useNavigate();
+    const [isPlaying, setIsPlaying] = useState(true);
+
+    const togglePlay = () => {
+        if (imgRef.current) {
+            if (isPlaying) {
+                imgRef.current.pause();
+            } else {
+                imgRef.current.play();
+            }
+            setIsPlaying(!isPlaying);
+        }
+    };
 
     useEffect(() => {
         const tl = gsap.timeline({
@@ -40,9 +52,12 @@ const HeroAirpodsPro = () => {
         <section ref={containerRef} className="w-full flex justify-center mt-6 px-4 mb-20 relative">
             <div className="w-[95%] max-w-[1600px] h-[60vh] md:h-[80vh] rounded-[3rem] overflow-hidden relative flex flex-col justify-between p-10 md:p-14 bg-black border border-white/10 mx-auto">
 
-                <div className="absolute top-5 right-5 z-20">
-                    <button className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-all">
-                        ||
+                <div className="absolute top-5 right-5 z-20 pointer-events-auto">
+                    <button 
+                        onClick={togglePlay}
+                        className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-all cursor-pointer"
+                    >
+                        {isPlaying ? "||" : "▶"}
                     </button>
                 </div>
 
@@ -60,14 +75,14 @@ const HeroAirpodsPro = () => {
                 </div>
 
                 {/* Content Overlay */}
-                <div ref={textRef} className="relative z-10 w-full flex flex-col md:flex-row justify-between items-end opacity-0 pointer-events-auto mt-auto">
-                    <div className="text-black drop-shadow-sm">
+                <div ref={textRef} className="relative z-10 w-full flex flex-col md:flex-row justify-between items-start md:items-end opacity-0 pointer-events-auto mt-auto gap-6">
+                    <div className="text-black drop-shadow-sm text-left">
                         <h1 className="text-black font-semibold text-5xl md:text-7xl mb-2 tracking-tight">AirPods Pro 3</h1>
                         <p className="text-xl md:text-2xl font-bold mb-4 text-black">Active Noise Cancellation you've never heard before.</p>
                         <p className="text-black text-lg">$249.00</p>
                     </div>
 
-                    <div className="flex gap-4 mt-6 md:mt-0">
+                    <div className="flex gap-4">
                         <button onClick={() => navigate("/airpods/pro3")} className="bg-white text-black hover:bg-gray-200 px-6 py-2.5 rounded-full text-sm font-semibold transition-all">Learn more</button>
                         <button
                             onClick={() => {

@@ -42,13 +42,20 @@ const HotspotViewer = () => {
                     </div>
                 </div>
                 {activeSpot && (
-                    <div className="absolute z-50 flex items-center justify-center pointer-events-none" style={{ left: `${activeSpot.x}%`, top: `${activeSpot.y}%` }}>
-                        <div className={`absolute ${activeSpot.tooltipPos} w-[220px] md:w-[320px] p-6 bg-zinc-900/95 backdrop-blur-2xl border border-white/20 rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.8)] pointer-events-auto animate-in fade-in zoom-in duration-500`}>
-                            <h4 className="text-white font-bold text-lg md:text-2xl mb-2 tracking-tight leading-tight">{activeSpot.title}</h4>
-                            <p className="text-zinc-400 text-sm md:text-base leading-relaxed">{activeSpot.desc}</p>
-                            <button className="mt-5 w-full bg-white text-black font-bold py-3 rounded-full hover:bg-zinc-200 hover:scale-105 active:scale-95 transition-all" onClick={() => handleDotClick(activeSpot)}>Close</button>
+                    <>
+                        <div className="hidden md:flex absolute z-50 items-center justify-center pointer-events-none" style={{ left: `${activeSpot.x}%`, top: `${activeSpot.y}%` }}>
+                            <div className={`absolute ${activeSpot.tooltipPos} w-[320px] p-6 bg-zinc-900/95 backdrop-blur-2xl border border-white/20 rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.8)] pointer-events-auto animate-in fade-in zoom-in duration-500`}>
+                                <h4 className="text-white font-bold text-2xl mb-2 tracking-tight leading-tight">{activeSpot.title}</h4>
+                                <p className="text-zinc-400 text-base leading-relaxed">{activeSpot.desc}</p>
+                                <button className="mt-5 w-full bg-white text-black font-bold py-3 rounded-full hover:bg-zinc-200 hover:scale-105 active:scale-95 transition-all" onClick={() => handleDotClick(activeSpot)}>Close</button>
+                            </div>
                         </div>
-                    </div>
+                        <div className="md:hidden fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] w-[90vw] p-6 bg-zinc-900/95 backdrop-blur-2xl border border-white/20 rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.8)] pointer-events-auto animate-in fade-in slide-in-from-bottom-10 duration-500">
+                            <h4 className="text-white font-bold text-lg mb-2 tracking-tight leading-tight">{activeSpot.title}</h4>
+                            <p className="text-zinc-400 text-sm leading-relaxed">{activeSpot.desc}</p>
+                            <button className="mt-5 w-full bg-white text-black font-bold py-3 rounded-full active:scale-95 transition-all" onClick={() => handleDotClick(activeSpot)}>Close</button>
+                        </div>
+                    </>
                 )}
             </div>
             <div className={`absolute inset-0 z-0 bg-black/80 pointer-events-none transition-opacity duration-1000 ${activeSpot ? 'opacity-100' : 'opacity-0'}`} />

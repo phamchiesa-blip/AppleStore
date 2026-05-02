@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { useCart } from '../../../../context/useCart';
@@ -8,6 +8,19 @@ const Airpods4 = () => {
 
     const containerRef = useRef(null);
     const contentRef = useRef(null);
+    const videoRef = useRef(null);
+    const [isPlaying, setIsPlaying] = useState(true);
+
+    const togglePlay = () => {
+        if (videoRef.current) {
+            if (isPlaying) {
+                videoRef.current.pause();
+            } else {
+                videoRef.current.play();
+            }
+            setIsPlaying(!isPlaying);
+        }
+    };
 
     useEffect(() => {
         gsap.fromTo(contentRef.current,
@@ -41,14 +54,18 @@ const Airpods4 = () => {
                     background: "radial-gradient(circle at 50% 50%, #ff8c42, #d15a1a)",
                 }}
             >
-                <div className="absolute top-5 right-5 z-40">
-                    <button className="w-8 h-8 rounded-full bg-black/20 flex items-center justify-center text-white hover:bg-black/30 transition-all">
-                        ||
+                <div className="absolute top-5 right-5 z-40 pointer-events-auto">
+                    <button 
+                        onClick={togglePlay}
+                        className="w-8 h-8 rounded-full bg-black/20 flex items-center justify-center text-white hover:bg-black/30 transition-all cursor-pointer"
+                    >
+                        {isPlaying ? "||" : "▶"}
                     </button>
                 </div>
 
                 <div className="absolute inset-0 z-0 flex items-center justify-center bg-black">
                     <video
+                        ref={videoRef}
                         src="/videos/introduce-airpod-4.mp4"
                         autoPlay
                         muted

@@ -88,9 +88,9 @@ const CompareAirpods = () => {
         <section ref={sectionRef} className="w-full flex flex-col items-center justify-center pt-20 px-5 mb-20">
             <h2 className="text-4xl md:text-6xl text-white font-semibold mb-16 text-center">Compare AirPods models</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl w-full">
+            <div className="flex md:grid flex-nowrap overflow-x-auto md:overflow-visible snap-x snap-mandatory md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl w-full pb-8 md:pb-0 scrollbar-hide">
                 {products.map((product, idx) => (
-                    <div key={idx} className="compare-card flex flex-col items-center text-center h-full">
+                    <div key={idx} className="compare-card flex-shrink-0 w-[80vw] md:w-auto flex flex-col items-center text-center h-full snap-center">
                         <div className="h-48 flex items-end justify-center mb-6 w-full">
                             <img src={product.img} alt={product.name} className="max-h-full object-contain mix-blend-screen drop-shadow-2xl" />
                         </div>
@@ -122,7 +122,7 @@ const CompareAirpods = () => {
 
                         <div className="w-full h-[1px] bg-white/20 mb-8 mt-auto"></div>
 
-                        <div className="flex flex-col items-center h-32 justify-start w-full">
+                        <div className="flex flex-col items-center h-32 justify-start w-full px-4">
                             <div className="w-8 h-8 mb-4 opacity-70">
                                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414 1.414m-2.828 2.828a9 9 0 002.828 2.828M12 12a3 3 0 110-6 3 3 0 010 6z" />

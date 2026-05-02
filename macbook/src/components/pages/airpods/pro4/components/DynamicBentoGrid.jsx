@@ -45,18 +45,18 @@ const DynamicBentoGrid = () => {
             <div className="max-w-[1200px] mx-auto border-t border-white/[0.05] pt-32">
                 <h2 className="text-zinc-100 text-5xl md:text-7xl font-bold mb-20 tracking-tighter">Dynamic features.</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="bento-usb group md:col-span-2 relative bg-zinc-900/40 border border-white/[0.05] rounded-[3rem] p-12 lg:p-16 overflow-hidden backdrop-blur-2xl hover:bg-zinc-800/60 transition-colors duration-500 min-h-[350px] md:min-h-[450px] flex flex-col justify-between">
-                        <div className="absolute right-12 top-12 md:right-24 md:top-24 w-32 h-48 border-[6px] border-zinc-800 rounded-3xl flex items-end justify-center pb-4 z-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] overflow-hidden bg-black/50">
-                            <div className="usb-cable w-16 h-24 bg-zinc-300 rounded-t-xl relative border-t-8 border-zinc-400">
+                    <div className="bento-usb group md:col-span-2 relative bg-zinc-900/40 border border-white/[0.05] rounded-[3rem] p-8 md:p-12 lg:p-16 overflow-hidden backdrop-blur-2xl hover:bg-zinc-800/60 transition-colors duration-500 min-h-[350px] md:min-h-[450px] flex flex-col justify-between">
+                        <div className="absolute right-6 top-6 md:right-24 md:top-24 w-24 h-36 md:w-32 md:h-48 border-[6px] border-zinc-800 rounded-3xl flex items-end justify-center pb-4 z-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] overflow-hidden bg-black/50">
+                            <div className="usb-cable w-12 h-16 md:w-16 md:h-24 bg-zinc-300 rounded-t-xl relative border-t-8 border-zinc-400">
                                 <div className="absolute top-2 w-full h-1 bg-zinc-400/50" />
-                                <div className="absolute -bottom-24 left-1/2 -translate-x-1/2 w-8 h-24 bg-zinc-400" />
+                                <div className="absolute -bottom-16 md:-bottom-24 left-1/2 -translate-x-1/2 w-6 h-16 md:w-8 md:h-24 bg-zinc-400" />
                             </div>
                             <div className="usb-glow absolute w-full h-full bg-blue-500/10 opacity-0 z-10" />
                         </div>
-                        <div className="relative z-10">
-                            <Cable className="w-10 h-10 text-zinc-400 mb-6 drop-shadow-md" />
-                            <h3 className="text-zinc-100 text-4xl lg:text-5xl font-bold mb-4 tracking-tight">USB-C Charging</h3>
-                            <p className="text-zinc-500 text-xl lg:text-2xl max-w-sm">Universal connectivity for all your Apple devices. Fast and robust.</p>
+                        <div className="relative z-10 w-[55%] md:w-[50%] lg:w-[60%]">
+                            <Cable className="w-8 h-8 md:w-10 md:h-10 text-zinc-400 mb-4 md:mb-6 drop-shadow-md" />
+                            <h3 className="text-zinc-100 text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 tracking-tight">USB-C Charging</h3>
+                            <p className="text-zinc-500 text-base md:text-xl lg:text-2xl max-w-sm">Universal connectivity for all your Apple devices. Fast and robust.</p>
                         </div>
                     </div>
                     <div className="bento-stem group md:col-span-1 relative bg-zinc-900/40 border border-white/[0.05] rounded-[3rem] p-12 lg:p-16 overflow-hidden backdrop-blur-2xl hover:bg-zinc-800/60 transition-colors duration-500 min-h-[350px] md:min-h-[450px] flex flex-col justify-between items-center text-center">

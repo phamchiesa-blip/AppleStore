@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { Link } from "react-router-dom";
@@ -12,6 +12,18 @@ const HeroAirpodsMax = () => {
     const imgRef = useRef(null);
     const containerRef = useRef(null);
     const textRef = useRef(null);
+    const [isPlaying, setIsPlaying] = useState(true);
+
+    const togglePlay = () => {
+        if (imgRef.current) {
+            if (isPlaying) {
+                imgRef.current.pause();
+            } else {
+                imgRef.current.play();
+            }
+            setIsPlaying(!isPlaying);
+        }
+    };
 
     useEffect(() => {
         // Animation for the text moving up
@@ -49,9 +61,12 @@ const HeroAirpodsMax = () => {
 
             <div className="w-[95%] max-w-[1600px] h-[75vh] md:h-[85vh] rounded-[3rem] overflow-hidden relative flex flex-col justify-between p-10 md:p-14 border border-white/10 mx-auto bg-black mt-4">
                 
-                <div className="absolute top-5 right-5 z-40">
-                    <button className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all backdrop-blur-md">
-                        ||
+                <div className="absolute top-5 right-5 z-40 pointer-events-auto">
+                    <button 
+                        onClick={togglePlay}
+                        className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all backdrop-blur-md cursor-pointer"
+                    >
+                        {isPlaying ? "||" : "▶"}
                     </button>
                 </div>
 
