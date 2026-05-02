@@ -59,16 +59,16 @@ const MaxHero = () => {
             </div>
 
             {/* Layer 2: Specifications Cards */}
-            <div className="absolute inset-0 flex flex-col md:flex-row items-center justify-between px-6 md:px-24 z-20 pointer-events-none">
-                <div className="spec-card-1 w-full md:w-80 bg-zinc-900/40 backdrop-blur-3xl border border-white/10 rounded-3xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] pointer-events-auto transform-gpu mt-[50vh] md:mt-0">
-                    <div className="w-10 h-1 bg-white/20 rounded-full mb-6" />
-                    <h3 className="text-white text-3xl font-bold mb-3 tracking-tight">Active Noise Cancellation</h3>
-                    <p className="text-zinc-400 text-lg leading-relaxed">Cancels up to 2x more background noise than the previous generation.</p>
+            <div className="absolute inset-0 flex flex-col md:flex-row items-center justify-center md:justify-between gap-6 px-6 md:px-24 z-20 pointer-events-none">
+                <div className="spec-card-1 w-full md:w-80 bg-zinc-900/40 backdrop-blur-3xl border border-white/10 rounded-3xl p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] pointer-events-auto transform-gpu mt-[40vh] md:mt-0">
+                    <div className="w-10 h-1 bg-white/20 rounded-full mb-4 md:mb-6" />
+                    <h3 className="text-white text-2xl md:text-3xl font-bold mb-2 md:mb-3 tracking-tight">Active Noise Cancellation</h3>
+                    <p className="text-zinc-400 text-base md:text-lg leading-relaxed">Cancels up to 2x more background noise than the previous generation.</p>
                 </div>
-                <div className="spec-card-2 w-full md:w-80 bg-zinc-900/40 backdrop-blur-3xl border border-white/10 rounded-3xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] pointer-events-auto mt-6 md:mt-0 transform-gpu">
-                    <div className="w-10 h-1 bg-white/20 rounded-full mb-6" />
-                    <h3 className="text-white text-3xl font-bold mb-3 tracking-tight">Spatial Audio</h3>
-                    <p className="text-zinc-400 text-lg leading-relaxed">Personalized spatial audio tailored precisely to your unique ear geometry.</p>
+                <div className="spec-card-2 w-full md:w-80 bg-zinc-900/40 backdrop-blur-3xl border border-white/10 rounded-3xl p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] pointer-events-auto transform-gpu">
+                    <div className="w-10 h-1 bg-white/20 rounded-full mb-4 md:mb-6" />
+                    <h3 className="text-white text-2xl md:text-3xl font-bold mb-2 md:mb-3 tracking-tight">Spatial Audio</h3>
+                    <p className="text-zinc-400 text-base md:text-lg leading-relaxed">Personalized spatial audio tailored precisely to your unique ear geometry.</p>
                 </div>
             </div>
 

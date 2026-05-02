@@ -1,7 +1,10 @@
 import React, { useRef, useState } from "react";
 import gsap from "gsap";
+import { MotionPathPlugin } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { Waves } from "lucide-react";
+
+gsap.registerPlugin(MotionPathPlugin);
 
 const InteractiveProCanvas = () => {
     const containerRef = useRef(null);
@@ -94,22 +97,22 @@ const InteractiveProCanvas = () => {
             </div>
 
             <div className="hero-text absolute inset-x-0 top-32 flex flex-col items-center pointer-events-none z-10">
-                <h1 className="text-white text-6xl md:text-8xl font-black tracking-tighter text-center">Magical.</h1>
-                <p className="text-zinc-400 text-xl md:text-2xl mt-4">Scroll to release.</p>
+                <h1 className="text-white text-5xl md:text-8xl font-black tracking-tighter text-center">Magical.</h1>
+                <p className="text-zinc-400 text-lg md:text-2xl mt-4">Scroll to release.</p>
             </div>
 
             <div className="anc-text-block absolute inset-0 flex flex-col items-center justify-center pointer-events-none opacity-0 translate-y-10 z-10 px-6">
-                <div className="inline-flex items-center gap-2 bg-blue-500/20 text-blue-400 px-4 py-2 rounded-full text-sm font-bold tracking-widest uppercase mb-4 backdrop-blur-md">
+                <div className="inline-flex items-center gap-2 bg-blue-500/20 text-blue-400 px-4 py-2 rounded-full text-xs md:text-sm font-bold tracking-widest uppercase mb-4 backdrop-blur-md">
                     <Waves className="w-4 h-4" /> Active Noise Cancellation
                 </div>
-                <h2 className="text-white text-5xl md:text-7xl font-bold leading-tight text-center max-w-4xl">Build a wall<br />of silence.</h2>
+                <h2 className="text-white text-4xl md:text-7xl font-bold leading-tight text-center max-w-4xl">Build a wall<br />of silence.</h2>
             </div>
 
             <div className="spatial-text-block absolute inset-0 flex flex-col items-center justify-center pointer-events-none opacity-0 translate-y-10 z-30 px-6">
-                <div className="inline-flex items-center gap-2 bg-purple-500/20 text-purple-400 px-4 py-2 rounded-full text-sm font-bold tracking-widest uppercase mb-4 backdrop-blur-md">
+                <div className="inline-flex items-center gap-2 bg-purple-500/20 text-purple-400 px-4 py-2 rounded-full text-xs md:text-sm font-bold tracking-widest uppercase mb-4 backdrop-blur-md">
                     Personalized Spatial Audio
                 </div>
-                <h2 className="text-white text-5xl md:text-7xl font-bold leading-tight text-center max-w-4xl">Sound all around.<br />And then some.</h2>
+                <h2 className="text-white text-4xl md:text-7xl font-bold leading-tight text-center max-w-4xl">Sound all around.<br />And then some.</h2>
             </div>
 
             <div className="absolute inset-0 z-20 pointer-events-none">

@@ -60,14 +60,14 @@ const HeroAirpodsPro = () => {
                 </div>
 
                 {/* Content Overlay */}
-                <div ref={textRef} className="relative z-10 w-full flex flex-col md:flex-row justify-between items-end opacity-0 pointer-events-auto mt-auto">
-                    <div className="text-black drop-shadow-sm">
+                <div ref={textRef} className="relative z-10 w-full flex flex-col md:flex-row justify-between items-start md:items-end opacity-0 pointer-events-auto mt-auto gap-6">
+                    <div className="text-black drop-shadow-sm text-left">
                         <h1 className="text-black font-semibold text-5xl md:text-7xl mb-2 tracking-tight">AirPods Pro 3</h1>
                         <p className="text-xl md:text-2xl font-bold mb-4 text-black">Active Noise Cancellation you've never heard before.</p>
                         <p className="text-black text-lg">$249.00</p>
                     </div>
 
-                    <div className="flex gap-4 mt-6 md:mt-0">
+                    <div className="flex gap-4">
                         <button onClick={() => navigate("/airpods/pro3")} className="bg-white text-black hover:bg-gray-200 px-6 py-2.5 rounded-full text-sm font-semibold transition-all">Learn more</button>
                         <button
                             onClick={() => {

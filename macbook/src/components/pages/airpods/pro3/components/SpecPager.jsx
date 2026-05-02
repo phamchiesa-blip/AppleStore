@@ -199,17 +199,17 @@ const SpecPager = () => {
     return (
         <section ref={containerRef} className="w-full bg-[#0a0a0a] px-6 md:px-12 lg:px-24">
             <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-start gap-12 lg:gap-24 relative">
-                <div className="flex-1 w-full pb-[20vh]">
+                <div className="flex-1 w-full pb-[20vh] relative z-10 pt-[40vh] md:pt-0 pointer-events-none md:pointer-events-auto">
                     {airpodsProData.specs.map((spec, i) => (
-                        <div key={i} className={`spec-trigger-block min-h-[100vh] flex flex-col justify-center space-y-6 transition-opacity duration-500 ${activeIndex === i ? 'opacity-100' : 'opacity-30'}`}>
-                            <div className={`p-4 rounded-2xl ${spec.bg} inline-block ${spec.color} w-fit`}>{spec.icon}</div>
-                            <h3 className="text-white text-4xl md:text-6xl font-bold tracking-tight">{spec.title}</h3>
-                            <p className="text-gray-400 text-lg md:text-xl leading-relaxed max-w-lg">{spec.desc}</p>
+                        <div key={i} className={`spec-trigger-block min-h-[60vh] md:min-h-[100vh] flex flex-col justify-center space-y-4 md:space-y-6 transition-opacity duration-500 pointer-events-auto ${activeIndex === i ? 'opacity-100' : 'opacity-30'}`}>
+                            <div className={`p-3 md:p-4 rounded-xl md:rounded-2xl ${spec.bg} inline-block ${spec.color} w-fit`}>{spec.icon}</div>
+                            <h3 className="text-white text-3xl md:text-6xl font-bold tracking-tight">{spec.title}</h3>
+                            <p className="text-gray-400 text-base md:text-xl leading-relaxed max-w-lg">{spec.desc}</p>
                         </div>
                     ))}
                 </div>
-                <div ref={pinWrapperRef} className="flex-1 w-full h-screen flex items-center justify-center pointer-events-none">
-                    <div className="w-full h-[65vh] md:h-[70vh] pointer-events-auto relative flex items-center justify-center bg-zinc-900/30 rounded-[3.5rem] border border-white/5 backdrop-blur-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                <div ref={pinWrapperRef} className="w-full md:flex-1 h-[40vh] md:h-screen flex items-center justify-center pointer-events-none absolute md:relative top-0 left-0 z-0 md:mt-0">
+                    <div className="w-full h-full md:h-[70vh] pointer-events-auto relative flex items-center justify-center bg-zinc-900/30 rounded-b-3xl md:rounded-[3.5rem] border border-white/5 backdrop-blur-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                         <div className={`absolute inset-0 transition-all duration-700 ease-in-out ${activeIndex === 0 ? 'opacity-100 z-10 scale-100' : 'opacity-0 -z-10 scale-95'}`}><HealthGraph isActive={activeIndex === 0} /></div>
                         <div className={`absolute inset-0 transition-all duration-700 ease-in-out ${activeIndex === 1 ? 'opacity-100 z-10 scale-100' : 'opacity-0 -z-10 scale-95'}`}><AdaptiveAudioGraph isActive={activeIndex === 1} /></div>
                         <div className={`absolute inset-0 transition-all duration-700 ease-in-out ${activeIndex === 2 ? 'opacity-100 z-10 scale-100' : 'opacity-0 -z-10 scale-95'}`}><ConversationGraph isActive={activeIndex === 2} /></div>
