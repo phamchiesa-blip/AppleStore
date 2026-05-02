@@ -7,6 +7,7 @@ function ManageOrders() {
 
   useEffect(() => {
     fetchOrders();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchOrders = async () => {
@@ -56,19 +57,19 @@ function ManageOrders() {
 
   return (
     <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 shadow-xl border border-white/10">
-      <h2 className="text-2xl font-semibold mb-6 text-white">Quản lý Đơn hàng</h2>
+      <h2 className="text-2xl font-semibold mb-6 text-white">Order Management</h2>
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="border-b border-white/10 text-gray-300">
               <th className="p-3 font-medium">Order ID</th>
-              <th className="p-3 font-medium">Khách hàng</th>
-              <th className="p-3 font-medium">SĐT</th>
-              <th className="p-3 font-medium">Tổng tiền</th>
-              <th className="p-3 font-medium">Thanh toán</th>
-              <th className="p-3 font-medium">Ngày đặt</th>
-              <th className="p-3 font-medium">Trạng thái</th>
-              <th className="p-3 font-medium text-center">Hành động</th>
+              <th className="p-3 font-medium">Customer</th>
+              <th className="p-3 font-medium">Phone</th>
+              <th className="p-3 font-medium">Total Price</th>
+              <th className="p-3 font-medium">Payment Method</th>
+              <th className="p-3 font-medium">Order Date</th>
+              <th className="p-3 font-medium">Status</th>
+              <th className="p-3 font-medium text-center">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -89,23 +90,23 @@ function ManageOrders() {
                 </td>
                 <td className="p-3 text-center">
                   {(o.status === 'Pending' || !o.status) && (
-                    <button 
+                    <button
                       onClick={() => updateStatus(o.id, 'Delivering')}
                       className="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1 rounded text-xs font-medium transition-colors"
                     >
-                      Duyệt
+                      Confirm
                     </button>
                   )}
                   {o.status === 'Delivering' && (
-                    <button 
+                    <button
                       onClick={() => updateStatus(o.id, 'Delivered')}
                       className="bg-green-600 hover:bg-green-500 text-white px-3 py-1 rounded text-xs font-medium transition-colors"
                     >
-                      Hoàn thành
+                      Completed
                     </button>
                   )}
                   {o.status === 'Delivered' && (
-                    <span className="text-gray-500 text-xs italic">Đã xong</span>
+                    <span className="text-gray-500 text-xs italic">Completed</span>
                   )}
                 </td>
               </tr>

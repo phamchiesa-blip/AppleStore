@@ -241,24 +241,24 @@ const UserPage = () => {
                 {/* —— Profile Header —— */}
                 <div className="max-w-5xl mx-auto px-5 -mt-12 flex flex-col sm:flex-row items-start sm:items-end gap-5 relative">
                     <Avatar user={user} onClickEdit={() => setShowAvatarPopup(!showAvatarPopup)} />
-                    
+
                     {/* AVATAR POPUP */}
                     {showAvatarPopup && (
                         <div className="absolute top-[80px] left-0 z-50 bg-white rounded-xl shadow-xl w-48 overflow-hidden border border-gray-200">
-                            <input 
-                                type="file" 
-                                ref={fileInputRef} 
-                                className="hidden" 
-                                accept="image/*" 
+                            <input
+                                type="file"
+                                ref={fileInputRef}
+                                className="hidden"
+                                accept="image/*"
                                 onChange={handleUploadPhoto}
                             />
-                            <button 
+                            <button
                                 onClick={() => fileInputRef.current.click()}
                                 className="w-full flex items-center gap-3 px-4 py-3 text-black hover:bg-gray-100 transition-colors border-b border-gray-200 text-sm font-medium"
                             >
                                 <PictureIcon /> Upload photo
                             </button>
-                            <button 
+                            <button
                                 onClick={handleDeletePhoto}
                                 disabled={!user.avatar_url}
                                 className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors ${user.avatar_url ? 'text-red-500 hover:bg-red-50 cursor-pointer' : 'text-gray-300 cursor-not-allowed'}`}
@@ -398,9 +398,7 @@ const UserPage = () => {
                                         {/* Product image thumbnail */}
                                         <div className="w-24 h-24 rounded-2xl flex items-center justify-center overflow-hidden shrink-0 transition-transform duration-500 group-hover:scale-105"
                                             style={{ background: 'rgba(255,255,255,0.06)' }}>
-                                            {order.image_url
-                                                ? <img src={order.image_url} alt={order.product_name} className="w-full h-full object-contain p-2" />
-                                                : <ShoppingBagIcon />}
+                                            <ShoppingBagIcon />
                                         </div>
 
                                         {/* Info */}
@@ -432,7 +430,7 @@ const UserPage = () => {
                                 </div>
                                 <h3 className="text-xl font-bold text-white mb-2">No orders yet</h3>
                                 <p className="text-gray-500 max-w-xs mb-8">When you purchase Apple products, your orders will appear here.</p>
-                                <button onClick={() => navigate('/mac')}
+                                <button onClick={() => navigate('/')}
                                     className="px-8 py-3 rounded-full font-semibold text-sm text-black bg-white hover:bg-gray-100 transition-all hover:scale-105 active:scale-95">
                                     Explore products
                                 </button>
@@ -452,7 +450,7 @@ const UserPage = () => {
                                 <XIcon />
                             </button>
                         </div>
-                        
+
                         <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar space-y-6">
                             {/* Status & General Info */}
                             <div className="bg-white/5 rounded-xl p-4 flex flex-col md:flex-row justify-between gap-4">
@@ -501,11 +499,7 @@ const UserPage = () => {
                                         selectedOrder.items.map((item, idx) => (
                                             <div key={idx} className="flex gap-4 p-4 bg-white/5 rounded-xl border border-white/5">
                                                 <div className="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center p-2 shrink-0">
-                                                    {item.product_image || item.image ? (
-                                                        <img src={item.product_image || item.image} alt="Product" className="w-full h-full object-contain" />
-                                                    ) : (
-                                                        <ShoppingBagIcon />
-                                                    )}
+                                                    <ShoppingBagIcon />
                                                 </div>
                                                 <div className="flex-1 min-w-0">
                                                     <h4 className="text-white font-bold text-sm truncate">{item.product_name || item.name}</h4>

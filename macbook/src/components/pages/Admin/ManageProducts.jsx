@@ -22,6 +22,7 @@ function ManageProducts() {
 
   useEffect(() => {
     fetchProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchProducts = async () => {
@@ -90,7 +91,7 @@ function ManageProducts() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    
+
     // Attempt to parse options if provided
     let parsedOptions = {};
     if (formData.options.trim()) {
@@ -108,14 +109,14 @@ function ManageProducts() {
     };
 
     try {
-      const url = editId 
+      const url = editId
         ? `http://localhost:5000/api/admin/ipad/${editId}`
         : 'http://localhost:5000/api/admin/ipad';
       const method = editId ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
         method,
-        headers: { 
+        headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
@@ -135,15 +136,15 @@ function ManageProducts() {
     }
   };
 
-  const filteredProducts = selectedCategory === 'All' 
-    ? products 
+  const filteredProducts = selectedCategory === 'All'
+    ? products
     : products.filter(p => p.category?.toLowerCase() === selectedCategory.toLowerCase());
 
   return (
     <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 shadow-xl border border-white/10 relative">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-semibold text-white">Product Management</h2>
-        <button 
+        <button
           onClick={openAddModal}
           className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-colors"
         >
@@ -156,11 +157,10 @@ function ManageProducts() {
           <button
             key={cat}
             onClick={() => setSelectedCategory(cat)}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-              selectedCategory === cat 
-                ? 'bg-blue-500 text-white' 
+            className={`px-4 py-2 rounded-lg font-medium transition-colors ${selectedCategory === cat
+                ? 'bg-blue-500 text-white'
                 : 'bg-white/10 text-gray-300 hover:bg-white/20'
-            }`}
+              }`}
           >
             {cat === 'All' ? 'All Products' : cat.toUpperCase()}
           </button>
@@ -220,9 +220,9 @@ function ManageProducts() {
             <form onSubmit={handleFormSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm text-gray-400 mb-1">Category</label>
-                <select 
+                <select
                   value={formData.category}
-                  onChange={(e) => setFormData({...formData, category: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                   className="w-full bg-black border border-white/10 rounded-lg p-2 text-white"
                 >
                   {categories.filter(c => c !== 'All').map(c => (
@@ -232,23 +232,23 @@ function ManageProducts() {
               </div>
               <div>
                 <label className="block text-sm text-gray-400 mb-1">Product Name</label>
-                <input required type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-black border border-white/10 rounded-lg p-2 text-white" />
+                <input required type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full bg-black border border-white/10 rounded-lg p-2 text-white" />
               </div>
               <div>
                 <label className="block text-sm text-gray-400 mb-1">Base Price ($)</label>
-                <input required type="number" step="0.01" value={formData.base_price} onChange={(e) => setFormData({...formData, base_price: e.target.value})} className="w-full bg-black border border-white/10 rounded-lg p-2 text-white" />
+                <input required type="number" step="0.01" value={formData.base_price} onChange={(e) => setFormData({ ...formData, base_price: e.target.value })} className="w-full bg-black border border-white/10 rounded-lg p-2 text-white" />
               </div>
               <div>
                 <label className="block text-sm text-gray-400 mb-1">Image URL</label>
-                <input type="text" value={formData.image_url} onChange={(e) => setFormData({...formData, image_url: e.target.value})} className="w-full bg-black border border-white/10 rounded-lg p-2 text-white" placeholder="/images/example.png or http..." />
+                <input type="text" value={formData.image_url} onChange={(e) => setFormData({ ...formData, image_url: e.target.value })} className="w-full bg-black border border-white/10 rounded-lg p-2 text-white" placeholder="/images/example.png or http..." />
               </div>
               <div>
                 <label className="block text-sm text-gray-400 mb-1">Description</label>
-                <textarea value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} className="w-full bg-black border border-white/10 rounded-lg p-2 text-white" rows="2"></textarea>
+                <textarea value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} className="w-full bg-black border border-white/10 rounded-lg p-2 text-white" rows="2"></textarea>
               </div>
               <div>
                 <label className="block text-sm text-gray-400 mb-1">Options (JSON string)</label>
-                <textarea value={formData.options} onChange={(e) => setFormData({...formData, options: e.target.value})} className="w-full bg-black border border-white/10 rounded-lg p-2 text-white font-mono text-sm" rows="4" placeholder='{"models": ["11-inch"], "colors": ["Silver"]}'></textarea>
+                <textarea value={formData.options} onChange={(e) => setFormData({ ...formData, options: e.target.value })} className="w-full bg-black border border-white/10 rounded-lg p-2 text-white font-mono text-sm" rows="4" placeholder='{"models": ["11-inch"], "colors": ["Silver"]}'></textarea>
               </div>
               <div className="flex justify-end gap-3 mt-6">
                 <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 rounded-lg text-gray-300 hover:bg-white/10 transition-colors">Cancel</button>

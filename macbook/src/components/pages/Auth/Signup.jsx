@@ -14,7 +14,7 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast.error('Nhập lại mật khẩu không khớp!');
+      toast.error('Password did not match when re-entered!');
       return;
     }
 
@@ -27,17 +27,17 @@ function Signup() {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success('Đăng ký thành công!');
+        toast.success('Sign up successfully!');
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
         setUser(data.user);
         navigate('/');
       } else {
-        toast.error(data.message || 'Lỗi đăng ký');
+        toast.error(data.message || 'Error Sign Up');
       }
     } catch (error) {
       console.error(error);
-      toast.error('Lỗi kết nối server');
+      toast.error('Error connect server');
     }
   };
 

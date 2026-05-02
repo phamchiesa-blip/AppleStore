@@ -71,19 +71,19 @@ INSERT IGNORE INTO products (id, category, name, description, base_price, image_
 
 -- Insert AirPods
 INSERT IGNORE INTO products (id, category, name, description, base_price, image_url, options) VALUES 
-(13, 'airpods', 'AirPods', 'Iconic design. Incredible sound.', 129.00, '/airpods.png', '{"models":["AirPods 3","AirPods 4","AirPods 4 with ANC"],"colors":["White"],"storages":[]}'),
-(14, 'airpods', 'AirPods Pro', 'Magic like you''ve never heard.', 199.00, '/airpodspro.png', '{"models":["AirPods Pro","AirPods Pro 2","AirPods Pro 3"],"colors":["White"],"storages":[]}'),
-(15, 'airpods', 'AirPods Max', 'Over-ear audio reinvented.', 449.00, '/airpodsmax.png', '{"models":["AirPods Max","AirPods Max 2"],"colors":["Space Gray","Silver","Green","Sky Blue","Pink"],"storages":[]}');
+(13, 'airpods', 'AirPods', 'Iconic design. Incredible sound.', 129.00, '/AP-4-1.png', '{"models":["AirPods 3","AirPods 4","AirPods 4 with ANC"],"colors":["White"],"storages":[]}'),
+(14, 'airpods', 'AirPods Pro', 'Magic like you''ve never heard.', 199.00, '/images/airpods_pro3_case.png', '{"models":["AirPods Pro","AirPods Pro 2","AirPods Pro 3"],"colors":["White"],"storages":[]}'),
+(15, 'airpods', 'AirPods Max', 'Over-ear audio reinvented.', 449.00, '/images/Apple-AirPods-Max-2.jpg', '{"models":["AirPods Max","AirPods Max 2"],"colors":["Space Gray","Silver","Green","Sky Blue","Pink"],"storages":[]}');
 
 -- Insert Watches
 INSERT IGNORE INTO products (id, category, name, description, base_price, image_url, options) VALUES 
-(16, 'watch', 'Apple Watch Series 11', 'The ultimate device for a healthy life.', 399.00, '/watch11.png', '{"models":["Aluminum","Titanium"],"colors":["Standard"],"storages":[{"capacity":"42mm","price_modifier":0},{"capacity":"46mm","price_modifier":30}],"bands":["Rubber","Textile","Stainless Steel"]}'),
-(17, 'watch', 'Apple Watch SE 3', 'A great deal to love.', 249.00, '/watchse.png', '{"models":["Standard"],"colors":["Midnight","Starlight"],"storages":[{"capacity":"40mm","price_modifier":0},{"capacity":"44mm","price_modifier":30}],"bands":["Rubber","Textile","Stainless Steel"]}'),
-(18, 'watch', 'Apple Watch Ultra 3', 'Adventure awaits.', 799.00, '/watchultra.png', '{"models":["Standard"],"colors":["Natural Titanium","Black Titanium"],"storages":[{"capacity":"Standard","price_modifier":0}],"bands":["Alpine Loop","Trail Loop","Ocean Band","Titanium Milanese Loop"]}');
+(16, 'watch', 'Apple Watch Series 11', 'The ultimate device for a healthy life.', 399.00, '/watch11.webp', '{"models":["Aluminum","Titanium"],"colors":["Standard"],"storages":[{"capacity":"42mm","price_modifier":0},{"capacity":"46mm","price_modifier":30}],"bands":["Rubber","Textile","Stainless Steel"]}'),
+(17, 'watch', 'Apple Watch SE 3', 'A great deal to love.', 249.00, '/watchse3.png', '{"models":["Standard"],"colors":["Midnight","Starlight"],"storages":[{"capacity":"40mm","price_modifier":0},{"capacity":"44mm","price_modifier":30}],"bands":["Rubber","Textile","Stainless Steel"]}'),
+(18, 'watch', 'Apple Watch Ultra 3', 'Adventure awaits.', 799.00, '/watchul3.webp', '{"models":["Standard"],"colors":["Natural Titanium","Black Titanium"],"storages":[{"capacity":"Standard","price_modifier":0}],"bands":["Alpine Loop","Trail Loop","Ocean Band","Titanium Milanese Loop"]}');
 
 -- Insert TV & Home
 INSERT IGNORE INTO products (id, category, name, description, base_price, image_url, options) VALUES 
-(19, 'tvhome', 'Apple TV 4K', 'The Apple experience. Cinematic in every sense.', 149.00, '/appletv.png', '{"models":["Wi-Fi","Wi-Fi + Ethernet"],"colors":["Black"],"storages":[]}');
+(19, 'tvhome', 'Apple TV ', 'The Apple experience. Cinematic in every sense.', 149.00, '/appletvnormal.png', '{"models":["Wi-Fi","Wi-Fi + Ethernet"],"colors":["Black"],"storages":[]}');
 
 
 -- ==========================================
@@ -113,3 +113,4 @@ CREATE TABLE IF NOT EXISTS orders (
     status VARCHAR(50) DEFAULT 'Pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
