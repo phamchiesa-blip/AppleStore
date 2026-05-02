@@ -442,7 +442,7 @@ const UserPage = () => {
 
             {/* —— Order Details Modal —— */}
             {selectedOrder && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => setSelectedOrder(null)}>
+                <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => setSelectedOrder(null)}>
                     <div className="bg-[#111] border border-white/10 rounded-2xl p-6 w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]" onClick={e => e.stopPropagation()}>
                         <div className="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
                             <h2 className="text-xl font-bold text-white">Order Details <span className="text-gray-500 text-sm font-normal">#{selectedOrder.id}</span></h2>
@@ -451,7 +451,7 @@ const UserPage = () => {
                             </button>
                         </div>
 
-                        <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar space-y-6">
+                        <div className="flex-1 overflow-y-auto pr-2 pb-4 custom-scrollbar space-y-6">
                             {/* Status & General Info */}
                             <div className="bg-white/5 rounded-xl p-4 flex flex-col md:flex-row justify-between gap-4">
                                 <div>
@@ -494,17 +494,17 @@ const UserPage = () => {
                             {/* Order Items */}
                             <div>
                                 <h3 className="text-sm font-semibold text-gray-300 mb-3 uppercase tracking-wider">Items</h3>
-                                <div className="space-y-3">
+                                <div className="bg-white/5 rounded-xl p-4 space-y-3">
                                     {selectedOrder.items && selectedOrder.items.length > 0 ? (
                                         selectedOrder.items.map((item, idx) => (
-                                            <div key={idx} className="flex gap-4 p-4 bg-white/5 rounded-xl border border-white/5">
-                                                <div className="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center p-2 shrink-0">
+                                            <div key={idx} className={`flex gap-4 items-center ${idx !== selectedOrder.items.length - 1 ? 'border-b border-white/10 pb-3' : ''}`}>
+                                                <div className="w-14 h-14 bg-white/10 rounded-lg flex items-center justify-center p-2 shrink-0">
                                                     <ShoppingBagIcon />
                                                 </div>
                                                 <div className="flex-1 min-w-0">
                                                     <h4 className="text-white font-bold text-sm truncate">{item.product_name || item.name}</h4>
-                                                    <p className="text-gray-400 text-xs mt-1">Qty: {item.quantity}</p>
-                                                    <p className="text-blue-400 font-semibold text-sm mt-1">${item.product_price || item.price}</p>
+                                                    <p className="text-gray-400 text-xs mt-0.5">Qty: {item.quantity}</p>
+                                                    <p className="text-blue-400 font-semibold text-sm mt-0.5">${item.product_price || item.price}</p>
                                                 </div>
                                             </div>
                                         ))
