@@ -5,6 +5,7 @@ import Performance from "./Performance";
 import Feature from "./Feature";
 import Highlight from "./Highlight";
 import Footer from "../../Footer";
+import ExploreLineup from "../../ExploreLineup";
 
 function MacPage() {
   return (
@@ -15,6 +16,11 @@ function MacPage() {
       <Performance />
       <Feature />
       <Highlight />
+      <ExploreLineup 
+        category="Mac" 
+        learnMoreBehavior="external" 
+        defaultLearnMoreLink="https://www.apple.com/mac/" 
+      />
       <Footer />
     </>
   );

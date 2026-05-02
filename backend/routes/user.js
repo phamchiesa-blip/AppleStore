@@ -1,6 +1,26 @@
 const express = require('express');
 const router = express.Router();
 const mysql = require('mysql2/promise');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+
+// Ensure upload directory exists
+const uploadDir = path.join(__dirname, '..', 'public', 'uploads');
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, uploadDir);
+    },
+    filename: function (req, file, cb) {
+        cb(null, req.params.id + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
+const upload = multer({ storage: storage });
+
 
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
@@ -16,7 +36,7 @@ const pool = mysql.createPool({
 router.get('/:id', async (req, res) => {
     try {
         const [rows] = await pool.query(
-            'SELECT id, username, email, full_name, phone, address, created_at FROM users WHERE id = ?', 
+            'SELECT id, username, email, full_name, phone, address, avatar_url, created_at FROM users WHERE id = ?', 
             [req.params.id]
         );
         if (rows.length === 0) return res.status(404).json({ message: 'User not found' });
@@ -38,13 +58,39 @@ router.put('/:id', async (req, res) => {
         
         // Return back the updated user
         const [rows] = await pool.query(
-            'SELECT id, username, email, full_name, phone, address FROM users WHERE id = ?',
+            'SELECT id, username, email, full_name, phone, address, avatar_url FROM users WHERE id = ?',
             [req.params.id]
         );
         res.json({ message: 'Profile updated successfully', user: rows[0] });
     } catch (error) {
         console.error('Error updating profile:', error);
         res.status(500).json({ message: 'Server error updating profile' });
+    }
+});
+
+// POST upload avatar
+router.post('/:id/avatar', upload.single('avatar'), async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ message: 'No file uploaded' });
+        }
+        const avatarUrl = '/public/uploads/' + req.file.filename;
+        await pool.query('UPDATE users SET avatar_url = ? WHERE id = ?', [avatarUrl, req.params.id]);
+        res.json({ message: 'Avatar uploaded successfully', avatar_url: avatarUrl });
+    } catch (error) {
+        console.error('Error uploading avatar:', error);
+        res.status(500).json({ message: 'Server error uploading avatar' });
+    }
+});
+
+// DELETE avatar
+router.delete('/:id/avatar', async (req, res) => {
+    try {
+        await pool.query('UPDATE users SET avatar_url = NULL WHERE id = ?', [req.params.id]);
+        res.json({ message: 'Avatar deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting avatar:', error);
+        res.status(500).json({ message: 'Server error deleting avatar' });
     }
 });
 

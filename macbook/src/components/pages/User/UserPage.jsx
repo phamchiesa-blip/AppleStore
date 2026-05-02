@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../Navbar';
 import Footer from '../../Footer';
 
-/* ————————————————— Small icon components (inline SVG, no extra deps) —————————————————————— */
+/* ————————————————— Small icon components —————————————————————— */
 const Icon = ({ children, className = '' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
         stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"
@@ -21,6 +21,8 @@ const ShoppingBagIcon = () => <Icon><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 
 const PencilIcon = () => <Icon><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /></Icon>;
 const CheckIcon = () => <Icon><path d="M20 6 9 17l-5-5" /></Icon>;
 const XIcon = () => <Icon><path d="M18 6 6 18M6 6l12 12" /></Icon>;
+const PictureIcon = () => <Icon><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></Icon>;
+
 
 /* ————————————————— Info Field (view mode) ———————————————————————————————————————————————— */
 const ProfileField = ({ icon, label, value }) => (
@@ -32,13 +34,13 @@ const ProfileField = ({ icon, label, value }) => (
             <p className="text-[11px] uppercase tracking-widest font-semibold text-gray-500 mb-1">{label}</p>
             {value
                 ? <p className="text-[15px] text-white font-medium leading-snug break-words">{value}</p>
-                : <p className="text-[15px] text-gray-600 italic">Chưa cập nhật</p>}
+                : <p className="text-[15px] text-gray-600 italic">Not updated</p>}
         </div>
     </div>
 );
 
 /* ————————————————— Edit Field ———————————————————————————————————————————————————————————— */
-const EditField = ({ icon, label, name, value, onChange, type = 'text', multiline = false }) => (
+const EditField = ({ icon, label, name, value, onChange, type = 'text', multiline = false, readOnly = false }) => (
     <div className="flex items-start gap-4">
         <div className="mt-3 w-9 h-9 rounded-xl bg-white/8 flex items-center justify-center text-gray-400 shrink-0">
             {icon}
@@ -46,27 +48,34 @@ const EditField = ({ icon, label, name, value, onChange, type = 'text', multilin
         <div className="flex-1">
             <p className="text-[11px] uppercase tracking-widest font-semibold text-gray-500 mb-2">{label}</p>
             {multiline
-                ? <textarea name={name} value={value} onChange={onChange} rows={3}
-                    placeholder={`Nhập ${label.toLowerCase()}...`}
-                    className="w-full bg-white/5 border border-white/10 focus:border-blue-500/70 focus:bg-white/8 rounded-xl px-4 py-3 text-[15px] text-white outline-none transition-all resize-none placeholder-gray-600" />
-                : <input type={type} name={name} value={value} onChange={onChange}
-                    placeholder={`Nhập ${label.toLowerCase()}...`}
-                    className="w-full bg-white/5 border border-white/10 focus:border-blue-500/70 focus:bg-white/8 rounded-xl px-4 py-3 text-[15px] text-white outline-none transition-all placeholder-gray-600" />
+                ? <textarea name={name} value={value} onChange={onChange} rows={3} readOnly={readOnly}
+                    placeholder={`Enter ${label.toLowerCase()}...`}
+                    className={`w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[15px] text-white outline-none transition-all resize-none placeholder-gray-600 ${!readOnly && 'focus:border-blue-500/70 focus:bg-white/8'}`} />
+                : <input type={type} name={name} value={value} onChange={onChange} readOnly={readOnly}
+                    placeholder={`Enter ${label.toLowerCase()}...`}
+                    className={`w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[15px] text-white outline-none transition-all placeholder-gray-600 ${!readOnly && 'focus:border-blue-500/70 focus:bg-white/8'}`} />
             }
         </div>
     </div>
 );
 
 /* ————————————————— Avatar initials ———————————————————————————————————————————————————————— */
-const Avatar = ({ name, username }) => {
-    const initials = name
-        ? name.trim().split(' ').map(w => w[0]).slice(0, 2).join('')
-        : (username || 'U')[0];
+const Avatar = ({ user, onClickEdit }) => {
+    const initials = user.full_name
+        ? user.full_name.trim().split(' ').map(w => w[0]).slice(0, 2).join('')
+        : (user.username || 'U')[0];
     return (
-        <div className="relative shrink-0">
-            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center text-2xl md:text-3xl font-bold text-white select-none"
-                style={{ background: 'linear-gradient(135deg,#0094FF 0%,#7B61FF 50%,#FF375F 100%)' }}>
-                {initials.toUpperCase()}
+        <div className="relative shrink-0 group cursor-pointer" onClick={onClickEdit}>
+            {user.avatar_url ? (
+                <img src={`http://localhost:5000${user.avatar_url}`} alt="Avatar" className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-2 border-white/10" />
+            ) : (
+                <div className="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center text-2xl md:text-3xl font-bold text-white select-none border-2 border-white/10"
+                    style={{ background: 'linear-gradient(135deg,#0094FF 0%,#7B61FF 50%,#FF375F 100%)' }}>
+                    {initials.toUpperCase()}
+                </div>
+            )}
+            <div className="absolute inset-0 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <PencilIcon />
             </div>
             <div className="absolute bottom-1 right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-[#111]" />
         </div>
@@ -93,6 +102,8 @@ const UserPage = () => {
     const [editForm, setEditForm] = useState({ full_name: '', phone: '', address: '' });
     const [isSaving, setIsSaving] = useState(false);
     const [activeTab, setActiveTab] = useState('profile');
+    const [showAvatarPopup, setShowAvatarPopup] = useState(false);
+    const fileInputRef = useRef(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -116,7 +127,6 @@ const UserPage = () => {
                 setEditForm({ full_name: data.full_name || '', phone: data.phone || '', address: data.address || '' });
                 localStorage.setItem('user', JSON.stringify(data));
             } else if (r.status === 404) {
-                // User not found in DB, clear local storage and redirect
                 localStorage.removeItem('user');
                 localStorage.removeItem('token');
                 navigate('/login');
@@ -127,8 +137,12 @@ const UserPage = () => {
     const fetchOrders = async (userId) => {
         try {
             const r = await fetch(`http://localhost:5000/api/orders/user/${userId}`);
-            const data = await r.json();
-            setOrders(Array.isArray(data) ? data : []);
+            if (r.ok) {
+                const data = await r.json();
+                setOrders(Array.isArray(data) ? data : []);
+            } else {
+                setOrders([]);
+            }
         } catch (e) { setOrders([]); }
         finally { setLoading(false); }
     };
@@ -157,9 +171,50 @@ const UserPage = () => {
         finally { setIsSaving(false); }
     };
 
+    const handleUploadPhoto = async (e) => {
+        const file = e.target.files[0];
+        if (!file || !user) return;
+
+        const formData = new FormData();
+        formData.append('avatar', file);
+
+        try {
+            const r = await fetch(`http://localhost:5000/api/users/${user.id}/avatar`, {
+                method: 'POST',
+                body: formData,
+            });
+            if (r.ok) {
+                const data = await r.json();
+                const updatedUser = { ...user, avatar_url: data.avatar_url };
+                setUser(updatedUser);
+                localStorage.setItem('user', JSON.stringify(updatedUser));
+                setShowAvatarPopup(false);
+            }
+        } catch (e) {
+            console.error('Failed to upload avatar', e);
+        }
+    };
+
+    const handleDeletePhoto = async () => {
+        if (!user || !user.avatar_url) return;
+        try {
+            const r = await fetch(`http://localhost:5000/api/users/${user.id}/avatar`, {
+                method: 'DELETE',
+            });
+            if (r.ok) {
+                const updatedUser = { ...user, avatar_url: null };
+                setUser(updatedUser);
+                localStorage.setItem('user', JSON.stringify(updatedUser));
+                setShowAvatarPopup(false);
+            }
+        } catch (e) {
+            console.error('Failed to delete avatar', e);
+        }
+    };
+
     if (!user) return null;
 
-    const memberSince = new Date(user.created_at).toLocaleDateString('vi-VN', { year: 'numeric', month: 'long' });
+    const memberSince = new Date(user.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
 
     return (
         <div className="bg-[#111] min-h-screen text-white overflow-x-hidden" style={{ fontFamily: 'var(--font-regular, sans-serif)' }}>
@@ -169,7 +224,6 @@ const UserPage = () => {
             <div className="relative pt-[64px]">
                 <div className="h-52 md:h-64 w-full"
                     style={{ background: 'linear-gradient(135deg,#070B18 0%,#0D1B3E 40%,#1A0A2E 70%,#0A2414 100%)' }}>
-                    {/* decorative blobs */}
                     <div className="absolute top-10 left-1/4 w-72 h-72 rounded-full opacity-20 blur-3xl pointer-events-none"
                         style={{ background: 'radial-gradient(circle,#0094FF,transparent 70%)' }} />
                     <div className="absolute top-0 right-1/4 w-56 h-56 rounded-full opacity-15 blur-3xl pointer-events-none"
@@ -177,20 +231,47 @@ const UserPage = () => {
                 </div>
 
                 {/* —— Profile Header —— */}
-                <div className="max-w-5xl mx-auto px-5 -mt-12 flex flex-col sm:flex-row items-start sm:items-end gap-5">
-                    <Avatar name={user.full_name} username={user.username} />
+                <div className="max-w-5xl mx-auto px-5 -mt-12 flex flex-col sm:flex-row items-start sm:items-end gap-5 relative">
+                    <Avatar user={user} onClickEdit={() => setShowAvatarPopup(!showAvatarPopup)} />
+                    
+                    {/* AVATAR POPUP */}
+                    {showAvatarPopup && (
+                        <div className="absolute top-[80px] left-0 z-50 bg-white rounded-xl shadow-xl w-48 overflow-hidden border border-gray-200">
+                            <input 
+                                type="file" 
+                                ref={fileInputRef} 
+                                className="hidden" 
+                                accept="image/*" 
+                                onChange={handleUploadPhoto}
+                            />
+                            <button 
+                                onClick={() => fileInputRef.current.click()}
+                                className="w-full flex items-center gap-3 px-4 py-3 text-black hover:bg-gray-100 transition-colors border-b border-gray-200 text-sm font-medium"
+                            >
+                                <PictureIcon /> Upload photo
+                            </button>
+                            <button 
+                                onClick={handleDeletePhoto}
+                                disabled={!user.avatar_url}
+                                className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors ${user.avatar_url ? 'text-red-500 hover:bg-red-50 cursor-pointer' : 'text-gray-300 cursor-not-allowed'}`}
+                            >
+                                <XIcon /> Delete photo
+                            </button>
+                        </div>
+                    )}
+
                     <div className="flex-1 pb-2">
                         <h1 className="text-2xl md:text-3xl font-bold text-white leading-tight">
                             {user.full_name || user.username}
                         </h1>
-                        <p className="text-gray-400 text-sm mt-0.5">@{user.username} · Thành viên từ {memberSince}</p>
+                        <p className="text-gray-400 text-sm mt-0.5">@{user.username} · Member since {memberSince}</p>
                     </div>
                     {!isEditing && (
                         <button onClick={() => setIsEditing(true)}
                             className="mb-2 flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-white transition-all duration-200 hover:scale-105 active:scale-95"
                             style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.15)' }}>
                             <PencilIcon />
-                            Chỉnh sửa hồ sơ
+                            Edit Profile
                         </button>
                     )}
                 </div>
@@ -202,7 +283,7 @@ const UserPage = () => {
                     {['profile', 'orders'].map(tab => (
                         <button key={tab} onClick={() => setActiveTab(tab)}
                             className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${activeTab === tab ? 'bg-white text-black shadow-lg' : 'text-gray-400 hover:text-white'}`}>
-                            {tab === 'profile' ? 'Hồ Sơ' : `Đơn Hàng (${orders.length})`}
+                            {tab === 'profile' ? 'Profile' : `Orders (${orders.length})`}
                         </button>
                     ))}
                 </div>
@@ -210,15 +291,13 @@ const UserPage = () => {
 
             {/* —— Main Content —— */}
             <div className="max-w-5xl mx-auto px-5 mt-6 pb-24">
-
                 {/* ══ PROFILE TAB ══ */}
                 {activeTab === 'profile' && (
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-
                         {/* Left: info card */}
                         <div className="md:col-span-2 rounded-3xl overflow-hidden" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
                             <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-white/8">
-                                <h2 className="text-base font-semibold text-white">Thông tin cá nhân</h2>
+                                <h2 className="text-base font-semibold text-white">Personal Information</h2>
                                 {isEditing && (
                                     <div className="flex gap-2">
                                         <button onClick={() => setIsEditing(false)} disabled={isSaving}
@@ -231,7 +310,7 @@ const UserPage = () => {
                                             style={{ background: 'linear-gradient(135deg,#007AFF,#5856D6)' }}>
                                             {isSaving
                                                 ? <div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                                : <><CheckIcon />Lưu</>}
+                                                : <><CheckIcon />Save</>}
                                         </button>
                                     </div>
                                 )}
@@ -240,21 +319,20 @@ const UserPage = () => {
                             <div className="p-4 space-y-1">
                                 {isEditing ? (
                                     <div className="space-y-4 p-2">
-                                        {/* read-only fields */}
-                                        <EditField icon={<UserIcon />} label="Tên đăng nhập" name="_username" value={user.username} onChange={() => { }} />
-                                        <EditField icon={<MailIcon />} label="Email" name="_email" value={user.email} onChange={() => { }} type="email" />
+                                        <EditField icon={<UserIcon />} label="Username" name="_username" value={user.username} readOnly />
+                                        <EditField icon={<MailIcon />} label="Email" name="_email" value={user.email} type="email" readOnly />
                                         <div className="border-t border-white/8 my-2" />
-                                        <EditField icon={<NameIcon />} label="Họ và tên" name="full_name" value={editForm.full_name} onChange={handleInputChange} />
-                                        <EditField icon={<PhoneIcon />} label="Số điện thoại" name="phone" value={editForm.phone} onChange={handleInputChange} type="tel" />
-                                        <EditField icon={<MapIcon />} label="Địa chỉ" name="address" value={editForm.address} onChange={handleInputChange} multiline />
+                                        <EditField icon={<NameIcon />} label="Full Name" name="full_name" value={editForm.full_name} onChange={handleInputChange} />
+                                        <EditField icon={<PhoneIcon />} label="Phone Number" name="phone" value={editForm.phone} onChange={handleInputChange} type="tel" />
+                                        <EditField icon={<MapIcon />} label="Address" name="address" value={editForm.address} onChange={handleInputChange} multiline />
                                     </div>
                                 ) : (
                                     <>
-                                        <ProfileField icon={<UserIcon />} label="Tên đăng nhập" value={user.username} />
-                                        <ProfileField icon={<MailIcon />} label="Địa chỉ Email" value={user.email} />
-                                        <ProfileField icon={<NameIcon />} label="Họ và tên" value={user.full_name} />
-                                        <ProfileField icon={<PhoneIcon />} label="Số điện thoại" value={user.phone} />
-                                        <ProfileField icon={<MapIcon />} label="Địa chỉ" value={user.address} />
+                                        <ProfileField icon={<UserIcon />} label="Username" value={user.username} />
+                                        <ProfileField icon={<MailIcon />} label="Email Address" value={user.email} />
+                                        <ProfileField icon={<NameIcon />} label="Full Name" value={user.full_name} />
+                                        <ProfileField icon={<PhoneIcon />} label="Phone Number" value={user.phone} />
+                                        <ProfileField icon={<MapIcon />} label="Address" value={user.address} />
                                     </>
                                 )}
                             </div>
@@ -263,30 +341,30 @@ const UserPage = () => {
                         {/* Right: Stats card */}
                         <div className="flex flex-col gap-4">
                             <div className="rounded-3xl p-6 flex flex-col gap-4" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                                <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Tổng quan</h3>
+                                <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Overview</h3>
                                 <div className="flex flex-col gap-3">
                                     <div className="flex justify-between items-center">
-                                        <span className="text-sm text-gray-400">Tổng đơn hàng</span>
+                                        <span className="text-sm text-gray-400">Total Orders</span>
                                         <span className="text-xl font-bold text-white">{orders.length}</span>
                                     </div>
                                     <div className="flex justify-between items-center">
-                                        <span className="text-sm text-gray-400">Đã giao</span>
+                                        <span className="text-sm text-gray-400">Delivered</span>
                                         <span className="text-xl font-bold text-green-400">{orders.filter(o => o.status === 'Delivered').length}</span>
                                     </div>
                                     <div className="flex justify-between items-center">
-                                        <span className="text-sm text-gray-400">Đang vận chuyển</span>
+                                        <span className="text-sm text-gray-400">In Transit</span>
                                         <span className="text-xl font-bold text-blue-400">{orders.filter(o => o.status !== 'Delivered').length}</span>
                                     </div>
                                 </div>
                             </div>
 
                             <div className="rounded-3xl p-6" style={{ background: 'linear-gradient(135deg,rgba(0,122,255,0.15),rgba(88,86,214,0.15))', border: '1px solid rgba(0,122,255,0.2)' }}>
-                                <p className="text-xs text-blue-400 font-semibold uppercase tracking-wider mb-2">Tài khoản</p>
-                                <p className="text-sm text-gray-300 leading-relaxed">Quản lý tất cả thông tin và đơn hàng của bạn tại đây.</p>
+                                <p className="text-xs text-blue-400 font-semibold uppercase tracking-wider mb-2">Account</p>
+                                <p className="text-sm text-gray-300 leading-relaxed">Manage all your information and orders here.</p>
                                 <button onClick={() => setActiveTab('orders')}
                                     className="mt-4 w-full py-2 rounded-xl text-sm font-semibold text-white transition-all hover:brightness-110"
                                     style={{ background: 'rgba(0,122,255,0.3)', border: '1px solid rgba(0,122,255,0.4)' }}>
-                                    Xem đơn hàng →
+                                    View orders →
                                 </button>
                             </div>
                         </div>
@@ -324,13 +402,13 @@ const UserPage = () => {
                                                 <StatusBadge status={order.status} />
                                             </div>
                                             <p className="text-sm text-gray-500">
-                                                Đặt ngày {new Date(order.order_date).toLocaleDateString('vi-VN', { year: 'numeric', month: 'long', day: 'numeric' })}
+                                                Ordered on {new Date(order.order_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                                             </p>
                                             <div className="flex items-center justify-between pt-2">
                                                 <span className="text-2xl font-bold text-white">{order.price_string}</span>
                                                 <button className="px-5 py-2 rounded-full text-sm font-semibold text-white transition-all hover:scale-105 active:scale-95"
                                                     style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)' }}>
-                                                    Chi tiết
+                                                    Details
                                                 </button>
                                             </div>
                                         </div>
@@ -344,11 +422,11 @@ const UserPage = () => {
                                     style={{ background: 'rgba(255,255,255,0.05)' }}>
                                     <ShoppingBagIcon />
                                 </div>
-                                <h3 className="text-xl font-bold text-white mb-2">Chưa có đơn hàng nào</h3>
-                                <p className="text-gray-500 max-w-xs mb-8">Khi bạn mua sản phẩm Apple, đơn hàng sẽ xuất hiện tại đây.</p>
+                                <h3 className="text-xl font-bold text-white mb-2">No orders yet</h3>
+                                <p className="text-gray-500 max-w-xs mb-8">When you purchase Apple products, your orders will appear here.</p>
                                 <button onClick={() => navigate('/mac')}
                                     className="px-8 py-3 rounded-full font-semibold text-sm text-black bg-white hover:bg-gray-100 transition-all hover:scale-105 active:scale-95">
-                                    Khám phá sản phẩm
+                                    Explore products
                                 </button>
                             </div>
                         )}

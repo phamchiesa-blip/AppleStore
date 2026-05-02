@@ -13,8 +13,8 @@ const IPadPage = () => {
         <div className="bg-black min-h-screen overflow-x-hidden">
             <main>
                 <Hero />
-                <Models />
                 <Features />
+                <Models />
             </main>
             <Footer />
         </div>

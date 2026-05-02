@@ -1,13 +1,24 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import BuyPopup from "../../../BuyPopup";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const CompareAirpods = () => {
     const sectionRef = useRef(null);
+    const [buyState, setBuyState] = useState({ product: null, img: null });
+    const [dbProducts, setDbProducts] = useState({});
+
+    const openBuy = (key, img) => {
+        const product = dbProducts[key.toLowerCase()] || null;
+        setBuyState({ product, img });
+    };
 
     const products = [
         {
             name: "AirPods 4",
+            dbKey: "airpods",
             img: "/AP-4-1.png",
             tagline: "Breakthrough audio and comfort.",
             price: "$129.00",
@@ -16,6 +27,7 @@ const CompareAirpods = () => {
         },
         {
             name: "AirPods 4",
+            dbKey: "airpods",
             sub: "Active Noise Cancellation",
             img: "/AP4-2.png",
             tagline: "Breakthrough audio, comfort, and noise control.",
@@ -25,6 +37,7 @@ const CompareAirpods = () => {
         },
         {
             name: "AirPods Pro 3",
+            dbKey: "airpods pro",
             img: "/AP-3.png",
             tagline: "Active Noise Cancellation you've never heard before.",
             price: "$249.00",
@@ -33,6 +46,7 @@ const CompareAirpods = () => {
         },
         {
             name: "AirPods Max 2",
+            dbKey: "airpods max",
             isNew: true,
             img: "https://www.apple.com/v/airpods/shared/compare/b/images/compare/compare_airpods_max__b14s2x6q07rm_large.png",
             tagline: "A perfectly personal over-ear listening experience.",
@@ -56,7 +70,19 @@ const CompareAirpods = () => {
                 }
             }
         );
+
+        // Fetch airpods products from DB for BuyPopup
+        fetch('http://localhost:5000/api/products/category/airpods')
+            .then(r => r.json())
+            .then(data => {
+                const map = {};
+                data.forEach(p => { map[p.name.toLowerCase()] = p; });
+                setDbProducts(map);
+            })
+            .catch(() => {});
     }, []);
+
+    const getDbProduct = (key) => dbProducts[key.toLowerCase()] || null;
 
     return (
         <section ref={sectionRef} className="w-full flex flex-col items-center justify-center pt-20 px-5 mb-20">
@@ -78,14 +104,21 @@ const CompareAirpods = () => {
 
                         <p className="text-white text-sm mb-4">{product.price}</p>
 
-                        <button className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-1.5 rounded-full text-sm font-medium mb-2 transition-all">Buy</button>
+                        <button
+                            onClick={() => openBuy(product.dbKey, product.img)}
+                            className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-1.5 rounded-full text-sm font-medium mb-2 transition-all"
+                        >
+                            Buy
+                        </button>
                         <a href="#" className="text-blue-500 hover:underline text-xs mb-8 border-b-2 border-transparent hover:border-blue-500">Learn more &gt;</a>
 
                         <div className="w-full h-[1px] bg-white/20 mb-8"></div>
 
                         <div className="flex flex-col items-center">
                             <div className="w-8 h-8 mb-4 opacity-70">
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414 1.414m-2.828 2.828a9 9 0 002.828 2.828M12 12a3 3 0 110-6 3 3 0 010 6z" /></svg>
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414 1.414m-2.828 2.828a9 9 0 002.828 2.828M12 12a3 3 0 110-6 3 3 0 010 6z" />
+                                </svg>
                             </div>
                             <p className="text-white text-sm font-medium mb-1">{product.iconDesc}</p>
                             <p className="text-gray-400 text-xs px-2">{product.desc}</p>
@@ -93,10 +126,15 @@ const CompareAirpods = () => {
                     </div>
                 ))}
             </div>
+
+            <BuyPopup
+                isOpen={!!buyState.product}
+                onClose={() => setBuyState({ product: null, img: null })}
+                product={buyState.product}
+                overrideImage={buyState.img}
+            />
         </section>
     );
 };
 
 export default CompareAirpods;
-
-
