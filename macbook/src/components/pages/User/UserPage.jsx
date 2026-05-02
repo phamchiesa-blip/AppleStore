@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../Navbar';
 import Footer from '../../Footer';
+import useAuthStore from '../../../store/authStore';
 
 /* ————————————————— Small icon components —————————————————————— */
 const Icon = ({ children, className = '' }) => (
@@ -97,6 +98,7 @@ const StatusBadge = ({ status }) => {
 const UserPage = () => {
     const [user, setUser] = useState(null);
     const [orders, setOrders] = useState([]);
+    const [selectedOrder, setSelectedOrder] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isEditing, setIsEditing] = useState(false);
     const [editForm, setEditForm] = useState({ full_name: '', phone: '', address: '' });
@@ -105,6 +107,7 @@ const UserPage = () => {
     const [showAvatarPopup, setShowAvatarPopup] = useState(false);
     const fileInputRef = useRef(null);
     const navigate = useNavigate();
+    const { setUser: setGlobalUser } = useAuthStore();
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -124,11 +127,13 @@ const UserPage = () => {
             if (r.ok) {
                 const data = await r.json();
                 setUser(data);
+                setGlobalUser(data);
                 setEditForm({ full_name: data.full_name || '', phone: data.phone || '', address: data.address || '' });
                 localStorage.setItem('user', JSON.stringify(data));
             } else if (r.status === 404) {
                 localStorage.removeItem('user');
                 localStorage.removeItem('token');
+                setGlobalUser(null);
                 navigate('/login');
             }
         } catch (e) { console.error(e); }
@@ -164,6 +169,7 @@ const UserPage = () => {
             if (r.ok) {
                 const data = await r.json();
                 setUser(data.user);
+                setGlobalUser(data.user);
                 localStorage.setItem('user', JSON.stringify(data.user));
                 setIsEditing(false);
             }
@@ -187,6 +193,7 @@ const UserPage = () => {
                 const data = await r.json();
                 const updatedUser = { ...user, avatar_url: data.avatar_url };
                 setUser(updatedUser);
+                setGlobalUser(updatedUser);
                 localStorage.setItem('user', JSON.stringify(updatedUser));
                 setShowAvatarPopup(false);
             }
@@ -204,6 +211,7 @@ const UserPage = () => {
             if (r.ok) {
                 const updatedUser = { ...user, avatar_url: null };
                 setUser(updatedUser);
+                setGlobalUser(updatedUser);
                 localStorage.setItem('user', JSON.stringify(updatedUser));
                 setShowAvatarPopup(false);
             }
@@ -406,7 +414,7 @@ const UserPage = () => {
                                             </p>
                                             <div className="flex items-center justify-between pt-2">
                                                 <span className="text-2xl font-bold text-white">{order.price_string}</span>
-                                                <button className="px-5 py-2 rounded-full text-sm font-semibold text-white transition-all hover:scale-105 active:scale-95"
+                                                <button onClick={() => setSelectedOrder(order)} className="px-5 py-2 rounded-full text-sm font-semibold text-white transition-all hover:scale-105 active:scale-95"
                                                     style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)' }}>
                                                     Details
                                                 </button>
@@ -433,6 +441,94 @@ const UserPage = () => {
                     </div>
                 )}
             </div>
+
+            {/* —— Order Details Modal —— */}
+            {selectedOrder && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => setSelectedOrder(null)}>
+                    <div className="bg-[#111] border border-white/10 rounded-2xl p-6 w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]" onClick={e => e.stopPropagation()}>
+                        <div className="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
+                            <h2 className="text-xl font-bold text-white">Order Details <span className="text-gray-500 text-sm font-normal">#{selectedOrder.id}</span></h2>
+                            <button onClick={() => setSelectedOrder(null)} className="text-gray-400 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors">
+                                <XIcon />
+                            </button>
+                        </div>
+                        
+                        <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar space-y-6">
+                            {/* Status & General Info */}
+                            <div className="bg-white/5 rounded-xl p-4 flex flex-col md:flex-row justify-between gap-4">
+                                <div>
+                                    <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">Status</p>
+                                    <StatusBadge status={selectedOrder.status} />
+                                </div>
+                                <div>
+                                    <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">Date</p>
+                                    <p className="text-sm font-medium text-white">{new Date(selectedOrder.order_date).toLocaleString()}</p>
+                                </div>
+                                <div>
+                                    <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">Total</p>
+                                    <p className="text-sm font-bold text-white">{selectedOrder.price_string}</p>
+                                </div>
+                            </div>
+
+                            {/* Customer Details */}
+                            <div>
+                                <h3 className="text-sm font-semibold text-gray-300 mb-3 uppercase tracking-wider">Shipping Information</h3>
+                                <div className="bg-white/5 rounded-xl p-4 space-y-3 text-sm">
+                                    <div className="flex gap-2">
+                                        <span className="text-gray-500 w-24 shrink-0">Name:</span>
+                                        <span className="text-white font-medium">{selectedOrder.customer_name || 'N/A'}</span>
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <span className="text-gray-500 w-24 shrink-0">Phone:</span>
+                                        <span className="text-white font-medium">{selectedOrder.phone || 'N/A'}</span>
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <span className="text-gray-500 w-24 shrink-0">Address:</span>
+                                        <span className="text-white font-medium leading-relaxed">{selectedOrder.address || 'N/A'}</span>
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <span className="text-gray-500 w-24 shrink-0">Payment:</span>
+                                        <span className="text-green-400 bg-green-500/10 px-2 py-0.5 rounded text-xs font-semibold">{selectedOrder.payment_method || 'N/A'}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Order Items */}
+                            <div>
+                                <h3 className="text-sm font-semibold text-gray-300 mb-3 uppercase tracking-wider">Items</h3>
+                                <div className="space-y-3">
+                                    {selectedOrder.items && selectedOrder.items.length > 0 ? (
+                                        selectedOrder.items.map((item, idx) => (
+                                            <div key={idx} className="flex gap-4 p-4 bg-white/5 rounded-xl border border-white/5">
+                                                <div className="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center p-2 shrink-0">
+                                                    {item.product_image || item.image ? (
+                                                        <img src={item.product_image || item.image} alt="Product" className="w-full h-full object-contain" />
+                                                    ) : (
+                                                        <ShoppingBagIcon />
+                                                    )}
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                    <h4 className="text-white font-bold text-sm truncate">{item.product_name || item.name}</h4>
+                                                    <p className="text-gray-400 text-xs mt-1">Qty: {item.quantity}</p>
+                                                    <p className="text-blue-400 font-semibold text-sm mt-1">${item.product_price || item.price}</p>
+                                                </div>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <p className="text-gray-500 text-sm italic">No items found.</p>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="mt-6 pt-4 border-t border-white/10 text-right">
+                            <button onClick={() => setSelectedOrder(null)} className="px-6 py-2 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             <Footer />
         </div>

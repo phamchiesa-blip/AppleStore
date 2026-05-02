@@ -26,6 +26,34 @@ function ManageOrders() {
     }
   };
 
+  const updateStatus = async (id, newStatus) => {
+    const token = localStorage.getItem('token');
+    try {
+      const res = await fetch(`http://localhost:5000/api/admin/orders/${id}/status`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ status: newStatus })
+      });
+      if (res.ok) {
+        fetchOrders();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'Pending': return 'bg-yellow-500/20 text-yellow-400';
+      case 'Delivering': return 'bg-blue-500/20 text-blue-400';
+      case 'Delivered': return 'bg-green-500/20 text-green-400';
+      default: return 'bg-gray-500/20 text-gray-400';
+    }
+  };
+
   return (
     <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 shadow-xl border border-white/10">
       <h2 className="text-2xl font-semibold mb-6 text-white">Quản lý Đơn hàng</h2>
@@ -39,6 +67,8 @@ function ManageOrders() {
               <th className="p-3 font-medium">Tổng tiền</th>
               <th className="p-3 font-medium">Thanh toán</th>
               <th className="p-3 font-medium">Ngày đặt</th>
+              <th className="p-3 font-medium">Trạng thái</th>
+              <th className="p-3 font-medium text-center">Hành động</th>
             </tr>
           </thead>
           <tbody>
@@ -49,9 +79,35 @@ function ManageOrders() {
                 <td className="p-3 text-gray-400">{o.phone}</td>
                 <td className="p-3 text-white font-medium">${o.total_price}</td>
                 <td className="p-3 text-gray-300">
-                  <span className="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">{o.payment_method}</span>
+                  <span className="bg-gray-500/20 text-gray-300 px-2 py-1 rounded text-xs">{o.payment_method}</span>
                 </td>
                 <td className="p-3 text-gray-400 text-sm">{new Date(o.created_at).toLocaleString()}</td>
+                <td className="p-3">
+                  <span className={`px-2 py-1 rounded text-xs font-semibold ${getStatusColor(o.status || 'Pending')}`}>
+                    {o.status || 'Pending'}
+                  </span>
+                </td>
+                <td className="p-3 text-center">
+                  {(o.status === 'Pending' || !o.status) && (
+                    <button 
+                      onClick={() => updateStatus(o.id, 'Delivering')}
+                      className="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1 rounded text-xs font-medium transition-colors"
+                    >
+                      Duyệt
+                    </button>
+                  )}
+                  {o.status === 'Delivering' && (
+                    <button 
+                      onClick={() => updateStatus(o.id, 'Delivered')}
+                      className="bg-green-600 hover:bg-green-500 text-white px-3 py-1 rounded text-xs font-medium transition-colors"
+                    >
+                      Hoàn thành
+                    </button>
+                  )}
+                  {o.status === 'Delivered' && (
+                    <span className="text-gray-500 text-xs italic">Đã xong</span>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>

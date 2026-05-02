@@ -17,17 +17,18 @@ export const CartProvider = ({ children }) => {
 
   const fetchCart = async () => {
     const data = await getCartItems();
-    setCart(data || []);
+    const mappedData = Array.isArray(data) ? data.map(item => ({
+      ...item,
+      name: item.product_name,
+      price: item.product_price,
+      image: item.product_image
+    })) : [];
+    setCart(mappedData);
   };
 
   // Load cart from backend when app starts
   useEffect(() => {
-  const loadCart = async () => {
-    const data = await getCartItems();
-    setCart(data || []);
-  };
-
-  loadCart();
+    fetchCart();
   }, []);
 
   const clearCart = () => setCart([]);

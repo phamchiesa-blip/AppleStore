@@ -36,7 +36,7 @@ const pool = mysql.createPool({
 router.get('/:id', async (req, res) => {
     try {
         const [rows] = await pool.query(
-            'SELECT id, username, email, full_name, phone, address, avatar_url, created_at FROM users WHERE id = ?', 
+            'SELECT id, username, email, full_name, phone, address, avatar_url, role, status, created_at FROM users WHERE id = ?', 
             [req.params.id]
         );
         if (rows.length === 0) return res.status(404).json({ message: 'User not found' });
@@ -58,7 +58,7 @@ router.put('/:id', async (req, res) => {
         
         // Return back the updated user
         const [rows] = await pool.query(
-            'SELECT id, username, email, full_name, phone, address, avatar_url FROM users WHERE id = ?',
+            'SELECT id, username, email, full_name, phone, address, avatar_url, role, status FROM users WHERE id = ?',
             [req.params.id]
         );
         res.json({ message: 'Profile updated successfully', user: rows[0] });

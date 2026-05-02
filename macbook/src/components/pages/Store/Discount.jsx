@@ -79,7 +79,11 @@ export default function Discount() {
   const { setDiscount } = useContext(CartContext);
   const [toast, setToast] = useState(null);
   
-  const handleVerify = () => {
+  const handleVerify = (image) => {
+    if (!image) {
+      setToast({ message: "Please upload an image first to get the discount!", type: "error" });
+      return;
+    }
     setDiscount({
       percent: 10
     });
@@ -118,7 +122,7 @@ export default function Discount() {
                Save up to <span className="text-white font-bold">$192</span> when you own a Mac. Plus, get 3 months of free Apple Music and Apple TV+.
               </p>
               <button 
-              onClick={handleVerify}
+              onClick={() => handleVerify(block1.image)}
               className="bg-sky-500 text-black font-semibold py-3 px-8 rounded-full hover:bg-gray-200 transition-colors">
                 Verify now
               </button>
@@ -138,7 +142,7 @@ export default function Discount() {
               <h3 className="text-xl font-bold mb-2">Equipment valuation</h3>
               <p className="text-gray-400 text-sm">Upload a photo of your old device to see the upgrade subsidy.</p>
               <button 
-              onClick={handleVerify}
+              onClick={() => handleVerify(block2.image)}
               className="bg-sky-500 text-black font-semibold text-[12px] py-1.5 px-2.5 rounded-full hover:bg-gray-200 transition-colors mt-7">
                 Verify now
               </button>
@@ -159,7 +163,7 @@ export default function Discount() {
                 Discount <span className="text-white font-bold">20%</span> for Apple Watch cases, bands, and fast chargers when purchased with the main device.
               </p>
               <button 
-              onClick={handleVerify}
+              onClick={() => handleVerify(block3.image)}
               className="bg-sky-500 text-black font-semibold py-1.5 px-2.5 text-[12px] rounded-full hover:bg-gray-200 transition-colors mt-7">
                 Verify now
               </button>

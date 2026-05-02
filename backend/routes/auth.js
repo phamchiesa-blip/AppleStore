@@ -43,6 +43,9 @@ router.post('/signup', async (req, res) => {
         id: result.insertId,
         username: username,
         email: email,
+        full_name: null,
+        phone: null,
+        address: null,
         role: 'user',
         status: 'active'
       }
@@ -91,6 +94,9 @@ router.post('/login', async (req, res) => {
         id: user.id,
         username: user.username,
         email: user.email,
+        full_name: user.full_name,
+        phone: user.phone,
+        address: user.address,
         role: user.role,
         status: user.status
       }

@@ -56,14 +56,7 @@ const CartSidebar = () => {
                   key={item.id}
                   className="flex gap-3 border-b border-gray-800/50 pb-4"
                 >
-                  {/* Image */}
-                  <div className="w-16 h-16 bg-white/5 rounded-xl p-1 flex-shrink-0 flex items-center justify-center">
-                    {item.image ? (
-                      <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
-                    ) : (
-                      <div className="w-full h-full bg-gray-800 rounded-lg flex items-center justify-center text-gray-600 text-xs">No img</div>
-                    )}
-                  </div>
+                  {/* Image removed as requested */}
 
                   <div className="flex-1 flex flex-col justify-between">
                     <div className="flex justify-between items-start">
@@ -93,7 +86,7 @@ const CartSidebar = () => {
           </div>
 
           <div id="discount" className="mt-2">
-            {discount && (
+            {!!discount && (
               <div className="text-green-400 text-sm font-medium">
                 Discount Applied: {discount.percent}% (−${discountAmount.toFixed(2)})
               </div>
