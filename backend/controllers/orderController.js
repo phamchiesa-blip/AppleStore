@@ -1,8 +1,9 @@
 const db = require("../db");
+const bcrypt = require('bcrypt');
 
 const placeOrder = async (req, res) => {
   try {
-    const { customer_name, phone, address, payment_method } = req.body;
+    const { customer_name, phone, address, payment_method, email, is_guest } = req.body;
 
     // Get cart items
     const [cartItems] = await db.query("SELECT * FROM cart");
@@ -16,6 +17,22 @@ const placeOrder = async (req, res) => {
       (sum, item) => sum + Number(item.product_price) * item.quantity,
       0
     );
+
+    // If guest, create an account
+    if (is_guest && email) {
+        // check if email or phone already exists
+        const [existing] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
+        if (existing.length === 0) {
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(phone, salt);
+            // use email prefix as username
+            const username = email.split('@')[0] + Math.floor(Math.random() * 1000);
+            await db.query(
+                'INSERT INTO users (username, email, password, full_name, phone, address) VALUES (?, ?, ?, ?, ?, ?)',
+                [username, email, hashedPassword, customer_name, phone, address]
+            );
+        }
+    }
 
     // Save order
     await db.query(

@@ -1,11 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import BuyPopup from '../../BuyPopup';
+import { Link } from 'react-router-dom';
+import BuyPopup from './BuyPopup';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Models = () => {
+const ExploreLineup = ({ category, learnMoreBehavior, defaultLearnMoreLink }) => {
     const [models, setModels] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedBuyModel, setSelectedBuyModel] = useState(null); 
@@ -23,18 +24,18 @@ const Models = () => {
     useEffect(() => {
         const fetchModels = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/products/category/iPad');
+                const response = await fetch(`http://localhost:5000/api/products/category/${category}`);
                 const data = await response.json();
                 setModels(data);
             } catch (error) {
-                console.error("Failed to fetch iPad models:", error);
+                console.error(`Failed to fetch ${category} models:`, error);
             } finally {
                 setLoading(false);
             }
         };
 
         fetchModels();
-    }, []);
+    }, [category]);
 
     useEffect(() => {
         if (!loading && models.length > 0) {
@@ -56,8 +57,20 @@ const Models = () => {
         }
     }, [loading, models]);
 
+    const getInternalLink = (name) => {
+        const lower = name.toLowerCase();
+        if (lower.includes('watch series 11')) return '/detailwatchseries11';
+        if (lower.includes('watch se')) return '/detailwatchse3';
+        if (lower.includes('ultra 3')) return '/detailwatchsultra';
+        if (lower.includes('airpods max')) return '/airpods-max';
+        if (lower.includes('airpods pro')) return '/airpods-pro';
+        if (lower.includes('airpods')) return '/airpods';
+        if (lower.includes('tv 4k')) return '/tv4k';
+        return '/';
+    };
+
     return (
-        <section className="py-32 bg-black text-white relative min-h-screen">
+        <section className="py-32 bg-black text-white relative">
             <div className="max-w-7xl mx-auto px-6">
                  <div className="mb-20 text-center md:text-left flex items-center gap-4">
                      <h2 className="text-5xl md:text-6xl font-semibold tracking-tight">Explore the line-up.</h2>
@@ -102,14 +115,23 @@ const Models = () => {
                                         Buy
                                     </button>
                                     
-                                    <a 
-                                        href="https://www.apple.com/ipad/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-[#2997ff] hover:text-[#147ce6] transition-colors py-2 text-sm flex items-center justify-center gap-1 cursor-pointer"
-                                    >
-                                        Learn more <span>&gt;</span>
-                                    </a>
+                                    {learnMoreBehavior === 'external' ? (
+                                        <a 
+                                            href={defaultLearnMoreLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-[#2997ff] hover:text-[#147ce6] transition-colors py-2 text-sm flex items-center justify-center gap-1 cursor-pointer"
+                                        >
+                                            Learn more <span>&gt;&gt;</span>
+                                        </a>
+                                    ) : (
+                                        <Link 
+                                            to={getInternalLink(model.name)}
+                                            className="text-[#2997ff] hover:text-[#147ce6] transition-colors py-2 text-sm flex items-center justify-center gap-1 cursor-pointer"
+                                        >
+                                            Learn more <span>&gt;&gt;</span>
+                                        </Link>
+                                    )}
                                  </div>
                              </div>
                          </div>
@@ -126,4 +148,4 @@ const Models = () => {
     );
 };
 
-export default Models;
+export default ExploreLineup;

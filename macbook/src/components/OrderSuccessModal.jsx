@@ -1,4 +1,4 @@
-const OrderSuccessModal = ({ isOpen, onContinue }) => {
+const OrderSuccessModal = ({ isOpen, onContinue, guestMessage }) => {
   if (!isOpen) return null;
 
   return (
@@ -14,9 +14,17 @@ const OrderSuccessModal = ({ isOpen, onContinue }) => {
             Order Placed
           </h2>
 
-          <p className="text-gray-400 mb-6">
+          <p className="text-gray-400 mb-2">
             Your order has been placed successfully.
           </p>
+
+          {guestMessage && (
+            <div className="bg-blue-500/10 border border-blue-500/50 rounded-lg p-3 mb-6 w-full text-sm text-blue-200">
+                {guestMessage}
+            </div>
+          )}
+
+          {!guestMessage && <div className="mb-6"></div>}
 
           <button
             onClick={onContinue}

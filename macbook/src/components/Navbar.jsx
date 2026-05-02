@@ -67,8 +67,8 @@ function NavBar() {
                   {user.role === 'admin' && (
                     <li><Link to="/admin" className="font-semibold text-purple-400 hover:text-purple-300 mr-2">Admin Panel</Link></li>
                   )}
-                  <li><Link to="/user" className="font-medium">Hi, {user?.username.split(" ").pop()}</Link></li>
-                  <li><button onClick={handleLogout} className="text-red-500 font-medium">Log out</button></li>
+                  <li><span className="font-medium cursor-default">Hi, {user?.username.split(" ").pop()}</span></li>
+                  <li><button onClick={handleLogout} className="text-red-500 font-medium hover:text-red-400">Log out</button></li>
                 </>
               ) : (
                 dn.map((item, index) => (
@@ -77,7 +77,18 @@ function NavBar() {
               )}
             </ul>
 
-            <div className="flex items-center gap-4 lg:gap-5">
+            <div className="flex items-center gap-4 lg:gap-5 ml-4 lg:ml-0">
+              {user && (
+                <Link to="/user" className="flex items-center justify-center">
+                  {user.avatar_url ? (
+                    <img src={`http://localhost:5000${user.avatar_url}`} alt="User" className="w-6 h-6 rounded-full object-cover" />
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-gray-200 hover:text-white transition-colors">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                    </svg>
+                  )}
+                </Link>
+              )}
               <button onClick={() => setOpenSearch(true)}>
                 <img src="/search.svg" alt="Search" className="w-5" />
               </button>
@@ -133,12 +144,17 @@ function NavBar() {
             </li>
           )}
           <li>
+            <span className="text-xl font-medium cursor-default">
+              Hi, {user?.username.split(" ").pop()}
+            </span>
+          </li>
+          <li>
             <Link
               onClick={() => setMenuOpen(false)}
               to="/user"
-              className="text-xl font-medium"
+              className="text-xl font-medium text-blue-400"
             >
-              Hi, {user?.username.split(" ").pop()}
+              My Profile
             </Link>
           </li>
           <li>
