@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { footerLinks } from "../constants/index";
 
 // Cấu trúc menu footer chuẩn Apple
@@ -7,75 +8,75 @@ const footerSections = [
   {
     title: "Store",
     links: [
-      { label: "Find a store", href: "#" },
-      { label: "iPad", href: "#" },
-      { label: "iPhone", href: "#" },
-      { label: "Mac", href: "#" },
-      { label: "Apple Watch", href: "#" },
-      { label: "Apple Vision Pro", href: "#" },
-      { label: "AirPods", href: "#" },
-      { label: "Apple TV 4K", href: "#" },
+      { label: "Find a store", href: "https://www.apple.com/retail/" },
+      { label: "iPad", href: "/ipad" },
+      { label: "iPhone", href: "/iphone" },
+      { label: "Mac", href: "/mac" },
+      { label: "Apple Watch", href: "/watch" },
+      { label: "Apple Vision Pro", href: "https://www.apple.com/apple-vision-pro/" },
+      { label: "AirPods", href: "/airpods" },
+      { label: "Apple TV 4K", href: "/tvhome" },
     ],
   },
   {
     title: "Service",
     links: [
-      { label: "Apple Music", href: "#" },
-      { label: "Apple TV+", href: "#" },
-      { label: "Apple Arcade", href: "#" },
-      { label: "iCloud+", href: "#" },
-      { label: "Apple One", href: "#" },
-      { label: "Apple Card", href: "#" },
-      { label: "Apple Books", href: "#" },
-      { label: "App Store", href: "#" },
+      { label: "Apple Music", href: "https://www.apple.com/apple-music/" },
+      { label: "Apple TV+", href: "https://www.apple.com/apple-tv-plus/" },
+      { label: "Apple Arcade", href: "https://www.apple.com/apple-arcade/" },
+      { label: "iCloud+", href: "https://www.apple.com/icloud/" },
+      { label: "Apple One", href: "https://www.apple.com/apple-one/" },
+      { label: "Apple Card", href: "https://www.apple.com/apple-card/" },
+      { label: "Apple Books", href: "https://www.apple.com/apple-books/" },
+      { label: "App Store", href: "https://www.apple.com/app-store/" },
     ],
   },
   {
     title: "Account",
     links: [
-      { label: "Manage Apple ID", href: "#" },
-      { label: "Apple Store Account", href: "#" },
-      { label: "iCloud.com", href: "#" },
+      { label: "Manage Apple ID", href: "https://appleid.apple.com/" },
+      { label: "Apple Store Account", href: "https://secure.store.apple.com/shop/account/setup" },
+      { label: "iCloud.com", href: "https://www.icloud.com/" },
     ],
   },
   {
     title: "Apple Store",
     links: [
-      { label: "Find a store", href: "#" },
-      { label: "Genius Bar", href: "#" },
-      { label: "Today at Apple", href: "#" },
-      { label: "Apple Summer Camp", href: "#" },
-      { label: "Apple Store App", href: "#" },
-      { label: "Refurbished Certificate", href: "#" },
-      { label: "Finance", href: "#" },
-      { label: "Apple Trade In", href: "#" },
-      { label: "Order status", href: "#" },
+      { label: "Find a store", href: "https://www.apple.com/retail/" },
+      { label: "Genius Bar", href: "https://www.apple.com/retail/geniusbar/" },
+      { label: "Today at Apple", href: "https://www.apple.com/today/" },
+      { label: "Apple Summer Camp", href: "https://www.apple.com/today/camp/" },
+      { label: "Apple Store App", href: "https://www.apple.com/apple-store-app/" },
+      { label: "Refurbished Certificate", href: "https://www.apple.com/shop/refurbished" },
+      { label: "Finance", href: "https://www.apple.com/apple-card/" },
+      { label: "Apple Trade In", href: "https://www.apple.com/shop/trade-in" },
+      { label: "Order status", href: "https://secure.store.apple.com/shop/order/list" },
     ],
   },
   {
     title: "Businesses",
     links: [
-      { label: "Apple & Doanh nghiệp", href: "#" },
-      { label: "Buy for Businesses", href: "#" },
+      { label: "Apple & Business", href: "https://www.apple.com/business/" },
+      { label: "Buy for Businesses", href: "https://www.apple.com/retail/business/" },
     ],
   },
   {
     title: "Education",
     links: [
-      { label: "Apple & Giáo dục", href: "#" },
-      { label: "Buy for University", href: "#" },
+      { label: "Apple & Education", href: "https://www.apple.com/education/" },
+      { label: "Buy for University", href: "https://www.apple.com/us-hed/shop" },
     ],
   },
   {
     title: "About Apple",
     links: [
-      { label: "Newsroom", href: "#" },
-      { label: "Apple Leadership", href: "#" },
-      { label: "Career Opportunities", href: "#" },
-      { label: "Investors", href: "#" },
-      { label: "Ethics & Compliance", href: "#" },
-      { label: "Events", href: "#" },
-      { label: "Contact Apple", href: "#" },
+      { label: "Newsroom", href: "https://www.apple.com/newsroom/" },
+      { label: "Apple Leadership", href: "https://www.apple.com/leadership/" },
+      { label: "Career Opportunities", href: "https://www.apple.com/careers/us/" },
+      { label: "Investors", href: "https://investor.apple.com/" },
+      { label: "Ethics & Compliance", href: "https://www.apple.com/compliance/" },
+      { label: "Events", href: "https://www.apple.com/apple-events/" },
+      { label: "Contact Apple", href: "https://www.apple.com/contact/" },
     ],
   },
 ];
@@ -107,12 +108,23 @@ function AccordionSection({ section }) {
         <ul className="space-y-3">
           {section.links.map(({ label, href }) => (
             <li key={label}>
-              <a
-                href={href}
-                className="text-[13px] text-[#86868b] hover:text-white transition-colors duration-150"
-              >
-                {label}
-              </a>
+              {href.startsWith("/") ? (
+                <Link
+                  to={href}
+                  className="text-[13px] text-[#86868b] hover:text-white transition-colors duration-150"
+                >
+                  {label}
+                </Link>
+              ) : (
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[13px] text-[#86868b] hover:text-white transition-colors duration-150"
+                >
+                  {label}
+                </a>
+              )}
             </li>
           ))}
         </ul>
@@ -153,12 +165,23 @@ const Footer = () => {
               <ul className="space-y-3">
                 {section.links.map(({ label, href }) => (
                   <li key={label}>
-                    <a
-                      href={href}
-                      className="text-[12px] text-[#86868b] hover:text-white transition-colors duration-150 leading-snug block"
-                    >
-                      {label}
-                    </a>
+                    {href.startsWith("/") ? (
+                      <Link
+                        to={href}
+                        className="text-[12px] text-[#86868b] hover:text-white transition-colors duration-150 leading-snug block"
+                      >
+                        {label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[12px] text-[#86868b] hover:text-white transition-colors duration-150 leading-snug block"
+                      >
+                        {label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>

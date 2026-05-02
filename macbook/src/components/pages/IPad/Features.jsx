@@ -49,7 +49,7 @@ const Features = () => {
                 <div className="w-full lg:w-1/2 mb-16 lg:mb-0 pr-0 lg:pr-12" ref={content1Ref}>
                     <h2 className="text-4xl md:text-6xl font-semibold mb-6 tracking-tight">Ultra Retina XDR.<br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500">World's most advanced display.</span></h2>
                     <p className="text-xl md:text-2xl text-[#a1a1a6] mb-8 font-medium">Extreme brightness and precise contrast. It's a visual experience like no other.</p>
-                    <button className="text-[#2997ff] text-lg hover:underline flex items-center gap-1">Take a closer look at the display <span>&gt;</span></button>
+                    <button className="text-[#2997ff] text-lg hover:underline flex items-center gap-1">Take a closer look at the display <span>&gt;&gt;</span></button>
                 </div>
                 
                 <div className="w-full lg:w-1/2 flex justify-center relative">

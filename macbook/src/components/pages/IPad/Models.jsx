@@ -108,7 +108,7 @@ const Models = () => {
                                         rel="noopener noreferrer"
                                         className="text-[#2997ff] hover:text-[#147ce6] transition-colors py-2 text-sm flex items-center justify-center gap-1 cursor-pointer"
                                     >
-                                        Learn more <span>&gt;</span>
+                                        Learn more <span>&gt;&gt;</span>
                                     </a>
                                  </div>
                              </div>

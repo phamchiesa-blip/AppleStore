@@ -41,9 +41,14 @@ const Hero = () => {
                     >
                         Buy
                     </button>
-                    <button className="text-green-500 hover:text-green-400 font-medium text-lg flex items-center gap-1 cursor-pointer transition-colors">
-                        Learn more <span className="text-sm">&gt;</span>
-                    </button>
+                    <a 
+                        href="https://www.apple.com/ipad-pro/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-green-500 hover:text-green-400 font-medium text-lg flex items-center gap-1 cursor-pointer transition-colors"
+                    >
+                        Learn more <span className="text-sm">&gt;&gt;</span>
+                    </a>
                 </div>
             </div>
             

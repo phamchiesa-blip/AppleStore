@@ -43,17 +43,13 @@ const HeroAirpodsMax = () => {
             {/* Top promo text - keeping it outside the rounded box or anchored top */}
             <div className="absolute top-[7vh] w-full flex justify-center z-40 p-4 bg-black/50 backdrop-blur-md">
                 <p className="text-white text-xs sm:text-sm text-center border-b border-transparent">
-                    Get 3 months of Apple Fitness+ and Apple Music free with purchase of AirPods Pro 3. <a href="#" className="text-blue-500 hover:underline">Buy &gt;</a>
+                    Get 3 months of Apple Fitness+ and Apple Music free with purchase of AirPods Pro 3. <a href="#" className="text-blue-500 hover:underline">Buy &gt;&gt;</a>
                 </p>
             </div>
 
             <div className="w-[95%] max-w-[1600px] h-[75vh] md:h-[85vh] rounded-[3rem] overflow-hidden relative flex flex-col justify-between p-10 md:p-14 border border-white/10 mx-auto bg-black mt-4">
                 
-                <div className="absolute top-5 right-5 z-40">
-                    <button className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all backdrop-blur-md">
-                        ||
-                    </button>
-                </div>
+
 
                 {/* Video Background */}
                 <div className="absolute inset-0 z-0 flex items-center justify-center">

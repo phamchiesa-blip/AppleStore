@@ -36,14 +36,14 @@ const [activeTab, setActiveTab] = useState(0);
                 <span 
                   className={`text-2xl md:text-3xl font-semibold transition-colors duration-500 ${
                     activeTab === item.id 
-                      ? 'text-black dark:text-white' 
-                      : 'text-gray-400 hover:text-gray-600 dark:hover:text-zinc-500'
+                      ? 'text-white' 
+                      : 'text-gray-400 hover:text-gray-300'
                   }`}
                 >
                   {item.title}
                 </span>
                 {activeTab === item.id ? (
-                  <ChevronUp className="w-6 h-6 text-black dark:text-white" />
+                  <ChevronUp className="w-6 h-6 text-white" />
                 ) : (
                   <ChevronDown className="w-6 h-6 text-gray-400" />
                 )}
@@ -55,7 +55,7 @@ const [activeTab, setActiveTab] = useState(0);
                   activeTab === item.id ? 'max-h-60 opacity-100 mt-4' : 'max-h-0 opacity-0'
                 }`}
               >
-                <p className="text-gray-600 dark:text-zinc-400 text-lg leading-relaxed pr-8">
+                <p className="text-gray-300 text-lg leading-relaxed pr-8">
                   {item.content}
                 </p>
               </div>

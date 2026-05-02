@@ -20,7 +20,7 @@ function Accessory() {
                     <div className="mt-[170px] text-center">
                         <h1 className="text-4xl">It's time for spring colors.</h1>
                         <h2 className="text-xl mt-4">Discover the latest strap designs with fresh colors and materials.</h2>
-                        <h3 className="mt-4 cursor-pointer text-blue-600">Buy Apple Watch straps 🎗️</h3>
+                        <a href="https://www.apple.com/shop/watch/bands" target="_blank" rel="noopener noreferrer" className="mt-4 cursor-pointer text-blue-600 block text-xl font-medium">Customize your straps</a>
                     </div>
                     <div className="flex-center">
                         <img src="daydeo-removebg-preview.png" alt="" />

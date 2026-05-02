@@ -83,13 +83,13 @@ function WatchProducts() {
                         <h1 className="text-white-300 mt-[22px]">{item.tagline}</h1>
                         <h1 className="text-white mt-[22px]">{item.price}</h1>
                         <Link to={item.learnMoreLink}>
-                            <h3 className="text-white-900 text-xl mt-3 cursor-pointer hover:scale-105">👉🏻 {item.learnMoreLabel}</h3>
+                            <h3 className="text-white-900 text-xl mt-3 cursor-pointer hover:scale-105">{item.learnMoreLabel}</h3>
                         </Link>
                         <button
                             onClick={() => openBuy(item.key, item.img)}
                             className="px-7 py-3 bg-[#0076DF] rounded-4xl mt-[30px] mb-2 text-xl"
                         >
-                            <h3 className="text-xl text-white cursor-pointer transition-transform duration-200 hover:scale-110">Buy 🛍️</h3>
+                            <h3 className="text-xl text-white cursor-pointer transition-transform duration-200 hover:scale-110">Buy</h3>
                         </button>
                     </div>
                 ))}

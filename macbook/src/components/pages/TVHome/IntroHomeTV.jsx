@@ -28,11 +28,11 @@ function IntroHomeTV() {
             <div className="flex justify-center gap-x-[20px]">
                 <div className="flex flex-col items-center cursor-pointer group">
                     <img src="tvhome-removebg-preview.png" className="w-[60px] h-[36px]" />
-                    <h3 className="text-white mt-2 group-hover:text-blue-200">Apple TV</h3>
+                    <h3 className="text-white mt-2">Apple TV</h3>
                 </div>
                 <div className="flex flex-col items-center cursor-pointer group">
                     <img src="home.png" className="w-[36px] h-[36px]" />
-                    <h3 className="text-white mt-2 group-hover:text-blue-200">Home App</h3>
+                    <h3 className="text-white mt-2">Home App</h3>
                 </div>
             </div>
 
@@ -53,7 +53,7 @@ function IntroHomeTV() {
                         <h1 className="mt-3 text-3xl bg-gradient-to-r from-gray-300 via-white-300 to-blue-300 bg-clip-text text-transparent">smart home.</h1>
                         <div className="flex flex-col items-center">
                             <Link to="/homeapp">
-                            <p className="mt-6 text-blue-500 cursor-pointer hover:text-amber-100 transition-all duration-300">Learn more</p>
+                            <p className="mt-6 text-blue-500 cursor-pointer hover:text-amber-100 transition-all duration-300">Learn more &gt;&gt;</p>
                             </Link>
                         </div>
                         <img src="homeapp__cpc1k972xys2_large_2x-removebg-preview.png" className="mt-[90px] w-[470px] h-[370px]" />
@@ -78,8 +78,8 @@ function IntroHomeTV() {
                                     addToCart(tv);
                                     setIsCartOpen(true);
                                 }}
-                                className="text-center bg-blue-300 rounded-full px-6 py-2 text-white text-xl mt-[22px] cursor-pointer hover:scale-110 transition-all duration-300">Buy</button>
-                            <Link to="/tv4k"><p className="mt-6 text-blue-500 cursor-pointer hover:text-amber-100 transition-all duration-300">Learn more</p></Link>
+                                className="text-center bg-blue-600 hover:bg-blue-500 rounded-full px-6 py-2 text-white text-xl mt-[22px] cursor-pointer hover:scale-110 transition-all duration-300">Buy</button>
+                            <Link to="/tv4k"><p className="mt-6 text-blue-500 cursor-pointer hover:text-amber-100 transition-all duration-300">Learn more &gt;&gt;</p></Link>
                         </div>
                         <img src="tvhome-removebg-preview.png" className="mt-[90px] w-[408px] h-[275px]" />
                     </div>
